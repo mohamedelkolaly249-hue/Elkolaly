@@ -23,7 +23,6 @@
     height: 100%;
     overflow: hidden;
     background-color: #02050e !important;
-    background-image: radial-gradient(circle at 50% 15%, #0a152e 0%, #030712 60%, #010206 100%);
     color: #f8fafc;
     perspective: 1500px;
   }
@@ -32,7 +31,6 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 50% 18%, #0a1633 0%, #030712 65%, #010206 100%);
   }
   .ui-layer { position: relative; z-index: 10; height: 100vh; width: 100vw; display: flex; flex-direction: column; }
 
@@ -94,11 +92,11 @@
     vertical-align: middle;
   }
 
-  /* كروت زجاجية داكنة بإطار ذهبي رفيع وشيك */
+  /* كروت زجاجية داكنة تسمح برؤية الـ 3D خلفها */
   .royal-dark-card {
-    background: linear-gradient(165deg, rgba(10, 19, 42, 0.92) 0%, rgba(3, 7, 18, 0.98) 100%);
+    background: linear-gradient(165deg, rgba(10, 19, 42, 0.84) 0%, rgba(3, 7, 18, 0.92) 100%);
     border: 1px solid rgba(245, 158, 11, 0.32);
-    backdrop-filter: blur(26px);
+    backdrop-filter: blur(18px);
     box-shadow:
       0 24px 60px -10px rgba(0, 0, 0, 0.92),
       0 4px 0 rgba(15, 23, 42, 0.9),
@@ -107,8 +105,9 @@
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .royal-crown-card {
-    background: linear-gradient(165deg, rgba(11, 21, 46, 0.95) 0%, rgba(3, 6, 16, 0.99) 100%);
+    background: linear-gradient(165deg, rgba(11, 21, 46, 0.86) 0%, rgba(3, 6, 16, 0.94) 100%);
     border: 1.5px solid rgba(245, 158, 11, 0.55);
+    backdrop-filter: blur(18px);
     box-shadow:
       0 30px 75px rgba(0, 0, 0, 0.95),
       0 5px 0 rgba(120, 53, 15, 0.45),
@@ -161,42 +160,167 @@
     transform: scale(1.08);
   }
 
-  /* شارات وأيقونات الفريق الأول والفريق الثاني الاحترافية (3D Royal Team Crests) */
-  .team-crest-3d {
+  /* ================= أيقونات الفريقين الجديدة فائقة الاحترافية عند الهوست (3D Orbiting Medallions) ================= */
+  .team-orb-3d {
     position: relative;
-    width: 58px;
-    height: 58px;
-    border-radius: 18px;
-    padding: 2px;
-    background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #78350f 100%);
-    box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.85),
-      0 3px 0 #451a03,
-      inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    width: 68px;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .team-crest-inner-rose {
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    background: radial-gradient(circle at 30% 25%, #be123c 0%, #4c0519 75%, #090d16 100%);
-    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25), 0 0 18px rgba(244, 63, 94, 0.35);
+  .team-orb-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 9999px;
+    border: 1.5px dashed rgba(253, 224, 71, 0.7);
+    animation: spinSlow 10s linear infinite;
+    pointer-events: none;
+  }
+  .team-orb-ring-reverse {
+    position: absolute;
+    inset: -1px;
+    border-radius: 9999px;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-top-color: #fde047;
+    animation: spinReverse 6s linear infinite;
+    pointer-events: none;
+  }
+  .team-orb-chassis {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 9999px;
+    padding: 2px;
+    background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #78350f 100%);
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.9),
+      0 4px 0 #3b1704,
+      inset 0 2px 3px rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .team-crest-inner-blue {
+  .team-orb-core-rose {
+    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 16px;
-    background: radial-gradient(circle at 30% 25%, #1d4ed8 0%, #172554 75%, #090d16 100%);
-    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.25), 0 0 18px rgba(59, 130, 246, 0.35);
+    border-radius: 9999px;
+    background: radial-gradient(circle at 32% 28%, #fb7185 0%, #e11d48 45%, #4c0519 95%);
+    box-shadow:
+      inset 0 -5px 10px rgba(0, 0, 0, 0.65),
+      inset 0 2px 4px rgba(255, 255, 255, 0.45),
+      0 0 22px rgba(244, 63, 94, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+  }
+  .team-orb-core-blue {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 32% 28%, #60a5fa 0%, #2563eb 45%, #172554 95%);
+    box-shadow:
+      inset 0 -5px 10px rgba(0, 0, 0, 0.65),
+      inset 0 2px 4px rgba(255, 255, 255, 0.45),
+      0 0 22px rgba(59, 130, 246, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .team-orb-core-rose::before, .team-orb-core-blue::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 16%;
+    right: 16%;
+    height: 35%;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.01) 100%);
+    pointer-events: none;
+  }
+
+  /* ================= ميدالية النهاية 3D بحلقات دوارة مثل الفون (Host Finale 3D Rig) ================= */
+  .finale-3d-rig {
+    position: relative;
+    width: 155px;
+    height: 155px;
+    margin: 0 auto 14px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .finale-orbit-outer {
+    position: absolute;
+    inset: -12px;
+    border-radius: 9999px;
+    border: 2.5px dashed rgba(253, 224, 71, 0.8);
+    animation: spinSlow 11s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.55));
+    pointer-events: none;
+  }
+  .finale-orbit-inner {
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    border: 2px solid rgba(56, 189, 248, 0.35);
+    border-top-color: #fde047;
+    border-bottom-color: #f59e0b;
+    animation: spinReverse 7s linear infinite;
+    pointer-events: none;
+  }
+  .finale-glow-aura {
+    position: absolute;
+    inset: 6px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.65), rgba(56, 189, 248, 0.25));
+    filter: blur(22px);
+    pointer-events: none;
+  }
+  .finale-dome-chassis {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    border-radius: 9999px;
+    background: linear-gradient(145deg, #1e293b, #060b16);
+    padding: 10px;
+    border: 2px solid rgba(253, 224, 71, 0.75);
+    box-shadow:
+      0 20px 45px rgba(0, 0, 0, 0.95),
+      0 6px 0 #02050b,
+      inset 0 2px 5px rgba(254, 240, 138, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .finale-dome-core {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 50% 28%, #1e3a8a 0%, #09132c 65%, #02050e 100%);
+    box-shadow:
+      inset 0 -6px 14px rgba(0, 0, 0, 0.8),
+      inset 0 2px 6px rgba(254, 240, 138, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .finale-dome-core::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    right: 15%;
+    height: 36%;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.01) 100%);
+    pointer-events: none;
   }
 
   /* أزرار الخيارات 3D لشاشة العرض */
@@ -243,10 +367,10 @@
     display: inline-block;
   }
 
-  /* نوافذ منبثقة داكنة بالكامل (تمنع أي بياض في الخلفية نهائياً) */
-  .dark-modal-backdrop {
-    background: radial-gradient(circle at 50% 30%, rgba(10, 21, 46, 0.96) 0%, rgba(2, 5, 14, 0.99) 100%) !important;
-    backdrop-filter: blur(20px);
+  /* خلفية شفافة للنوافذ الختامية لكي يظهر الـ 3D والـ DNA بوضوح خلفها */
+  .glass-3d-backdrop {
+    background: radial-gradient(circle at 50% 50%, rgba(6, 13, 30, 0.45) 0%, rgba(2, 5, 14, 0.72) 100%) !important;
+    backdrop-filter: blur(5px);
   }
 
   /* جرس الموبايل المجسم 3D بإطار ذهبي رفيع */
@@ -355,6 +479,7 @@
   }
 
   @keyframes spinSlow { 100% { transform: rotate(360deg); } }
+  @keyframes spinReverse { 100% { transform: rotate(-360deg); } }
   @keyframes pulseRing {
     0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.65); }
     70% { box-shadow: 0 0 0 24px rgba(245, 158, 11, 0); }
@@ -363,7 +488,7 @@
   .winner-glow { animation: pulseRing 1.6s infinite; }
   @keyframes floatCap {
     0%, 100% { transform: translateY(0px) rotate(-2deg); }
-    50% { transform: translateY(-8px) rotate(2deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
   }
   .grad-cap-anim { animation: floatCap 2.6s ease-in-out infinite; display: inline-block; }
   @keyframes slideUp {
@@ -375,7 +500,7 @@
 </head>
 <body>
 
-<!-- خلفية الـ DNA ثلاثية الأبعاد الداكنة بالكامل -->
+<!-- خلفية الـ DNA ثلاثية الأبعاد والحلقات المدارية الدائمة -->
 <div id="canvas-container"></div>
 
 <!-- تدرجات الذهب اللامع والأيقونات الثلاثية الأبعاد -->
@@ -383,19 +508,14 @@
   <defs>
     <linearGradient id="gold3d" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fef9c3" />
-      <stop offset="40%" stop-color="#facc15" />
-      <stop offset="75%" stop-color="#b45309" />
-      <stop offset="100%" stop-color="#fde047" />
+      <stop offset="35%" stop-color="#fde047" />
+      <stop offset="70%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#fef08a" />
     </linearGradient>
-    <linearGradient id="roseCrest3d" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe4e6" />
-      <stop offset="45%" stop-color="#fb7185" />
-      <stop offset="100%" stop-color="#e11d48" />
-    </linearGradient>
-    <linearGradient id="blueCrest3d" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e0f2fe" />
-      <stop offset="45%" stop-color="#60a5fa" />
-      <stop offset="100%" stop-color="#2563eb" />
+    <linearGradient id="platinum3d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#64748b" />
     </linearGradient>
   </defs>
 </svg>
@@ -488,15 +608,19 @@
 
     <!-- منطقة الـ QR Code الأبيض العادي وبطاقتي الفريقين -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-7 items-center my-5">
-      <!-- بطاقة الفريق الأول بأيقونة نخبوية ثلاثية الأبعاد -->
-      <div id="wait-card-team1" class="royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-rose-500/30">
-        <div class="team-crest-3d mb-3">
-          <div class="team-crest-inner-rose">
-            <!-- شارة الكأس والنجوم الاحترافية للفريق الأول -->
-            <svg class="w-8 h-8 drop-shadow" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L14.4 7.2L20 8L16 12L17 17.6L12 14.8L7 17.6L8 12L4 8L9.6 7.2L12 2Z" fill="url(#gold3d)"/>
-              <circle cx="12" cy="11" r="3" fill="url(#roseCrest3d)"/>
-            </svg>
+      <!-- بطاقة الفريق الأول بميدالية 3D دوارة -->
+      <div id="wait-card-team1" class="royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-rose-500/30">
+        <div class="team-orb-3d mb-3.5">
+          <div class="team-orb-ring"></div>
+          <div class="team-orb-ring-reverse"></div>
+          <div class="team-orb-chassis">
+            <div class="team-orb-core-rose">
+              <!-- أيقونة تاج وكأس البطولة المجسم للفريق الأول -->
+              <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]" viewBox="0 0 24 24">
+                <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="text-xs font-extrabold text-rose-400 mb-1">الفريق الأول</div>
@@ -510,15 +634,19 @@
         </div>
       </div>
 
-      <!-- بطاقة الفريق الثاني بأيقونة نخبوية ثلاثية الأبعاد -->
-      <div id="wait-card-team2" class="royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-blue-500/30">
-        <div class="team-crest-3d mb-3">
-          <div class="team-crest-inner-blue">
-            <!-- شارة الدرع الملكي والماسة الاحترافية للفريق الثاني -->
-            <svg class="w-8 h-8 drop-shadow" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L4 5.5V11.5C4 16.8 7.4 21.6 12 23C16.6 21.6 20 16.8 20 11.5V5.5L12 2Z" fill="url(#gold3d)"/>
-              <polygon points="12,6 16,12 12,18 8,12" fill="url(#blueCrest3d)"/>
-            </svg>
+      <!-- بطاقة الفريق الثاني بميدالية 3D دوارة -->
+      <div id="wait-card-team2" class="royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-blue-500/30">
+        <div class="team-orb-3d mb-3.5">
+          <div class="team-orb-ring"></div>
+          <div class="team-orb-ring-reverse"></div>
+          <div class="team-orb-chassis">
+            <div class="team-orb-core-blue">
+              <!-- أيقونة تاج وكأس البطولة المجسم للفريق الثاني -->
+              <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]" viewBox="0 0 24 24">
+                <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="text-xs font-extrabold text-blue-400 mb-1">الفريق الثاني</div>
@@ -549,15 +677,19 @@
 <div id="host-game-screen" class="ui-layer hidden p-3 sm:p-5 justify-between">
   <!-- الشريط العلوي بعرض كامل -->
   <div class="max-w-7xl w-full mx-auto grid grid-cols-12 gap-4 items-center">
-    <!-- الفريق الأول مع الشارة الاحترافية الثلاثية الأبعاد -->
+    <!-- الفريق الأول مع الميدالية الثلاثية الأبعاد الدوارة -->
     <div id="host-team1-box" class="col-span-4 royal-dark-card rounded-2xl p-3.5 sm:p-4 border-r-2 border-r-rose-500 flex items-center justify-between">
-      <div class="flex items-center gap-3.5">
-        <div class="team-crest-3d hidden sm:flex">
-          <div class="team-crest-inner-rose">
-            <svg class="w-8 h-8 drop-shadow" viewBox="0 0 24 24" fill="none">
-              <path d="M19 5H17V3H7V5H5C3.9 5 3 5.9 3 7V8C3 10.55 4.92 12.63 7.39 12.94C8.02 14.44 9.37 15.57 11 15.9V19H7V21H17V19H13V15.9C14.63 15.57 15.98 14.44 16.61 12.94C19.08 12.63 21 10.55 21 8V7C21 5.9 20.1 5 19 5ZM5 8V7H7V10.82C5.84 10.4 5 9.3 5 8ZM19 8C19 9.3 18.16 10.4 17 10.82V7H19V8Z" fill="url(#gold3d)"/>
-              <circle cx="12" cy="9" r="2.3" fill="url(#roseCrest3d)"/>
-            </svg>
+      <div class="flex items-center gap-4">
+        <div class="team-orb-3d hidden sm:flex">
+          <div class="team-orb-ring"></div>
+          <div class="team-orb-ring-reverse"></div>
+          <div class="team-orb-chassis">
+            <div class="team-orb-core-rose">
+              <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.85)]" viewBox="0 0 24 24">
+                <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+              </svg>
+            </div>
           </div>
         </div>
         <div>
@@ -590,10 +722,10 @@
       </div>
     </div>
 
-    <!-- الفريق الثاني مع الشارة الاحترافية الثلاثية الأبعاد -->
+    <!-- الفريق الثاني مع الميدالية الثلاثية الأبعاد الدوارة -->
     <div id="host-team2-box" class="col-span-4 royal-dark-card rounded-2xl p-3.5 sm:p-4 border-l-2 border-l-blue-500 flex items-center justify-between">
       <div id="host-team2-score" class="text-5xl sm:text-7xl font-black gold-shimmer-text">0</div>
-      <div class="flex items-center gap-3.5 text-left">
+      <div class="flex items-center gap-4 text-left">
         <div>
           <input id="team2-name-input" value="الفريق الثاني" onchange="syncTeamNames()" class="bg-transparent text-left font-black text-xl sm:text-3xl text-blue-400 w-36 sm:w-52 focus:outline-none border-b border-transparent focus:border-blue-400">
           <div class="flex items-center justify-end gap-1.5 mt-1">
@@ -601,12 +733,16 @@
             <button onclick="adjustScore('team2', -10)" class="px-2.5 py-0.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg text-xs font-bold text-slate-300 cursor-pointer">-10</button>
           </div>
         </div>
-        <div class="team-crest-3d hidden sm:flex">
-          <div class="team-crest-inner-blue">
-            <svg class="w-8 h-8 drop-shadow" viewBox="0 0 24 24" fill="none">
-              <path d="M19 5H17V3H7V5H5C3.9 5 3 5.9 3 7V8C3 10.55 4.92 12.63 7.39 12.94C8.02 14.44 9.37 15.57 11 15.9V19H7V21H17V19H13V15.9C14.63 15.57 15.98 14.44 16.61 12.94C19.08 12.63 21 10.55 21 8V7C21 5.9 20.1 5 19 5ZM5 8V7H7V10.82C5.84 10.4 5 9.3 5 8ZM19 8C19 9.3 18.16 10.4 17 10.82V7H19V8Z" fill="url(#gold3d)"/>
-              <circle cx="12" cy="9" r="2.3" fill="url(#blueCrest3d)"/>
-            </svg>
+        <div class="team-orb-3d hidden sm:flex">
+          <div class="team-orb-ring"></div>
+          <div class="team-orb-ring-reverse"></div>
+          <div class="team-orb-chassis">
+            <div class="team-orb-core-blue">
+              <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.85)]" viewBox="0 0 24 24">
+                <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+                <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -680,8 +816,8 @@
   </div>
 </div>
 
-<!-- ================= 4. شاشة الانتقال للمرحلة الثانية (الضعف) ================= -->
-<div id="stage-transition-modal" class="fixed inset-0 z-50 hidden dark-modal-backdrop items-center justify-center p-4">
+<!-- ================= 4. شاشة الانتقال للمرحلة الثانية (مع بقاء الـ 3D واضحاً في الخلفية) ================= -->
+<div id="stage-transition-modal" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4">
   <div class="royal-dark-card royal-crown-card winner-glow max-w-xl w-full rounded-3xl p-8 text-center my-auto animate-slide-up">
     <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-black mb-3">
       اكتملت المرحلة الأولى (10 أسئلة)
@@ -749,10 +885,19 @@
     <div id="team-options-box" class="hidden w-full grid grid-cols-1 gap-2.5 animate-slide-up"></div>
   </div>
 
-  <!-- شاشة النتيجة النهائية على الموبايل -->
+  <!-- شاشة النتيجة النهائية على الموبايل مع الميدالية الدوارة 3D -->
   <div id="team-end-area" class="hidden my-auto w-full max-w-md mx-auto animate-slide-up">
     <div id="team-end-card" class="royal-dark-card royal-crown-card rounded-3xl p-8 text-center">
-      <div id="team-end-emoji" class="text-6xl mb-4 grad-cap-anim">🏆🎓✨</div>
+      <div class="finale-3d-rig">
+        <div class="finale-orbit-outer"></div>
+        <div class="finale-orbit-inner"></div>
+        <div class="finale-glow-aura"></div>
+        <div class="finale-dome-chassis">
+          <div class="finale-dome-core">
+            <div id="team-end-emoji" class="text-5xl grad-cap-anim">🏆🎓</div>
+          </div>
+        </div>
+      </div>
       <h2 id="team-end-headline" class="text-4xl font-black gold-shimmer-text mb-3">مببروووك!</h2>
       <p id="team-end-subtext" class="text-base font-bold text-slate-200 mb-6"></p>
       <div class="bg-slate-950/90 rounded-2xl p-4 border border-amber-400/35">
@@ -766,7 +911,7 @@
 </div>
 
 <!-- ================= نافذة الـ QR Code الأبيض العادي ================= -->
-<div id="qr-modal" class="fixed inset-0 z-50 hidden dark-modal-backdrop items-center justify-center p-4">
+<div id="qr-modal" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4">
   <div class="royal-dark-card royal-crown-card max-w-sm w-full rounded-3xl p-6 text-center my-auto">
     <h3 class="text-xl font-black gold-shimmer-text mb-4">رمز الانضمام للمسابقة</h3>
     <div class="qr-white-card mb-5">
@@ -778,15 +923,27 @@
   </div>
 </div>
 
-<!-- ================= شاشة النتيجة النهائية للهوست (خلفية داكنة بالكامل) ================= -->
-<div id="winner-modal" class="fixed inset-0 z-50 hidden dark-modal-backdrop items-center justify-center p-4 overflow-y-auto">
+<!-- ================= شاشة النتيجة النهائية للهوست (مع الـ 3D والحلقات الدوارة مثل الفون) ================= -->
+<div id="winner-modal" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4 overflow-y-auto">
   <div class="royal-dark-card royal-crown-card winner-glow max-w-xl w-full rounded-3xl p-7 sm:p-9 text-center my-auto animate-slide-up">
-    <div class="flex items-center justify-center gap-4 mb-2">
+    <div class="flex items-center justify-center gap-4 mb-3">
       <div class="logo-3d-ring-sm"><img src="mnu-logo.jpg" onerror="this.parentElement.style.display='none'"></div>
       <div class="logo-3d-ring-sm"><img src="pharmacy-logo.jpg" onerror="this.parentElement.style.display='none'"></div>
       <div class="logo-3d-ring-sm"><img src="pharma-dept-logo.jpg" onerror="this.parentElement.style.display='none'"></div>
     </div>
-    <div class="text-5xl my-2 grad-cap-anim">🏆🎓✨</div>
+
+    <!-- ميدالية الفوز 3D بحلقات مدارية دوارة مثل الفون -->
+    <div class="finale-3d-rig">
+      <div class="finale-orbit-outer"></div>
+      <div class="finale-orbit-inner"></div>
+      <div class="finale-glow-aura"></div>
+      <div class="finale-dome-chassis">
+        <div class="finale-dome-core">
+          <span class="text-5xl grad-cap-anim">🏆🎓</span>
+        </div>
+      </div>
+    </div>
+
     <div class="text-amber-300 font-bold text-sm mb-1">النتيجة النهائية • مسابقة العباقرة</div>
     <h2 id="winner-title" class="text-3xl sm:text-5xl font-black gold-shimmer-text mb-3">الفائز</h2>
     <div id="final-scores-summary" class="text-lg sm:text-xl font-bold text-amber-300 bg-slate-950/90 py-3 px-4 rounded-2xl border border-amber-400/35 mb-6"></div>
@@ -807,8 +964,8 @@
   </div>
 </div>
 
-<!-- ================= شاشة الختام النهائية عند الهوست (بدون أي خلفية بيضاء نهائياً) ================= -->
-<div id="goodbye-screen" class="fixed inset-0 z-50 hidden dark-modal-backdrop items-center justify-center p-4 overflow-y-auto">
+<!-- ================= شاشة الختام النهائية عند الهوست (مع الـ 3D الخلفي والحلقات الدوارة مثل الفون) ================= -->
+<div id="goodbye-screen" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4 overflow-y-auto">
   <div class="royal-dark-card royal-crown-card max-w-2xl w-full rounded-3xl p-8 sm:p-10 text-center my-auto animate-slide-up">
     <!-- الشعارات الثلاثة بحلقات الذهب الرفيعة -->
     <div class="flex items-center justify-center gap-6 mb-4">
@@ -817,8 +974,16 @@
       <div class="logo-3d-ring"><img src="pharma-dept-logo.jpg" onerror="this.parentElement.style.display='none'"></div>
     </div>
 
-    <div class="my-2">
-      <span class="text-6xl sm:text-7xl grad-cap-anim">🎓✨</span>
+    <!-- ميدالية التخرج 3D بحلقات مدارية دوارة مثل الفون -->
+    <div class="finale-3d-rig">
+      <div class="finale-orbit-outer"></div>
+      <div class="finale-orbit-inner"></div>
+      <div class="finale-glow-aura"></div>
+      <div class="finale-dome-chassis">
+        <div class="finale-dome-core">
+          <span class="text-5xl sm:text-6xl grad-cap-anim">🎓✨</span>
+        </div>
+      </div>
     </div>
 
     <h2 class="text-3xl sm:text-5xl font-black gold-shimmer-text mb-2">
@@ -1509,11 +1674,11 @@
         const c1 = document.getElementById('wait-card-team1');
         const s1 = document.getElementById('wait-status-team1');
         if (roomState.team1Connected) {
-          c1.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.25)]';
+          c1.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.25)]';
           s1.innerText = roomState.team1Name;
           s1.className = 'text-2xl font-black text-white';
         } else {
-          c1.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-rose-500/30';
+          c1.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-rose-500/30';
           s1.innerText = 'في الانتظار';
           s1.className = 'text-xl font-black text-slate-500';
         }
@@ -1521,11 +1686,11 @@
         const c2 = document.getElementById('wait-card-team2');
         const s2 = document.getElementById('wait-status-team2');
         if (roomState.team2Connected) {
-          c2.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.25)]';
+          c2.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.25)]';
           s2.innerText = roomState.team2Name;
           s2.className = 'text-2xl font-black text-white';
         } else {
-          c2.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[195px] flex flex-col items-center justify-center border border-blue-500/30';
+          c2.className = 'royal-dark-card rounded-3xl p-6 text-center min-h-[205px] flex flex-col items-center justify-center border border-blue-500/30';
           s2.innerText = 'في الانتظار';
           s2.className = 'text-xl font-black text-slate-500';
         }
@@ -1684,19 +1849,19 @@
           subtext.innerText = 'كل الشكر والتقدير لمشاركتكم المميزة في مسابقة العباقرة بكلية الصيدلة - جامعة المنصورة الأهلية.';
         } else if (roomState.winnerTeam === myRole) {
           card.className = 'royal-dark-card royal-crown-card winner-glow rounded-3xl p-8 text-center';
-          emoji.innerText = '🏆🎓✨';
+          emoji.innerText = '🏆🎓';
           headline.innerText = 'مببروووك!';
           headline.className = 'text-4xl sm:text-5xl font-black gold-shimmer-text mb-3';
           subtext.innerText = 'ألف مبروك الفوز في مسابقة العباقرة! أداء علمي مشرف.';
         } else if (roomState.winnerTeam === 'tie') {
           card.className = 'royal-dark-card rounded-3xl p-8 text-center border border-sky-400/50';
-          emoji.innerText = '🤝🎓✨';
+          emoji.innerText = '🤝🎓';
           headline.innerText = 'تعادل بطولي!';
           headline.className = 'text-4xl font-black text-sky-400 mb-3';
           subtext.innerText = 'منافسة قوية وتعادل مستحق بين الفريقين!';
         } else {
           card.className = 'royal-dark-card rounded-3xl p-8 text-center border border-rose-400/40';
-          emoji.innerText = '💪🎓✨';
+          emoji.innerText = '💪🎓';
           headline.innerText = 'متزعلش متعوضة!';
           headline.className = 'text-3xl sm:text-4xl font-black text-rose-300 mb-3';
           subtext.innerText = 'متزعلش متعوضة المرة الجاية بإذن الله.. عملتوا ماتش عالمي وعاش على مجهودكم!';
@@ -1795,6 +1960,9 @@
     roomState.buzzerOpen = false;
     roomState.showTransition = false;
 
+    // تسريع دوران الـ DNA والحلقات المدارية 3D في الخلفية احتفالاً بالنهاية
+    setArenaState('finale');
+
     const modal = document.getElementById('winner-modal');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
@@ -1867,6 +2035,7 @@
   function closeCompetition() {
     clearInterval(timerInterval);
     roomState.sessionClosed = true;
+    setArenaState('finale');
     broadcastState();
 
     document.getElementById('winner-modal').classList.add('hidden');
@@ -1889,10 +2058,10 @@
     setTimeout(() => checkRoomAvailability(roomId), 300);
   }
 
-  // ================= خلفية الـ DNA ثلاثية الأبعاد الداكنة بالكامل (بدون أي شفافية بيضاء) =================
+  // ================= خلفية الـ DNA ثلاثية الأبعاد والحلقات المدارية الدائمة =================
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x02050e);
-  scene.fog = new THREE.FogExp2(0x02050e, 0.032);
+  scene.fog = new THREE.FogExp2(0x02050e, 0.028);
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setClearColor(0x02050e, 1);
@@ -1900,38 +2069,38 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
-  const pointLight1 = new THREE.PointLight(0xfde047, 3, 45);
+  const pointLight1 = new THREE.PointLight(0xfde047, 3.2, 45);
   pointLight1.position.set(6, 6, 8);
   scene.add(pointLight1);
-  const pointLight2 = new THREE.PointLight(0x38bdf8, 2.4, 45);
+  const pointLight2 = new THREE.PointLight(0x38bdf8, 2.5, 45);
   pointLight2.position.set(-6, -4, 8);
   scene.add(pointLight2);
 
-  const gridHelper = new THREE.GridHelper(46, 46, 0xf59e0b, 0x0f172a);
+  const gridHelper = new THREE.GridHelper(48, 48, 0xf59e0b, 0x0f172a);
   gridHelper.position.y = -5.2;
   gridHelper.material.transparent = true;
-  gridHelper.material.opacity = 0.25;
+  gridHelper.material.opacity = 0.28;
   scene.add(gridHelper);
 
   const dnaGroup = new THREE.Group();
-  const sphereGeo = new THREE.SphereGeometry(0.2, 20, 20);
-  const matStrandA = new THREE.MeshStandardMaterial({ color: 0xfde047, roughness: 0.15, metalness: 0.8, emissive: 0xd97706, emissiveIntensity: 0.4 });
-  const matStrandB = new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.7, emissive: 0x0284c7, emissiveIntensity: 0.35 });
-  const rungMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.42 });
+  const sphereGeo = new THREE.SphereGeometry(0.22, 20, 20);
+  const matStrandA = new THREE.MeshStandardMaterial({ color: 0xfde047, roughness: 0.15, metalness: 0.85, emissive: 0xd97706, emissiveIntensity: 0.45 });
+  const matStrandB = new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.75, emissive: 0x0284c7, emissiveIntensity: 0.4 });
+  const rungMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.45 });
 
   for (let i = -16; i <= 16; i++) {
     const y = i * 0.45;
     const angle = i * 0.4;
-    const r = 2.7;
+    const r = 2.8;
 
     const s1 = new THREE.Mesh(sphereGeo, matStrandA);
     s1.position.set(Math.cos(angle) * r, y, Math.sin(angle) * r);
     const s2 = new THREE.Mesh(sphereGeo, matStrandB);
     s2.position.set(Math.cos(angle + Math.PI) * r, y, Math.sin(angle + Math.PI) * r);
 
-    const rungGeo = new THREE.CylinderGeometry(0.035, 0.035, r * 2, 8);
+    const rungGeo = new THREE.CylinderGeometry(0.038, 0.038, r * 2, 8);
     const rung = new THREE.Mesh(rungGeo, rungMat);
     rung.position.set(0, y, 0);
     rung.rotation.z = Math.PI / 2;
@@ -1939,24 +2108,31 @@
 
     dnaGroup.add(s1, s2, rung);
   }
-  dnaGroup.position.set(0, 0, -4.2);
+  dnaGroup.position.set(0, 0, -4);
   dnaGroup.rotation.z = Math.PI / 9;
   scene.add(dnaGroup);
 
-  const ringGeo1 = new THREE.TorusGeometry(7.2, 0.035, 16, 120);
-  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.35 });
+  // حلقات مدارية ثلاثية الأبعاد تلف باستمرار في الفضاء (تظهر بوضوح أثناء اللعب وفي النهاية)
+  const ringGeo1 = new THREE.TorusGeometry(6.8, 0.045, 16, 120);
+  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.45 });
   const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
-  ring1.rotation.x = Math.PI / 2.4;
-  scene.add(ring1);
+  ring1.rotation.x = Math.PI / 2.3;
+
+  const ringGeo2 = new THREE.TorusGeometry(8.2, 0.035, 16, 120);
+  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.32 });
+  const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+  ring2.rotation.y = Math.PI / 3;
+
+  scene.add(ring1, ring2);
 
   const particlesGeo = new THREE.BufferGeometry();
-  const particleCount = 110;
+  const particleCount = 130;
   const posArray = new Float32Array(particleCount * 3);
   for (let i = 0; i < particleCount * 3; i++) {
     posArray[i] = (Math.random() - 0.5) * 32;
   }
   particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const particlesMat = new THREE.PointsMaterial({ size: 0.08, color: 0xfde047, transparent: true, opacity: 0.5 });
+  const particlesMat = new THREE.PointsMaterial({ size: 0.09, color: 0xfde047, transparent: true, opacity: 0.6 });
   const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
   scene.add(particlesMesh);
 
@@ -1990,10 +2166,16 @@
       ringMat1.color.setHex(0xef4444);
       matStrandB.color.setHex(0xef4444);
       dnaSpeed = 0.004;
+    } else if (state === 'finale') {
+      targetCamX = 0;
+      targetCamZ = 10.5;
+      ringMat1.color.setHex(0xfde047);
+      matStrandB.color.setHex(0x38bdf8);
+      dnaSpeed = 0.022;
     } else {
       targetCamX = 0;
       targetCamZ = 12.5;
-      ringMat1.color.setHex(0xf59e0b);
+      ringMat1.color.setHex(0xfde047);
       matStrandB.color.setHex(0x38bdf8);
       dnaSpeed = 0.008;
     }
@@ -2007,10 +2189,12 @@
     camera.lookAt(0, 0, 0);
 
     dnaGroup.rotation.y += dnaSpeed;
-    ring1.rotation.z += 0.003;
+    ring1.rotation.z += 0.004;
+    ring2.rotation.x -= 0.003;
+    ring2.rotation.y += 0.002;
 
-    gridHelper.position.z = (gridHelper.position.z + 0.015) % 1;
-    particlesMesh.rotation.y += 0.0006;
+    gridHelper.position.z = (gridHelper.position.z + 0.018) % 1;
+    particlesMesh.rotation.y += 0.0008;
 
     renderer.render(scene, camera);
   }
