@@ -568,4 +568,1061 @@
     // --- المرحلة الأولى: 10 أسئلة عادية (10 نقاط) ---
     {
       num: 1, stage: 1,
-      q
+      q: "Q1. Insulin resistance is best defined as:",
+      opts: ["Complete absence of insulin secretion", "Failure of body cells to respond adequately to insulin", "Increased insulin sensitivity", "Destruction of pancreatic alpha cells"],
+      ans: 1,
+      exp: "الخلايا لا تستجيب للإنسولين بشكل طبيعي، وبالتالي يحتاج الجسم لجرعات أكبر للحصول على نفس التأثير."
+    },
+    {
+      num: 2, stage: 1,
+      q: "Q2. Which of the following drugs may cause insulin resistance?",
+      opts: ["Metformin", "Acarbose", "Corticosteroids", "Sitagliptin"],
+      ans: 2,
+      exp: "Corticosteroids من العوامل التي تسبب insulin resistance."
+    },
+    {
+      num: 3, stage: 1,
+      q: "Q3. Sulfonylureas stimulate insulin secretion by:",
+      opts: ["Opening ATP-sensitive K⁺ channels", "Closing ATP-sensitive K⁺ channels", "Inhibiting calcium channels", "Increasing hepatic gluconeogenesis"],
+      ans: 1,
+      exp: "قفل K⁺ channels → Depolarization → دخول Ca²⁺ → Insulin release."
+    },
+    {
+      num: 4, stage: 1,
+      q: "Q4. Which of the following is a first-generation sulfonylurea?",
+      opts: ["Glimepiride", "Gliclazide", "Tolbutamide", "Glibenclamide"],
+      ans: 2,
+      exp: "First generation: Tolbutamide, Chlorpropamide | Second: Glibenclamide, Gliclazide | Third: Glimepiride."
+    },
+    {
+      num: 5, stage: 1,
+      q: "Q5. Sulfonylureas are mainly used in:",
+      opts: ["Type 1 DM", "Type 2 DM", "Diabetes insipidus", "Gestational diabetes only"],
+      ans: 1,
+      exp: "تحتاج وجود pancreatic β-cells قادرة على إفراز الإنسولين؛ لذلك لا تعمل في Type 1 DM."
+    },
+    {
+      num: 6, stage: 1,
+      q: "Q6. Which sulfonylurea is particularly associated with prolonged hypoglycemia?",
+      opts: ["Chlorpropamide", "Metformin", "Repaglinide", "Acarbose"],
+      ans: 0,
+      exp: "Chlorpropamide طويل المفعول، وبالتالي يزيد خطر prolonged hypoglycemia."
+    },
+    {
+      num: 7, stage: 1,
+      q: "Q7. Secondary failure of sulfonylureas is mainly due to:",
+      opts: ["Increased insulin receptor number", "Progressive decline in β-cell function", "Increased intestinal glucose absorption", "Increased GLP-1 secretion"],
+      ans: 1,
+      exp: "مع الوقت تقل قدرة β-cells على إفراز الإنسولين."
+    },
+    {
+      num: 8, stage: 1,
+      q: "Q8. Repaglinide and Nateglinide belong to which drug class?",
+      opts: ["Biguanides", "Meglitinides", "Thiazolidinediones", "Gliptins"],
+      ans: 1,
+      exp: "Meglitinides stimulate insulin secretion بطريقة مشابهة للـ sulfonylureas."
+    },
+    {
+      num: 9, stage: 1,
+      q: "Q9. Meglitinides should be administered:",
+      opts: ["After meals", "Just before meals", "Once weekly", "At bedtime only"],
+      ans: 1,
+      exp: "Fast onset and short duration → التحكم في postprandial hyperglycemia."
+    },
+    {
+      num: 10, stage: 1,
+      q: "Q10. Which drug can be used in patients allergic to sulfonylureas because it does not contain sulfur?",
+      opts: ["Glibenclamide", "Chlorpropamide", "Repaglinide", "Gliclazide"],
+      ans: 2,
+      exp: "Repaglinide من Meglitinides ولا يحتوي على sulfur."
+    },
+
+    // --- المرحلة الثانية: 10 أسئلة الضعف (20 نقطة) ---
+    {
+      num: 11, stage: 2,
+      q: "Q11. The main mechanism of metformin is:",
+      opts: ["Increasing insulin secretion", "Decreasing hepatic gluconeogenesis", "Closing potassium channels", "Increasing glucagon secretion"],
+      ans: 1,
+      exp: "Metformin يقلل hepatic glucose output ويقلل intestinal glucose absorption."
+    },
+    {
+      num: 12, stage: 2,
+      q: "Q12. Why does metformin rarely cause hypoglycemia when used alone?",
+      opts: ["It increases insulin secretion", "It stimulates glucagon release", "It does not increase insulin secretion", "It destroys pancreatic β-cells"],
+      ans: 2,
+      exp: "Metformin لا يحفز إفراز الإنسولين، لكنه يحسن حساسية الخلايا له."
+    },
+    {
+      num: 13, stage: 2,
+      q: "Q13. A patient taking metformin develops severe lactic acidosis. Which condition increases this risk?",
+      opts: ["Severe renal impairment", "Mild headache", "Increased HDL", "Increased insulin sensitivity"],
+      ans: 0,
+      exp: "Renal impairment يقلل التخلص من metformin ويزيد خطر lactic acidosis."
+    },
+    {
+      num: 14, stage: 2,
+      q: "Q14. Long-term metformin therapy may decrease the absorption of:",
+      opts: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K"],
+      ans: 1,
+      exp: "Metformin may reduce vitamin B12 absorption."
+    },
+    {
+      num: 15, stage: 2,
+      q: "Q15. Thiazolidinediones exert their action through activation of:",
+      opts: ["PPAR-γ", "DPP-4", "ATP-sensitive potassium channels", "α-glucosidase"],
+      ans: 0,
+      exp: "PPAR-γ nuclear receptor activation → increased insulin sensitivity and GLUT4 expression."
+    },
+    {
+      num: 16, stage: 2,
+      q: "Q16. Which of the following is an important adverse effect of pioglitazone?",
+      opts: ["Severe hypoglycemia when used alone", "Fluid retention and peripheral edema", "Increased gastric emptying", "Vitamin B12 deficiency"],
+      ans: 1,
+      exp: "Thiazolidinediones cause fluid retention and weight gain and should be avoided in CHF."
+    },
+    {
+      num: 17, stage: 2,
+      q: "Q17. Which thiazolidinedione has a greater association with myocardial infarction risk according to the lecture?",
+      opts: ["Pioglitazone", "Rosiglitazone", "Both have exactly equal risk", "Neither"],
+      ans: 1,
+      exp: "Rosiglitazone > Pioglitazone حسب المقارنة المذكورة في المحاضرة."
+    },
+    {
+      num: 18, stage: 2,
+      q: "Q18. Acarbose reduces blood glucose mainly by:",
+      opts: ["Increasing insulin secretion", "Inhibiting intestinal α-glucosidase", "Inhibiting DPP-4", "Increasing GLUT4 transporters"],
+      ans: 1,
+      exp: "يمنع تكسير وامتصاص الكربوهيدرات، وبالتالي يقلل postprandial glucose."
+    },
+    {
+      num: 19, stage: 2,
+      q: "Q19. GLP-1 mimetics produce all the following effects EXCEPT:",
+      opts: ["Increased insulin secretion", "Decreased glucagon secretion", "Delayed gastric emptying", "Increased appetite"],
+      ans: 3,
+      exp: "GLP-1 mimetics تقلل appetite وتبطئ gastric emptying."
+    },
+    {
+      num: 20, stage: 2,
+      q: "Q20. Sitagliptin lowers blood glucose by:",
+      opts: ["Activating α-glucosidase", "Inhibiting DPP-4 enzyme", "Blocking insulin receptors", "Increasing hepatic glucose production"],
+      ans: 1,
+      exp: "DPP-4 inhibition prevents GLP-1 degradation → prolongs incretin activity."
+    }
+  ];
+
+  let roomId = '';
+  let myRole = ''; // 'host' | 'team1' | 'team2'
+  let peer = null;
+  let hostConn = null;
+  let teamConns = { team1: null, team2: null };
+  let probePeer = null;
+
+  let roomState = {
+    team1Name: 'الفريق الأول',
+    team2Name: 'الفريق الثاني',
+    team1Connected: false,
+    team2Connected: false,
+    gameStarted: false,
+    team1Score: 0,
+    team2Score: 0,
+    qIndex: -1,
+    stage: 1,
+    showTransition: false,
+    currentQ: null,
+    buzzerOpen: false,
+    buzzedTeam: null,
+    lockedTeams: [],
+    wrongOptions: [],
+    revealed: false,
+    selectedOpt: null,
+    statusMessage: '',
+    matchEnded: false,
+    winnerTeam: null,
+    sessionClosed: false,
+    timer: 20
+  };
+
+  let timerInterval = null;
+  let isMuted = false;
+
+  async function playTone(type) {
+    if (isMuted) return;
+    try {
+      await Tone.start();
+      const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+      if (type === 'buzz') synth.triggerAttackRelease(["C5", "G5", "C6"], "8n");
+      else if (type === 'correct') synth.triggerAttackRelease(["C5", "E5", "G5", "C6"], "8n");
+      else if (type === 'wrong') synth.triggerAttackRelease(["F3", "B2"], "4n");
+      else if (type === 'next') synth.triggerAttackRelease(["E4", "A4"], "16n");
+      else if (type === 'win') synth.triggerAttackRelease(["C5", "E5", "G5", "B5", "C6"], "4n");
+    } catch (e) {}
+  }
+
+  function vibrateDevice(pattern) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(pattern); } catch (e) {}
+    }
+  }
+
+  function toggleMute() {
+    isMuted = !isMuted;
+    document.getElementById('mute-btn').innerText = isMuted ? 'الصوت: مكتوم' : 'الصوت: مفعل';
+  }
+
+  function broadcastState() {
+    if (myRole !== 'host') return;
+    ['team1', 'team2'].forEach(t => {
+      if (teamConns[t] && teamConns[t].open) {
+        teamConns[t].send({ type: 'STATE_UPDATE', state: roomState });
+      }
+    });
+  }
+
+  function checkRoomAvailability(targetRoomId) {
+    if (!targetRoomId || myRole !== '') return;
+
+    if (probePeer) { try { probePeer.destroy(); } catch (e) {} }
+    probePeer = new Peer();
+    probePeer.on('open', () => {
+      const conn = probePeer.connect('mnu-abakera-' + targetRoomId, { reliable: true });
+      conn.on('open', () => {
+        conn.send({ type: 'PROBE' });
+      });
+      conn.on('data', (data) => {
+        if (data.type === 'PROBE_RESULT') {
+          updateLobbyButtonsAvailability(data.team1Connected, data.team2Connected);
+        }
+      });
+    });
+  }
+
+  function updateLobbyButtonsAvailability(t1Taken, t2Taken) {
+    const btn1 = document.getElementById('join-team1-btn');
+    const btn2 = document.getElementById('join-team2-btn');
+    if (t1Taken) {
+      btn1.disabled = true;
+      btn1.innerText = 'الفريق الأول (مكتمل)';
+      btn1.className = 'py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-sm cursor-not-allowed';
+    }
+    if (t2Taken) {
+      btn2.disabled = true;
+      btn2.innerText = 'الفريق الثاني (مكتمل)';
+      btn2.className = 'py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-sm cursor-not-allowed';
+    }
+  }
+
+  function initHostPeerServer() {
+    if (peer) { try { peer.destroy(); } catch (e) {} }
+    roomId = Math.random().toString(36).substring(2, 10);
+    const peerId = 'mnu-abakera-' + roomId;
+    peer = new Peer(peerId);
+
+    peer.on('open', () => {
+      myRole = 'host';
+      document.getElementById('lobby-screen').classList.add('hidden');
+      document.getElementById('host-waiting-screen').classList.remove('hidden');
+      document.getElementById('host-game-screen').classList.add('hidden');
+
+      generateRoomQR(roomId);
+      renderUI();
+    });
+
+    peer.on('connection', (conn) => {
+      conn.on('data', (data) => {
+        if (data.type === 'PROBE') {
+          conn.send({
+            type: 'PROBE_RESULT',
+            team1Connected: roomState.team1Connected,
+            team2Connected: roomState.team2Connected
+          });
+        } else if (data.type === 'JOIN') {
+          if ((data.team === 'team1' && roomState.team1Connected) || (data.team === 'team2' && roomState.team2Connected)) {
+            conn.send({ type: 'ROLE_TAKEN' });
+            return;
+          }
+          teamConns[data.team] = conn;
+          if (data.team === 'team1') {
+            roomState.team1Connected = true;
+            if (data.teamName) roomState.team1Name = data.teamName.trim();
+            document.getElementById('team1-name-input').value = roomState.team1Name;
+          } else if (data.team === 'team2') {
+            roomState.team2Connected = true;
+            if (data.teamName) roomState.team2Name = data.teamName.trim();
+            document.getElementById('team2-name-input').value = roomState.team2Name;
+          }
+
+          if (roomState.team1Connected && roomState.team2Connected) {
+            playTone('win');
+            fireCelebrationConfetti();
+          } else {
+            playTone('next');
+          }
+
+          broadcastState();
+          renderUI();
+        } else if (data.type === 'BUZZ') {
+          if (roomState.buzzerOpen && !roomState.buzzedTeam && !roomState.lockedTeams.includes(data.team)) {
+            roomState.buzzerOpen = false;
+            roomState.buzzedTeam = data.team;
+            roomState.statusMessage = '';
+            roomState.timer = 15;
+            playTone('buzz');
+            startTimer();
+            broadcastState();
+            renderUI();
+          }
+        } else if (data.type === 'ANSWER') {
+          handleAnswerSubmission(data.optIdx, data.team);
+        }
+      });
+
+      conn.on('close', () => {
+        ['team1', 'team2'].forEach(t => {
+          if (teamConns[t] === conn) {
+            teamConns[t] = null;
+            roomState[t + 'Connected'] = false;
+            broadcastState();
+            renderUI();
+          }
+        });
+      });
+    });
+
+    peer.on('error', () => {
+      const btn = document.getElementById('create-host-btn');
+      if (btn) {
+        btn.disabled = false;
+        btn.innerText = 'Host';
+      }
+    });
+  }
+
+  function createHostRoom() {
+    const btn = document.getElementById('create-host-btn');
+    btn.innerText = '...';
+    btn.disabled = true;
+    initHostPeerServer();
+  }
+
+  function generateRoomQR(id) {
+    const baseUrl = window.location.href.split('?')[0];
+    const joinUrl = `${baseUrl}?room=${id}`;
+
+    const modalContainer = document.getElementById('qrcode-container');
+    modalContainer.innerHTML = '';
+    new QRCode(modalContainer, { text: joinUrl, width: 200, height: 200 });
+
+    const mainContainer = document.getElementById('main-qrcode-container');
+    mainContainer.innerHTML = '';
+    new QRCode(mainContainer, { text: joinUrl, width: 190, height: 190 });
+  }
+
+  function joinAsTeam(teamSlot) {
+    const enteredName = document.getElementById('custom-team-name-input').value.trim();
+
+    if (!enteredName) {
+      alert('يرجى إدخال اسم الفريق أولاً');
+      document.getElementById('custom-team-name-input').focus();
+      return;
+    }
+
+    document.getElementById('connection-status').innerText = 'جاري الاتصال...';
+    if (probePeer) { try { probePeer.destroy(); } catch (e) {} }
+    peer = new Peer();
+
+    peer.on('open', () => {
+      hostConn = peer.connect('mnu-abakera-' + roomId, { reliable: true });
+
+      hostConn.on('open', () => {
+        hostConn.send({ type: 'JOIN', team: teamSlot, teamName: enteredName });
+      });
+
+      hostConn.on('data', (data) => {
+        if (data.type === 'ROLE_TAKEN') {
+          alert('هذا الفريق تم اختياره بالفعل، اختر الفريق الآخر.');
+          location.reload();
+        } else if (data.type === 'SESSION_REPLACED') {
+          alert('انتهت هذه الجولة. شكراً لمشاركتكم!');
+          location.href = window.location.href.split('?')[0];
+        } else if (data.type === 'STATE_UPDATE') {
+          if (!myRole) {
+            myRole = teamSlot;
+            document.getElementById('lobby-screen').classList.add('hidden');
+            document.getElementById('team-screen').classList.remove('hidden');
+            document.getElementById('team-slot-subtitle').innerText = teamSlot === 'team1' ? 'الفريق الأول' : 'الفريق الثاني';
+
+            const btn = document.getElementById('team-buzzer-btn');
+            const aura = document.getElementById('buzzer-aura');
+            if (teamSlot === 'team2') {
+              btn.className = "buzzer-dome buzzer-dome-team2";
+              aura.className = "buzzer-glow-aura bg-blue-500";
+            }
+          }
+          roomState = data.state;
+          renderUI();
+        }
+      });
+
+      hostConn.on('error', () => {
+        alert('تعذر الاتصال بغرفة المسابقة، يرجى مسح رمز الـ QR مرة أخرى.');
+      });
+    });
+  }
+
+  function startMatchFromWaiting() {
+    if (!roomState.team1Connected || !roomState.team2Connected) return;
+    roomState.gameStarted = true;
+    document.getElementById('host-waiting-screen').classList.add('hidden');
+    document.getElementById('host-game-screen').classList.remove('hidden');
+    nextQuestion();
+  }
+
+  function nextQuestion() {
+    if (!roomState.team1Connected || !roomState.team2Connected) return;
+    roomState.gameStarted = true;
+
+    if (roomState.qIndex === 9 && roomState.stage === 1 && !roomState.showTransition) {
+      clearInterval(timerInterval);
+      roomState.showTransition = true;
+      roomState.buzzerOpen = false;
+      playTone('win');
+      broadcastState();
+      renderUI();
+      return;
+    }
+
+    if (roomState.qIndex >= COMPETITION_QUESTIONS.length - 1) {
+      endMatch();
+      return;
+    }
+
+    roomState.qIndex++;
+    const qObj = COMPETITION_QUESTIONS[roomState.qIndex];
+    roomState.stage = qObj.stage;
+    roomState.showTransition = false;
+    roomState.currentQ = qObj;
+    roomState.buzzerOpen = true;
+    roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.wrongOptions = [];
+    roomState.revealed = false;
+    roomState.selectedOpt = null;
+    roomState.statusMessage = '';
+    roomState.timer = 20;
+
+    playTone('next');
+    startTimer();
+    broadcastState();
+    renderUI();
+  }
+
+  function startStageTwo() {
+    roomState.stage = 2;
+    roomState.showTransition = false;
+    roomState.qIndex = 10;
+    const qObj = COMPETITION_QUESTIONS[10];
+    roomState.currentQ = qObj;
+    roomState.buzzerOpen = true;
+    roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.wrongOptions = [];
+    roomState.revealed = false;
+    roomState.selectedOpt = null;
+    roomState.statusMessage = '';
+    roomState.timer = 20;
+
+    playTone('next');
+    startTimer();
+    broadcastState();
+    renderUI();
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (roomState.timer > 0 && !roomState.revealed && !roomState.showTransition) {
+        roomState.timer--;
+        document.getElementById('host-timer').innerText = roomState.timer;
+
+        if (roomState.timer === 0) {
+          playTone('wrong');
+          if (roomState.buzzedTeam) {
+            const timedOutTeam = roomState.buzzedTeam;
+            const timedOutName = timedOutTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+            const otherTeam = timedOutTeam === 'team1' ? 'team2' : 'team1';
+            const otherTeamName = otherTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+
+            if (!roomState.lockedTeams.includes(timedOutTeam)) {
+              roomState.lockedTeams.push(timedOutTeam);
+            }
+
+            if (!roomState.lockedTeams.includes(otherTeam)) {
+              roomState.buzzedTeam = null;
+              roomState.buzzerOpen = true;
+              roomState.timer = 15;
+              roomState.statusMessage = `انتهى وقت ${timedOutName} — الجرس مفتوح الآن لـ ${otherTeamName}`;
+            } else {
+              roomState.buzzedTeam = null;
+              roomState.buzzerOpen = false;
+              roomState.statusMessage = `انتهى الوقت — اضغط على "إظهار الإجابة"`;
+              clearInterval(timerInterval);
+            }
+          } else {
+            roomState.buzzerOpen = false;
+            roomState.statusMessage = `انتهى وقت السؤال — اضغط على "إظهار الإجابة"`;
+            clearInterval(timerInterval);
+          }
+          broadcastState();
+          renderUI();
+        } else {
+          broadcastState();
+        }
+      }
+    }, 1000);
+  }
+
+  function pressBuzzer() {
+    if (!roomState.buzzerOpen || roomState.buzzedTeam || roomState.lockedTeams.includes(myRole)) return;
+    vibrateDevice([70, 40, 100]);
+    playTone('buzz');
+    if (hostConn && hostConn.open) {
+      hostConn.send({ type: 'BUZZ', team: myRole });
+    }
+  }
+
+  function unlockBuzzers() {
+    roomState.buzzerOpen = true;
+    roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.statusMessage = '';
+    roomState.timer = 20;
+    startTimer();
+    broadcastState();
+    renderUI();
+  }
+
+  function submitAnswer(optIdx) {
+    vibrateDevice(50);
+    if (myRole === 'host') {
+      handleAnswerSubmission(optIdx, roomState.buzzedTeam);
+    } else if (hostConn && hostConn.open) {
+      hostConn.send({ type: 'ANSWER', optIdx: optIdx, team: myRole });
+    }
+  }
+
+  function handleAnswerSubmission(optIdx, answeringTeam) {
+    if (!roomState.currentQ || roomState.revealed) return;
+    if (roomState.wrongOptions.includes(optIdx)) return;
+
+    const isCorrect = optIdx === roomState.currentQ.ans;
+    const pts = roomState.stage === 2 ? 20 : 10;
+
+    if (isCorrect) {
+      clearInterval(timerInterval);
+      playTone('correct');
+      fireCelebrationConfetti();
+      roomState.selectedOpt = optIdx;
+      roomState.revealed = true;
+      roomState.buzzerOpen = false;
+      roomState.statusMessage = '';
+      if (answeringTeam === 'team1') roomState.team1Score += pts;
+      if (answeringTeam === 'team2') roomState.team2Score += pts;
+    } else {
+      playTone('wrong');
+      if (!roomState.wrongOptions.includes(optIdx)) {
+        roomState.wrongOptions.push(optIdx);
+      }
+      if (answeringTeam && !roomState.lockedTeams.includes(answeringTeam)) {
+        roomState.lockedTeams.push(answeringTeam);
+      }
+
+      const wrongTeamName = answeringTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+      const otherTeam = answeringTeam === 'team1' ? 'team2' : 'team1';
+      const otherTeamName = otherTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+
+      if (answeringTeam && !roomState.lockedTeams.includes(otherTeam)) {
+        roomState.buzzedTeam = null;
+        roomState.buzzerOpen = true;
+        roomState.revealed = false;
+        roomState.timer = 15;
+        roomState.statusMessage = `إجابة خاطئة من ${wrongTeamName} — الجرس مفتوح الآن لـ ${otherTeamName}`;
+      } else {
+        clearInterval(timerInterval);
+        roomState.buzzedTeam = null;
+        roomState.buzzerOpen = false;
+        roomState.revealed = false;
+        roomState.statusMessage = `إجابة خاطئة — اضغط على "إظهار الإجابة" لكشف الحل`;
+      }
+    }
+
+    broadcastState();
+    renderUI();
+  }
+
+  function revealAnswer() {
+    clearInterval(timerInterval);
+    roomState.revealed = true;
+    roomState.buzzerOpen = false;
+    roomState.statusMessage = '';
+    broadcastState();
+    renderUI();
+  }
+
+  function adjustScore(team, delta) {
+    if (team === 'team1') roomState.team1Score = Math.max(0, roomState.team1Score + delta);
+    if (team === 'team2') roomState.team2Score = Math.max(0, roomState.team2Score + delta);
+    broadcastState();
+    renderUI();
+  }
+
+  function syncTeamNames() {
+    roomState.team1Name = document.getElementById('team1-name-input').value.trim() || 'الفريق الأول';
+    roomState.team2Name = document.getElementById('team2-name-input').value.trim() || 'الفريق الثاني';
+    broadcastState();
+  }
+
+  function renderUI() {
+    if (myRole === 'host') {
+      const waitScreen = document.getElementById('host-waiting-screen');
+      const gameScreen = document.getElementById('host-game-screen');
+
+      if (!roomState.gameStarted) {
+        waitScreen.classList.remove('hidden');
+        gameScreen.classList.add('hidden');
+
+        const connectedCount = (roomState.team1Connected ? 1 : 0) + (roomState.team2Connected ? 1 : 0);
+        const wHeadline = document.getElementById('waiting-headline');
+        const wSub = document.getElementById('waiting-subheadline');
+        const startBtn = document.getElementById('start-game-locked-btn');
+
+        const c1 = document.getElementById('wait-card-team1');
+        const s1 = document.getElementById('wait-status-team1');
+        const led1 = document.getElementById('wait-led-team1');
+        if (roomState.team1Connected) {
+          c1.className = 'bg-rose-950/60 border-2 border-rose-500 rounded-3xl p-6 text-center shadow-[0_0_30px_rgba(244,63,94,0.25)] min-h-[175px] flex flex-col items-center justify-center';
+          led1.className = 'status-led led-ready mb-3';
+          s1.innerText = roomState.team1Name;
+          s1.className = 'text-2xl font-black text-white';
+        } else {
+          c1.className = 'bg-slate-950/90 border border-slate-800 rounded-3xl p-6 text-center min-h-[175px] flex flex-col items-center justify-center';
+          led1.className = 'status-led led-waiting mb-3';
+          s1.innerText = 'في الانتظار';
+          s1.className = 'text-lg font-black text-slate-500';
+        }
+
+        const c2 = document.getElementById('wait-card-team2');
+        const s2 = document.getElementById('wait-status-team2');
+        const led2 = document.getElementById('wait-led-team2');
+        if (roomState.team2Connected) {
+          c2.className = 'bg-blue-950/60 border-2 border-blue-500 rounded-3xl p-6 text-center shadow-[0_0_30px_rgba(59,130,246,0.25)] min-h-[175px] flex flex-col items-center justify-center';
+          led2.className = 'status-led led-ready mb-3';
+          s2.innerText = roomState.team2Name;
+          s2.className = 'text-2xl font-black text-white';
+        } else {
+          c2.className = 'bg-slate-950/90 border border-slate-800 rounded-3xl p-6 text-center min-h-[175px] flex flex-col items-center justify-center';
+          led2.className = 'status-led led-waiting mb-3';
+          s2.innerText = 'في الانتظار';
+          s2.className = 'text-lg font-black text-slate-500';
+        }
+
+        if (connectedCount === 0) {
+          wHeadline.innerText = 'فين الفريقين؟';
+          wHeadline.className = 'text-3xl sm:text-4xl font-black text-amber-300 mb-1';
+          wSub.innerText = 'امسح رمز الـ QR بالموبايل لتسجيل الفريقين (0 / 2)';
+          startBtn.disabled = true;
+          startBtn.innerText = 'في انتظار اكتمال الفريقين (0 / 2)';
+          startBtn.className = 'px-12 py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-lg sm:text-xl cursor-not-allowed';
+        } else if (connectedCount === 1) {
+          wHeadline.innerText = 'فاضل فريق واحد';
+          wHeadline.className = 'text-3xl sm:text-4xl font-black text-sky-300 mb-1';
+          wSub.innerText = 'تم تسجيل فريق، في انتظار انضمام الفريق الثاني (1 / 2)';
+          startBtn.disabled = true;
+          startBtn.innerText = 'في انتظار الفريق الثاني (1 / 2)';
+          startBtn.className = 'px-12 py-4 rounded-2xl bg-sky-950/80 border border-sky-500/40 text-sky-300/70 font-black text-lg sm:text-xl cursor-not-allowed';
+        } else {
+          wHeadline.innerText = 'يلا نبدأ كملنا';
+          wHeadline.className = 'text-4xl sm:text-5xl font-black text-emerald-400 mb-1';
+          wSub.innerText = 'الفريقان جاهزان الآن لبدء المسابقة (2 / 2)';
+          startBtn.disabled = false;
+          startBtn.innerText = 'بدء المسابقة الآن';
+          startBtn.className = 'winner-glow px-14 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xl sm:text-2xl shadow-2xl cursor-pointer';
+        }
+        return;
+      }
+
+      waitScreen.classList.add('hidden');
+      gameScreen.classList.remove('hidden');
+
+      document.getElementById('host-team1-score').innerText = roomState.team1Score;
+      document.getElementById('host-team2-score').innerText = roomState.team2Score;
+      document.getElementById('host-timer').innerText = roomState.timer;
+
+      const box1 = document.getElementById('host-team1-box');
+      const box2 = document.getElementById('host-team2-box');
+      box1.classList.toggle('winner-glow', roomState.buzzedTeam === 'team1');
+      box2.classList.toggle('winner-glow', roomState.buzzedTeam === 'team2');
+
+      const stagePill = document.getElementById('stage-indicator-pill');
+      if (roomState.stage === 2) {
+        stagePill.innerText = 'المرحلة الثانية: الضعف (×2 • 20 نقطة)';
+        stagePill.className = 'w-full bg-amber-500/20 border border-amber-400/60 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-amber-300';
+      } else {
+        stagePill.innerText = 'المرحلة الأولى (10 أسئلة • 10 نقاط)';
+        stagePill.className = 'w-full bg-sky-950/90 border border-sky-500/40 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-sky-300';
+      }
+
+      const transModal = document.getElementById('stage-transition-modal');
+      if (roomState.showTransition) {
+        transModal.classList.remove('hidden');
+        transModal.classList.add('flex');
+      } else {
+        transModal.classList.add('hidden');
+        transModal.classList.remove('flex');
+      }
+
+      const currentNum = roomState.qIndex + 1;
+      document.getElementById('question-progress-bar').style.width = `${Math.max(5, (currentNum / 20) * 100)}%`;
+
+      const nextBtn = document.getElementById('next-q-btn');
+      if (currentNum === 10 && roomState.stage === 1) {
+        nextBtn.innerText = 'الانتقال للمرحلة الثانية (الضعف)';
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow cursor-pointer';
+      } else if (currentNum >= 20) {
+        nextBtn.innerText = 'اكتملت الأسئلة (20/20)';
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-slate-700 text-amber-300 font-black text-sm shadow cursor-pointer';
+      } else {
+        nextBtn.innerText = `السؤال التالي (${currentNum + 1}/20)`;
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer';
+      }
+
+      const banner = document.getElementById('buzz-banner');
+      if (roomState.buzzedTeam) {
+        const isTeam1 = roomState.buzzedTeam === 'team1';
+        const name = isTeam1 ? roomState.team1Name : roomState.team2Name;
+        banner.classList.remove('hidden');
+        banner.className = `mb-2.5 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl ${isTeam1 ? 'bg-rose-600 text-white' : 'bg-blue-600 text-white'}`;
+        banner.innerText = `الأسرع في الجرس: ${name}`;
+      } else if (roomState.statusMessage) {
+        banner.classList.remove('hidden');
+        banner.className = 'mb-2.5 py-2.5 px-6 rounded-2xl text-center font-black text-lg sm:text-xl shadow-xl bg-amber-600 text-white';
+        banner.innerText = roomState.statusMessage;
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      const expBox = document.getElementById('explanation-box');
+
+      if (roomState.currentQ) {
+        const ptsLabel = roomState.stage === 2 ? '20 نقطة (الضعف ×2)' : '10 نقاط';
+        document.getElementById('q-badge').innerText = `سؤال ${roomState.currentQ.num} من 20 • ${ptsLabel}`;
+        document.getElementById('host-question-text').innerText = roomState.currentQ.q;
+
+        const grid = document.getElementById('host-options-grid');
+        const letters = ['A', 'B', 'C', 'D'];
+        grid.innerHTML = roomState.currentQ.opts.map((opt, i) => {
+          let style = 'bg-slate-900/90 border-slate-700 text-white hover:border-amber-400';
+          if (roomState.revealed) {
+            if (i === roomState.currentQ.ans) style = 'bg-emerald-600 border-emerald-300 text-white shadow-lg shadow-emerald-600/30';
+            else if (roomState.wrongOptions.includes(i) || i === roomState.selectedOpt) style = 'bg-rose-600 border-rose-300 text-white';
+            else style = 'bg-slate-900/40 border-slate-800 text-slate-500';
+          } else if (roomState.wrongOptions.includes(i)) {
+            style = 'bg-rose-900/80 border-rose-500 text-rose-200 opacity-75';
+          }
+          return `<button onclick="submitAnswer(${i})" class="en-font p-4 rounded-2xl border-2 text-left font-bold text-base sm:text-lg flex items-center gap-3 transition cursor-pointer ${style}">
+            <span class="w-8 h-8 shrink-0 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-black text-sm">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>`;
+        }).join('');
+
+        if (roomState.revealed && roomState.currentQ.exp) {
+          expBox.classList.remove('hidden');
+          expBox.innerHTML = `<span class="text-amber-300">التفسير العلمي:</span> ${roomState.currentQ.exp}`;
+        } else {
+          expBox.classList.add('hidden');
+        }
+      }
+    } else if (myRole === 'team1' || myRole === 'team2') {
+      document.getElementById('team-header-name').innerText = myRole === 'team1' ? roomState.team1Name : roomState.team2Name;
+      document.getElementById('team-my-score').innerText = myRole === 'team1' ? roomState.team1Score : roomState.team2Score;
+
+      const teamStagePill = document.getElementById('team-stage-pill');
+      if (roomState.stage === 2) {
+        teamStagePill.innerText = 'المرحلة الثانية: الضعف (×2 • 20 نقطة)';
+        teamStagePill.className = 'px-4 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-black';
+      } else {
+        teamStagePill.innerText = 'المرحلة الأولى (10 نقاط)';
+        teamStagePill.className = 'px-4 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black';
+      }
+
+      const timerPill = document.getElementById('team-timer-pill');
+      if (roomState.gameStarted && !roomState.revealed && !roomState.showTransition) {
+        timerPill.classList.remove('hidden');
+        timerPill.innerText = `${roomState.timer} ث`;
+      } else {
+        timerPill.classList.add('hidden');
+      }
+
+      const playArea = document.getElementById('team-play-area');
+      const endArea = document.getElementById('team-end-area');
+
+      if (roomState.matchEnded) {
+        playArea.classList.add('hidden');
+        endArea.classList.remove('hidden');
+
+        const card = document.getElementById('team-end-card');
+        const headline = document.getElementById('team-end-headline');
+        const subtext = document.getElementById('team-end-subtext');
+        const scoresEl = document.getElementById('team-end-scores');
+
+        scoresEl.innerText = `${roomState.team1Name}: ${roomState.team1Score}  |  ${roomState.team2Name}: ${roomState.team2Score}`;
+
+        if (roomState.sessionClosed) {
+          card.className = 'exec-glass rounded-3xl p-8 text-center border-2 border-amber-400';
+          headline.innerText = 'انتهت المسابقة';
+          headline.className = 'text-3xl sm:text-4xl font-black text-amber-400 mb-3';
+          subtext.innerText = 'شكراً لمشاركتكم في مسابقة العباقرة بكلية الصيدلة - جامعة المنصورة الأهلية.';
+        } else if (roomState.winnerTeam === myRole) {
+          card.className = 'exec-glass winner-glow rounded-3xl p-8 text-center border-2 border-amber-400';
+          headline.innerText = 'مببروووك!';
+          headline.className = 'text-4xl sm:text-5xl font-black text-amber-400 mb-3';
+          subtext.innerText = 'ألف مبروك الفوز في مسابقة العباقرة! أداء مشرف.';
+        } else if (roomState.winnerTeam === 'tie') {
+          card.className = 'exec-glass rounded-3xl p-8 text-center border-2 border-sky-400';
+          headline.innerText = 'تعادل مستحق';
+          headline.className = 'text-4xl font-black text-sky-400 mb-3';
+          subtext.innerText = 'منافسة قوية وتعادل مستحق بين الفريقين.';
+        } else {
+          card.className = 'exec-glass rounded-3xl p-8 text-center border-2 border-rose-400/60';
+          headline.innerText = 'متزعلش متعوضة!';
+          headline.className = 'text-3xl sm:text-4xl font-black text-rose-300 mb-3';
+          subtext.innerText = 'متزعلش متعوضة المرة الجاية بإذن الله.. أداء رائع ومجهود متميز.';
+        }
+        return;
+      } else {
+        playArea.classList.remove('hidden');
+        endArea.classList.add('hidden');
+      }
+
+      const buzzWrapper = document.getElementById('team-buzzer-wrapper');
+      const buzzBtn = document.getElementById('team-buzzer-btn');
+      const ringAnim = document.getElementById('buzzer-ring-anim');
+      const mainLabel = document.getElementById('buzzer-main-label');
+      const subLabel = document.getElementById('buzzer-sub-label');
+      const statusText = document.getElementById('team-status-text');
+      const optsBox = document.getElementById('team-options-box');
+      const isTeamLocked = roomState.lockedTeams.includes(myRole);
+
+      const canBuzz = roomState.buzzerOpen && !isTeamLocked && roomState.gameStarted;
+      buzzBtn.disabled = !canBuzz;
+      ringAnim.classList.toggle('hidden', !canBuzz);
+
+      if (canBuzz) {
+        mainLabel.innerText = 'اضغط';
+        subLabel.innerText = 'READY';
+      } else {
+        mainLabel.innerText = 'مغلق';
+        subLabel.innerText = 'STANDBY';
+      }
+
+      if (!roomState.gameStarted) {
+        buzzWrapper.classList.remove('hidden');
+        optsBox.classList.add('hidden');
+        const connectedCount = (roomState.team1Connected ? 1 : 0) + (roomState.team2Connected ? 1 : 0);
+        statusText.innerText = connectedCount < 2
+          ? "تم تسجيل الفريق — في انتظار انضمام الفريق الثاني..."
+          : "اكتمل الفريقان — في انتظار بدء المسابقة...";
+        statusText.className = "text-base sm:text-lg font-black text-emerald-400";
+      } else if (roomState.showTransition) {
+        buzzWrapper.classList.remove('hidden');
+        optsBox.classList.add('hidden');
+        statusText.innerText = "هننتقل للمرحلة الجاية: مرحلة الضعف (×2)";
+        statusText.className = "text-base sm:text-lg font-black text-amber-400";
+      } else if (roomState.buzzedTeam === myRole && !roomState.revealed) {
+        statusText.innerText = `اختر الإجابة الآن (${roomState.timer} ثانية):`;
+        statusText.className = "text-base sm:text-lg font-black text-emerald-400";
+        buzzWrapper.classList.add('hidden');
+        optsBox.classList.remove('hidden');
+        const letters = ['A', 'B', 'C', 'D'];
+        optsBox.innerHTML = roomState.currentQ.opts.map((opt, i) => {
+          const isWrong = roomState.wrongOptions.includes(i);
+          return `<button onclick="submitAnswer(${i})" ${isWrong ? 'disabled' : ''} class="en-font w-full p-4 rounded-2xl ${isWrong ? 'bg-rose-950/60 border-rose-800 text-rose-400 line-through opacity-50' : 'bg-slate-900/95 hover:bg-amber-500 hover:text-slate-950 border-amber-400/40 shadow-lg'} border-2 text-left font-bold text-sm sm:text-base transition cursor-pointer flex items-center gap-3">
+            <span class="w-8 h-8 shrink-0 rounded-full bg-slate-800 text-amber-400 font-black flex items-center justify-center">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>`;
+        }).join('');
+      } else {
+        buzzWrapper.classList.remove('hidden');
+        optsBox.classList.add('hidden');
+        if (isTeamLocked && !roomState.revealed) {
+          statusText.innerText = "انتهت فرصتك في هذا السؤال — الفرصة للفريق المنافس";
+          statusText.className = "text-base sm:text-lg font-black text-rose-400";
+        } else if (roomState.buzzerOpen) {
+          statusText.innerText = roomState.lockedTeams.length > 0
+            ? "فرصتك الآن — اضغط الجرس للإجابة"
+            : "الجرس متاح — اضغط للإجابة";
+          statusText.className = "text-base sm:text-lg font-black text-amber-400";
+        } else if (roomState.buzzedTeam) {
+          const otherName = roomState.buzzedTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+          statusText.innerText = `يجيب الآن: ${otherName}`;
+          statusText.className = "text-base sm:text-lg font-black text-rose-400";
+        } else {
+          statusText.innerText = "في انتظار السؤال التالي...";
+          statusText.className = "text-base font-bold text-slate-300";
+        }
+      }
+    }
+  }
+
+  function toggleQrModal(show) {
+    const m = document.getElementById('qr-modal');
+    m.classList.toggle('hidden', !show);
+    m.classList.toggle('flex', show);
+  }
+
+  function fireCelebrationConfetti() {
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 90, spread: 75, origin: { y: 0.6 }, colors: ['#d4af37', '#38bdf8', '#f43f5e', '#10b981'] });
+    }
+  }
+
+  function endMatch() {
+    clearInterval(timerInterval);
+    roomState.matchEnded = true;
+    roomState.buzzerOpen = false;
+    roomState.showTransition = false;
+
+    const modal = document.getElementById('winner-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    const title = document.getElementById('winner-title');
+
+    if (roomState.team1Score > roomState.team2Score) {
+      roomState.winnerTeam = 'team1';
+      title.innerText = `الفائز: ${roomState.team1Name}`;
+    } else if (roomState.team2Score > roomState.team1Score) {
+      roomState.winnerTeam = 'team2';
+      title.innerText = `الفائز: ${roomState.team2Name}`;
+    } else {
+      roomState.winnerTeam = 'tie';
+      title.innerText = 'تعادل بين الفريقين';
+    }
+
+    document.getElementById('final-scores-summary').innerText = `${roomState.team1Name}: ${roomState.team1Score} نقطة  |  ${roomState.team2Name}: ${roomState.team2Score} نقطة`;
+    playTone('win');
+    fireCelebrationConfetti();
+    broadcastState();
+  }
+
+  function switchToNewTeams() {
+    ['team1', 'team2'].forEach(t => {
+      if (teamConns[t] && teamConns[t].open) {
+        teamConns[t].send({ type: 'SESSION_REPLACED' });
+        try { teamConns[t].close(); } catch (e) {}
+      }
+      teamConns[t] = null;
+    });
+
+    document.getElementById('winner-modal').classList.add('hidden');
+    document.getElementById('winner-modal').classList.remove('flex');
+    document.getElementById('explanation-box').classList.add('hidden');
+    document.getElementById('team1-name-input').value = 'الفريق الأول';
+    document.getElementById('team2-name-input').value = 'الفريق الثاني';
+
+    roomState = {
+      team1Name: 'الفريق الأول',
+      team2Name: 'الفريق الثاني',
+      team1Connected: false,
+      team2Connected: false,
+      gameStarted: false,
+      team1Score: 0,
+      team2Score: 0,
+      qIndex: -1,
+      stage: 1,
+      showTransition: false,
+      currentQ: null,
+      buzzerOpen: false,
+      buzzedTeam: null,
+      lockedTeams: [],
+      wrongOptions: [],
+      revealed: false,
+      selectedOpt: null,
+      statusMessage: '',
+      matchEnded: false,
+      winnerTeam: null,
+      sessionClosed: false,
+      timer: 20
+    };
+
+    initHostPeerServer();
+  }
+
+  function closeCompetition() {
+    clearInterval(timerInterval);
+    roomState.sessionClosed = true;
+    broadcastState();
+
+    document.getElementById('winner-modal').classList.add('hidden');
+    document.getElementById('winner-modal').classList.remove('flex');
+    document.getElementById('host-game-screen').classList.add('hidden');
+    document.getElementById('host-waiting-screen').classList.add('hidden');
+
+    const bye = document.getElementById('goodbye-screen');
+    bye.classList.remove('hidden');
+    bye.classList.add('flex');
+    fireCelebrationConfetti();
+  }
+
+  // التوجيه الذكي: إذا دخل عبر مسح الـ QR Code، يختفي زر الـ Host وتظهر بطاقة اختيار الفريق الأول/الثاني فوراً
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('room')) {
+    roomId = urlParams.get('room');
+    document.getElementById('host-role-card').classList.add('hidden');
+    document.getElementById('team-role-card').classList.remove('hidden');
+    setTimeout(() => checkRoomAvailability(roomId), 300);
+  }
+
+  // خلفية الاستوديو ثلاثية الأبعاد
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+  const ringGeo = new THREE.TorusGeometry(6.8, 0.05, 16, 120);
+  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.38 });
+  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.25 });
+  const ring1 = new THREE.Mesh(ringGeo, ringMat1);
+  const ring2 = new THREE.Mesh(ringGeo, ringMat2);
+  ring2.rotation.x = Math.PI / 3;
+  scene.add(ring1, ring2);
+
+  const particlesGeo = new THREE.BufferGeometry();
+  const particleCount = 100;
+  const posArray = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 28;
+  }
+  particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  const particlesMat = new THREE.PointsMaterial({ size: 0.08, color: 0xd4af37, transparent: true, opacity: 0.45 });
+  const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+  scene.add(particlesMesh);
+
+  camera.position.z = 12;
+
+  function animate3D() {
+    requestAnimationFrame(animate3D);
+    ring1.rotation.y += 0.0022;
+    ring1.rotation.x += 0.001;
+    ring2.rotation.y -= 0.003;
+    particlesMesh.rotation.y += 0.0006;
+    renderer.render(scene, camera);
+  }
+  animate3D();
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+</body>
+</html>
