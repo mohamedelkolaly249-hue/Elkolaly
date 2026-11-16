@@ -160,7 +160,7 @@
     transform: scale(1.08);
   }
 
-  /* ================= أيقونات الفريقين الجديدة فائقة الاحترافية عند الهوست (3D Orbiting Medallions) ================= */
+  /* أيقونات الفريقين الاحترافية عند الهوست (3D Orbiting Medallions) */
   .team-orb-3d {
     position: relative;
     width: 68px;
@@ -244,7 +244,7 @@
     pointer-events: none;
   }
 
-  /* ================= ميدالية النهاية 3D بحلقات دوارة مثل الفون (Host Finale 3D Rig) ================= */
+  /* ميدالية النهاية 3D بحلقات دوارة مثل الفون */
   .finale-3d-rig {
     position: relative;
     width: 155px;
@@ -371,6 +371,18 @@
   .glass-3d-backdrop {
     background: radial-gradient(circle at 50% 50%, rgba(6, 13, 30, 0.45) 0%, rgba(2, 5, 14, 0.72) 100%) !important;
     backdrop-filter: blur(5px);
+  }
+
+  /* نبض عداد الوقت في الثواني الأخيرة */
+  @keyframes timerUrgentPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+  .timer-urgent {
+    border-color: #f43f5e !important;
+    color: #fda4af !important;
+    box-shadow: 0 0 28px rgba(244, 63, 94, 0.6) !important;
+    animation: timerUrgentPulse 0.5s ease-in-out infinite;
   }
 
   /* جرس الموبايل المجسم 3D بإطار ذهبي رفيع */
@@ -615,7 +627,6 @@
           <div class="team-orb-ring-reverse"></div>
           <div class="team-orb-chassis">
             <div class="team-orb-core-rose">
-              <!-- أيقونة تاج وكأس البطولة المجسم للفريق الأول -->
               <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]" viewBox="0 0 24 24">
                 <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
                 <circle cx="12" cy="12" r="2" fill="#ffffff"/>
@@ -641,7 +652,6 @@
           <div class="team-orb-ring-reverse"></div>
           <div class="team-orb-chassis">
             <div class="team-orb-core-blue">
-              <!-- أيقونة تاج وكأس البطولة المجسم للفريق الثاني -->
               <svg class="w-8 h-8 drop-shadow-[0_3px_6px_rgba(0,0,0,0.8)]" viewBox="0 0 24 24">
                 <path fill="url(#gold3d)" d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
                 <circle cx="12" cy="12" r="2" fill="#ffffff"/>
@@ -694,7 +704,7 @@
         </div>
         <div>
           <input id="team1-name-input" value="الفريق الأول" onchange="syncTeamNames()" class="bg-transparent font-black text-xl sm:text-3xl text-rose-400 w-36 sm:w-52 focus:outline-none border-b border-transparent focus:border-rose-400">
-          <div class="flex items-center gap-1.5 mt-1">
+          <div class="flex items-center gap-2 mt-1">
             <button onclick="adjustScore('team1', -10)" class="px-2.5 py-0.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg text-xs font-bold text-slate-300 cursor-pointer">-10</button>
             <button onclick="adjustScore('team1', 10)" class="px-2.5 py-0.5 bg-slate-900 hover:bg-slate-800 border border-amber-500/40 rounded-lg text-xs font-bold text-amber-300 cursor-pointer">+10</button>
           </div>
@@ -728,7 +738,7 @@
       <div class="flex items-center gap-4 text-left">
         <div>
           <input id="team2-name-input" value="الفريق الثاني" onchange="syncTeamNames()" class="bg-transparent text-left font-black text-xl sm:text-3xl text-blue-400 w-36 sm:w-52 focus:outline-none border-b border-transparent focus:border-blue-400">
-          <div class="flex items-center justify-end gap-1.5 mt-1">
+          <div class="flex items-center justify-end gap-2 mt-1">
             <button onclick="adjustScore('team2', 10)" class="px-2.5 py-0.5 bg-slate-900 hover:bg-slate-800 border border-amber-500/40 rounded-lg text-xs font-bold text-amber-300 cursor-pointer">+10</button>
             <button onclick="adjustScore('team2', -10)" class="px-2.5 py-0.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg text-xs font-bold text-slate-300 cursor-pointer">-10</button>
           </div>
@@ -764,8 +774,8 @@
           <span id="q-badge">سؤال 1 من 20</span>
         </div>
 
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-2 px-5 py-1.5 rounded-full bg-slate-950 border border-amber-400/75 text-amber-300 font-black text-2xl shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+        <div class="flex items-center gap-4">
+          <div id="host-timer-pill" class="flex items-center gap-2 px-5 py-1.5 rounded-full bg-slate-950 border border-amber-400/75 text-amber-300 font-black text-2xl shadow-[0_0_20px_rgba(245,158,11,0.2)] transition-all">
             <svg class="w-6 h-6" fill="url(#gold3d)" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
             <span id="host-timer">20</span>
           </div>
@@ -781,18 +791,18 @@
     </div>
   </div>
 
-  <!-- شريط تحكم المقدم السفلي -->
-  <div class="max-w-7xl w-full mx-auto royal-dark-card rounded-2xl p-3 sm:p-3.5 flex flex-wrap items-center justify-between gap-2">
-    <div class="flex items-center gap-3">
-      <button id="next-q-btn" onclick="nextQuestion()" class="dark-gold-btn px-6 py-3 rounded-xl font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-2">
+  <!-- شريط تحكم المقدم السفلي (مع مسافة أوسع بين أزرار التحكم) -->
+  <div class="max-w-7xl w-full mx-auto royal-dark-card rounded-2xl p-3.5 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-5 sm:gap-7">
+      <button id="next-q-btn" onclick="nextQuestion()" class="dark-gold-btn px-7 py-3.5 rounded-xl font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-2.5">
         <svg class="w-4 h-4" fill="url(#gold3d)" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         <span id="next-q-btn-label" class="gold-shimmer-text">السؤال التالي (1/20)</span>
       </button>
-      <button onclick="unlockBuzzers()" class="btn-3d px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-400/50 text-amber-300 font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-1.5">
+      <button onclick="unlockBuzzers()" class="btn-3d px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-400/50 text-amber-300 font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-2">
         <svg class="w-5 h-5" fill="url(#gold3d)" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
         <span>فتح الجرس</span>
       </button>
-      <button onclick="revealAnswer()" class="btn-3d px-5 py-3 rounded-xl bg-sky-900/90 hover:bg-sky-800 border border-sky-400/50 text-sky-200 font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-1.5">
+      <button onclick="revealAnswer()" class="btn-3d px-6 py-3.5 rounded-xl bg-sky-900/90 hover:bg-sky-800 border border-sky-400/50 text-sky-200 font-black text-sm sm:text-base cursor-pointer inline-flex items-center gap-2">
         <svg class="w-5 h-5 fill-sky-300" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
         <span>إظهار الإجابة</span>
       </button>
@@ -807,8 +817,8 @@
       <span>م.م/ هبة بهريز</span>
     </div>
 
-    <div class="flex items-center gap-2">
-      <button onclick="endMatch()" class="btn-3d px-5 py-3 rounded-xl bg-rose-950/90 hover:bg-rose-900 border border-rose-500/50 text-rose-200 font-black text-xs sm:text-sm cursor-pointer inline-flex items-center gap-1.5">
+    <div class="flex items-center">
+      <button onclick="endMatch()" class="btn-3d px-6 py-3.5 rounded-xl bg-rose-950/90 hover:bg-rose-900 border border-rose-500/50 text-rose-200 font-black text-xs sm:text-sm cursor-pointer inline-flex items-center gap-2">
         <svg class="w-5 h-5" fill="url(#gold3d)" viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2z"/></svg>
         <span>إنهاء وإعلان الفائز</span>
       </button>
@@ -816,7 +826,7 @@
   </div>
 </div>
 
-<!-- ================= 4. شاشة الانتقال للمرحلة الثانية (مع بقاء الـ 3D واضحاً في الخلفية) ================= -->
+<!-- ================= 4. شاشة الانتقال للمرحلة الثانية ================= -->
 <div id="stage-transition-modal" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4">
   <div class="royal-dark-card royal-crown-card winner-glow max-w-xl w-full rounded-3xl p-8 text-center my-auto animate-slide-up">
     <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-black mb-3">
@@ -923,7 +933,7 @@
   </div>
 </div>
 
-<!-- ================= شاشة النتيجة النهائية للهوست (مع الـ 3D والحلقات الدوارة مثل الفون) ================= -->
+<!-- ================= شاشة النتيجة النهائية للهوست ================= -->
 <div id="winner-modal" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4 overflow-y-auto">
   <div class="royal-dark-card royal-crown-card winner-glow max-w-xl w-full rounded-3xl p-7 sm:p-9 text-center my-auto animate-slide-up">
     <div class="flex items-center justify-center gap-4 mb-3">
@@ -950,7 +960,7 @@
 
     <div class="border-t border-amber-400/25 pt-5">
       <p class="text-lg sm:text-xl font-black text-amber-200 mb-4">نغير الفريقين ولا كفاية؟</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <button onclick="switchToNewTeams()" class="dark-gold-btn py-3.5 px-5 rounded-2xl font-black text-base cursor-pointer flex items-center justify-center gap-2">
           <svg class="w-5 h-5" fill="url(#gold3d)" viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
           <span class="gold-shimmer-text">فريق تاني (QR جديد)</span>
@@ -964,7 +974,7 @@
   </div>
 </div>
 
-<!-- ================= شاشة الختام النهائية عند الهوست (مع الـ 3D الخلفي والحلقات الدوارة مثل الفون) ================= -->
+<!-- ================= شاشة الختام النهائية عند الهوست ================= -->
 <div id="goodbye-screen" class="fixed inset-0 z-50 hidden glass-3d-backdrop items-center justify-center p-4 overflow-y-auto">
   <div class="royal-dark-card royal-crown-card max-w-2xl w-full rounded-3xl p-8 sm:p-10 text-center my-auto animate-slide-up">
     <!-- الشعارات الثلاثة بحلقات الذهب الرفيعة -->
@@ -1200,17 +1210,53 @@
 
   let timerInterval = null;
   let isMuted = false;
+  let mainSynth = null;
+  let tickSynth = null;
+
+  // تهيئة محرك الصوت الاحترافي للمسابقة (شامل صوت عداد الوقت التلفزيوني)
+  async function ensureAudioReady() {
+    await Tone.start();
+    if (!mainSynth) {
+      mainSynth = new Tone.PolySynth(Tone.Synth).toDestination();
+    }
+    if (!tickSynth) {
+      tickSynth = new Tone.MembraneSynth({
+        pitchDecay: 0.015,
+        octaves: 3,
+        oscillator: { type: 'sine' },
+        envelope: { attack: 0.001, decay: 0.09, sustain: 0, release: 0.03 }
+      }).toDestination();
+      tickSynth.volume.value = -4;
+    }
+  }
 
   async function playTone(type) {
     if (isMuted) return;
     try {
-      await Tone.start();
-      const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-      if (type === 'buzz') synth.triggerAttackRelease(["C5", "G5", "C6"], "8n");
-      else if (type === 'correct') synth.triggerAttackRelease(["C5", "E5", "G5", "C6"], "8n");
-      else if (type === 'wrong') synth.triggerAttackRelease(["F3", "B2"], "4n");
-      else if (type === 'next') synth.triggerAttackRelease(["E4", "A4"], "16n");
-      else if (type === 'win') synth.triggerAttackRelease(["C5", "E5", "G5", "B5", "C6"], "4n");
+      await ensureAudioReady();
+      if (type === 'buzz') {
+        mainSynth.triggerAttackRelease(["C5", "G5", "C6"], "8n");
+      } else if (type === 'correct') {
+        mainSynth.triggerAttackRelease(["C5", "E5", "G5", "C6"], "8n");
+      } else if (type === 'wrong') {
+        mainSynth.triggerAttackRelease(["F3", "B2"], "4n");
+      } else if (type === 'next') {
+        mainSynth.triggerAttackRelease(["E4", "A4"], "16n");
+      } else if (type === 'win') {
+        mainSynth.triggerAttackRelease(["C5", "E5", "G5", "B5", "C6"], "4n");
+      } else if (type === 'tick') {
+        // دقة عداد وقت استوديو المسابقات (تتناوب بين نغمتين خفيفتين مثل عقارب الساعة)
+        const note = (roomState.timer % 2 === 0) ? "G4" : "E4";
+        tickSynth.triggerAttackRelease(note, "32n");
+      } else if (type === 'tick_urgent') {
+        // دقة تحذيرية مزدوجة ومثيرة في آخر 5 ثوانٍ
+        const now = Tone.now();
+        tickSynth.triggerAttackRelease("C5", "32n", now);
+        tickSynth.triggerAttackRelease("G5", "32n", now + 0.12);
+      } else if (type === 'timeout') {
+        // جرس انتهاء الوقت
+        mainSynth.triggerAttackRelease(["G3", "C#3", "C3"], "2n");
+      }
     } catch (e) {}
   }
 
@@ -1351,6 +1397,7 @@
   }
 
   function createHostRoom() {
+    ensureAudioReady();
     const btn = document.getElementById('create-host-btn');
     btn.innerText = '...';
     btn.disabled = true;
@@ -1383,6 +1430,7 @@
   }
 
   function joinCompetitionAuto() {
+    ensureAudioReady();
     const enteredName = document.getElementById('custom-team-name-input').value.trim();
 
     if (!enteredName) {
@@ -1515,8 +1563,14 @@
         roomState.timer--;
         document.getElementById('host-timer').innerText = roomState.timer;
 
+        const timerPillEl = document.getElementById('host-timer-pill');
+        if (timerPillEl) {
+          timerPillEl.classList.toggle('timer-urgent', roomState.timer > 0 && roomState.timer <= 5);
+        }
+
         if (roomState.timer === 0) {
-          playTone('wrong');
+          if (timerPillEl) timerPillEl.classList.remove('timer-urgent');
+          playTone('timeout');
           setArenaState('wrong');
           if (roomState.buzzedTeam) {
             const timedOutTeam = roomState.buzzedTeam;
@@ -1547,6 +1601,12 @@
           broadcastState();
           renderUI();
         } else {
+          // تشغيل دقات عداد الوقت (تصبح أسرع وأقوى في آخر 5 ثوانٍ)
+          if (roomState.timer <= 5) {
+            playTone('tick_urgent');
+          } else {
+            playTone('tick');
+          }
           broadcastState();
         }
       }
@@ -1723,6 +1783,11 @@
       document.getElementById('host-team1-score').innerText = roomState.team1Score;
       document.getElementById('host-team2-score').innerText = roomState.team2Score;
       document.getElementById('host-timer').innerText = roomState.timer;
+
+      const timerPillEl = document.getElementById('host-timer-pill');
+      if (timerPillEl) {
+        timerPillEl.classList.toggle('timer-urgent', !roomState.revealed && roomState.timer > 0 && roomState.timer <= 5);
+      }
 
       const box1 = document.getElementById('host-team1-box');
       const box2 = document.getElementById('host-team2-box');
@@ -1960,7 +2025,6 @@
     roomState.buzzerOpen = false;
     roomState.showTransition = false;
 
-    // تسريع دوران الـ DNA والحلقات المدارية 3D في الخلفية احتفالاً بالنهاية
     setArenaState('finale');
 
     const modal = document.getElementById('winner-modal');
@@ -2112,7 +2176,6 @@
   dnaGroup.rotation.z = Math.PI / 9;
   scene.add(dnaGroup);
 
-  // حلقات مدارية ثلاثية الأبعاد تلف باستمرار في الفضاء (تظهر بوضوح أثناء اللعب وفي النهاية)
   const ringGeo1 = new THREE.TorusGeometry(6.8, 0.045, 16, 120);
   const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.45 });
   const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
