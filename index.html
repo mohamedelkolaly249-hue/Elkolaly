@@ -316,8 +316,11 @@
     currentQ: null,
     buzzerOpen: false,
     buzzedTeam: null,
-    revealed: false,
+    lockedTeams: [],      // الفرق التي أخطأت بالفعل في هذا السؤال
+    wrongOptions: [],     // الخيارات الخاطئة التي تم اختيارها (تظهر باللون الأحمر دون كشف الصح)
+    revealed: false,      // لا تتحول إلى true إلا عند الإجابة الصحيحة أو ضغط زر "إظهار الإجابة"
     selectedOpt: null,
+    statusMessage: '',
     timer: 15
   };
 
@@ -350,7 +353,7 @@
     });
   }
 
-  // 1. إنشاء غرفة جديدة على اللابتوب (Host) عبر PeerJS مباشرة بدون أي سيرفر خارجي
+  // 1. إنشاء غرفة جديدة على اللابتوب (Host)
   function createHostRoom() {
     const btn = document.getElementById('create-host-btn');
     btn.innerText = 'جاري تجهيز الغرفة...';
@@ -378,9 +381,10 @@
           if (dot) dot.className = 'w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]';
           conn.send({ type: 'STATE_UPDATE', state: roomState });
         } else if (data.type === 'BUZZ') {
-          if (roomState.buzzerOpen && !roomState.buzzedTeam) {
+          if (roomState.buzzerOpen && !roomState.buzzedTeam && !roomState.lockedTeams.includes(data.team)) {
             roomState.buzzerOpen = false;
             roomState.buzzedTeam = data.team;
+            roomState.statusMessage = '';
             playTone('buzz');
             broadcastState();
             renderUI();
@@ -399,7 +403,7 @@
       });
     });
 
-    peer.on('error', (err) => {
+    peer.on('error', () => {
       alert('حدث خطأ في الاتصال، أعد تحميل الصفحة وحاول مرة أخرى.');
       btn.disabled = false;
       btn.innerText = 'إنشاء غرفة جديدة (Host)';
@@ -475,8 +479,11 @@
     roomState.currentQ = pool[nextIdx];
     roomState.buzzerOpen = true;
     roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.wrongOptions = [];
     roomState.revealed = false;
     roomState.selectedOpt = null;
+    roomState.statusMessage = '';
     roomState.timer = cat === 'rapid' ? 45 : 15;
 
     playTone('next');
@@ -506,7 +513,7 @@
   }
 
   function pressBuzzer() {
-    if (!roomState.buzzerOpen || roomState.buzzedTeam) return;
+    if (!roomState.buzzerOpen || roomState.buzzedTeam || roomState.lockedTeams.includes(myRole)) return;
     playTone('buzz');
     if (hostConn && hostConn.open) {
       hostConn.send({ type: 'BUZZ', team: myRole });
@@ -516,7 +523,8 @@
   function unlockBuzzers() {
     roomState.buzzerOpen = true;
     roomState.buzzedTeam = null;
-    roomState.selectedOpt = null;
+    roomState.lockedTeams = [];
+    roomState.statusMessage = '';
     broadcastState();
     renderUI();
   }
@@ -529,24 +537,53 @@
     }
   }
 
+  // معالجة الإجابة: إذا كانت خطأ تُخفى الإجابة الصحيحة ويُفتح الجرس تلقائياً للفريق المنافس
   function handleAnswerSubmission(optIdx, answeringTeam) {
     if (!roomState.currentQ || roomState.revealed) return;
-    roomState.selectedOpt = optIdx;
-    roomState.revealed = true;
-    roomState.buzzerOpen = false;
+    if (roomState.wrongOptions.includes(optIdx)) return;
 
     const isCorrect = optIdx === roomState.currentQ.ans;
     const pts = roomState.category === 'gamble' ? 20 : 10;
 
     if (isCorrect) {
       playTone('correct');
+      roomState.selectedOpt = optIdx;
+      roomState.revealed = true;
+      roomState.buzzerOpen = false;
+      roomState.statusMessage = '';
       if (answeringTeam === 'girls') roomState.girlsScore += pts;
       if (answeringTeam === 'boys') roomState.boysScore += pts;
     } else {
       playTone('wrong');
+      if (!roomState.wrongOptions.includes(optIdx)) {
+        roomState.wrongOptions.push(optIdx);
+      }
+      if (answeringTeam && !roomState.lockedTeams.includes(answeringTeam)) {
+        roomState.lockedTeams.push(answeringTeam);
+      }
+
       if (roomState.category === 'gamble') {
         if (answeringTeam === 'girls') roomState.girlsScore = Math.max(0, roomState.girlsScore - 10);
         if (answeringTeam === 'boys') roomState.boysScore = Math.max(0, roomState.boysScore - 10);
+      }
+
+      const wrongTeamName = answeringTeam === 'girls' ? roomState.girlsName : roomState.boysName;
+      const otherTeam = answeringTeam === 'girls' ? 'boys' : 'girls';
+      const otherTeamName = otherTeam === 'girls' ? roomState.girlsName : roomState.boysName;
+
+      // التحقق مما إذا كان الفريق المنافس لم يجرب بعد
+      if (answeringTeam && !roomState.lockedTeams.includes(otherTeam)) {
+        roomState.buzzedTeam = null;
+        roomState.buzzerOpen = true; // فتح الجرس للفريق المنافس فوراً
+        roomState.revealed = false;  // تظل الإجابة الصحيحة مخفية على الهوست
+        roomState.timer = 15;
+        roomState.statusMessage = `❌ إجابة خاطئة من ${wrongTeamName}! الجرس مفتوح الآن لـ ${otherTeamName}`;
+      } else {
+        // إذا أخطأ الفريقان أو ضغط المقدم مباشرة
+        roomState.buzzedTeam = null;
+        roomState.buzzerOpen = false;
+        roomState.revealed = false; // لا تظهر الإجابة الصحيحة إلا عند ضغط المقدم "إظهار الإجابة"
+        roomState.statusMessage = `❌ إجابة خاطئة! اضغط على "إظهار الإجابة" لكشف الحل`;
       }
     }
 
@@ -557,6 +594,7 @@
   function revealAnswer() {
     roomState.revealed = true;
     roomState.buzzerOpen = false;
+    roomState.statusMessage = '';
     broadcastState();
     renderUI();
   }
@@ -587,6 +625,10 @@
         banner.classList.remove('hidden');
         banner.className = `mb-3 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl ${isGirls ? 'bg-rose-600 text-white' : 'bg-blue-600 text-white'}`;
         banner.innerText = `🔔 الأسرع في الجرس: ${name}!`;
+      } else if (roomState.statusMessage) {
+        banner.classList.remove('hidden');
+        banner.className = 'mb-3 py-2.5 px-6 rounded-2xl text-center font-black text-lg sm:text-xl shadow-xl bg-amber-600 text-white';
+        banner.innerText = roomState.statusMessage;
       } else {
         banner.classList.add('hidden');
       }
@@ -601,9 +643,13 @@
         grid.innerHTML = roomState.currentQ.opts.map((opt, i) => {
           let style = 'bg-slate-900/90 border-slate-700 text-white hover:border-sky-400';
           if (roomState.revealed) {
+            // لا تظهر الإجابة الصحيحة باللون الأخضر إلا إذا revealed === true
             if (i === roomState.currentQ.ans) style = 'bg-emerald-600 border-emerald-300 text-white';
-            else if (i === roomState.selectedOpt) style = 'bg-rose-600 border-rose-300 text-white';
+            else if (roomState.wrongOptions.includes(i) || i === roomState.selectedOpt) style = 'bg-rose-600 border-rose-300 text-white';
             else style = 'bg-slate-900/40 border-slate-800 text-slate-500';
+          } else if (roomState.wrongOptions.includes(i)) {
+            // تمييز الخيار الخاطئ فقط باللون الأحمر وإبقاء باقي الخيارات مخفية
+            style = 'bg-rose-900/80 border-rose-500 text-rose-200 opacity-75';
           }
           return `<button onclick="submitAnswer(${i})" class="p-4 rounded-2xl border-2 text-right font-bold text-lg flex items-center gap-3 transition cursor-pointer ${style}">
             <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-black text-sm">${letters[i]}</span>
@@ -618,8 +664,9 @@
       const buzzBtn = document.getElementById('team-buzzer-btn');
       const statusText = document.getElementById('team-status-text');
       const optsBox = document.getElementById('team-options-box');
+      const isTeamLocked = roomState.lockedTeams.includes(myRole);
 
-      buzzBtn.disabled = !roomState.buzzerOpen;
+      buzzBtn.disabled = !roomState.buzzerOpen || isTeamLocked;
 
       if (roomState.buzzedTeam === myRole && !roomState.revealed) {
         statusText.innerText = "أنت الأسرع! اختر الإجابة الآن:";
@@ -627,16 +674,22 @@
         buzzBtn.classList.add('hidden');
         optsBox.classList.remove('hidden');
         const letters = ['أ', 'ب', 'ج', 'د'];
-        optsBox.innerHTML = roomState.currentQ.opts.map((opt, i) => `
-          <button onclick="submitAnswer(${i})" class="w-full p-4 rounded-2xl bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border border-slate-600 text-right font-black text-base transition cursor-pointer">
+        optsBox.innerHTML = roomState.currentQ.opts.map((opt, i) => {
+          const isWrong = roomState.wrongOptions.includes(i);
+          return `<button onclick="submitAnswer(${i})" ${isWrong ? 'disabled' : ''} class="w-full p-4 rounded-2xl ${isWrong ? 'bg-rose-950/60 border-rose-800 text-rose-400 line-through opacity-50' : 'bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border-slate-600'} border text-right font-black text-base transition cursor-pointer">
             ${letters[i]} - ${opt}
-          </button>
-        `).join('');
+          </button>`;
+        }).join('');
       } else {
         buzzBtn.classList.remove('hidden');
         optsBox.classList.add('hidden');
-        if (roomState.buzzerOpen) {
-          statusText.innerText = "الجرس مفتوح! اضغط بسرعة للإجابة";
+        if (isTeamLocked && !roomState.revealed) {
+          statusText.innerText = "إجابة خاطئة! الفرصة الآن للفريق المنافس";
+          statusText.className = "text-lg font-black text-rose-400";
+        } else if (roomState.buzzerOpen) {
+          statusText.innerText = roomState.lockedTeams.length > 0
+            ? "فرصتك الذهبية! الفريق المنافس أخطأ.. اضغط الجرس الآن!"
+            : "الجرس مفتوح! اضغط بسرعة للإجابة";
           statusText.className = "text-lg font-black text-amber-400";
         } else if (roomState.buzzedTeam) {
           const otherName = roomState.buzzedTeam === 'girls' ? roomState.girlsName : roomState.boysName;
