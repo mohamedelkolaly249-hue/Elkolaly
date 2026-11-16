@@ -46,7 +46,7 @@
       inset 0 0 30px rgba(245, 158, 11, 0.08);
   }
 
-  /* أزرار الخيارات ثلاثية الأبعاد (3D Beveled Options) */
+  /* أزرار الخيارات ثلاثية الأبعاد */
   .opt-3d-btn {
     background: linear-gradient(180deg, rgba(20, 34, 68, 0.92) 0%, rgba(9, 16, 36, 0.98) 100%);
     border: 1.5px solid rgba(56, 189, 248, 0.32);
@@ -224,7 +224,7 @@
 <!-- خلفية الاستوديو ثلاثي الأبعاد المتكامل (Three.js 3D Arena) -->
 <div id="canvas-container"></div>
 
-<!-- ================= 1. شاشة البداية (Host أو دخول الفرق عبر QR) ================= -->
+<!-- ================= 1. شاشة البداية (Host أو تسجيل اسم الفريق عبر QR) ================= -->
 <div id="lobby-screen" class="ui-layer items-center justify-center p-4 overflow-y-auto">
   <div class="studio-3d-card gold-3d-frame max-w-2xl w-full rounded-3xl p-6 sm:p-10 text-center my-auto animate-slide-up">
     
@@ -243,7 +243,7 @@
       مسابقة العباقرة
     </h1>
 
-    <!-- شريط الإشراف الأكاديمي بأيقونة تاج ذهبي احترافي -->
+    <!-- شريط الإشراف الأكاديمي -->
     <div class="bg-slate-950/90 border border-amber-400/45 rounded-2xl py-3 px-6 mb-8 inline-block max-w-full shadow-inner">
       <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-amber-400 mb-1">
         <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
@@ -266,28 +266,23 @@
       </button>
     </div>
 
-    <!-- قسم الفرق (يظهر تلقائياً عند فتح الرابط من الـ QR Code) -->
+    <!-- قسم الفرق على الموبايلات (اسم الفريق + زر انضمام واحد تلقائي بدون "الفريق الأول / الثاني") -->
     <div id="team-role-card" class="hidden max-w-md mx-auto mt-2">
       <div class="mb-4">
-        <input id="custom-team-name-input" type="text" maxlength="22" placeholder="ادخل اسم فريقك..." class="w-full text-center text-lg font-black bg-slate-950/95 border-2 border-amber-400/50 rounded-2xl py-3.5 px-4 text-white focus:outline-none focus:border-amber-400 shadow-inner">
+        <label class="block text-xs font-bold text-amber-300 mb-2">اسم الفريق</label>
+        <input id="custom-team-name-input" type="text" maxlength="22" placeholder="اكتب اسم فريقك هنا..." class="w-full text-center text-xl font-black bg-slate-950/95 border-2 border-amber-400/60 rounded-2xl py-4 px-4 text-white focus:outline-none focus:border-amber-400 shadow-inner">
       </div>
-      <div class="grid grid-cols-2 gap-3.5">
-        <button id="join-team1-btn" onclick="joinAsTeam('team1')" class="ctrl-3d-btn py-4 rounded-2xl bg-gradient-to-b from-rose-500 to-rose-700 hover:from-rose-400 hover:to-rose-600 text-white font-black text-base cursor-pointer flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
-          <span>الفريق الأول</span>
-        </button>
-        <button id="join-team2-btn" onclick="joinAsTeam('team2')" class="ctrl-3d-btn py-4 rounded-2xl bg-gradient-to-b from-blue-500 to-indigo-700 hover:from-blue-400 hover:to-indigo-600 text-white font-black text-base cursor-pointer flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
-          <span>الفريق الثاني</span>
-        </button>
-      </div>
+      <button id="join-auto-team-btn" onclick="joinCompetitionAuto()" class="ctrl-3d-btn w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-lg cursor-pointer flex items-center justify-center gap-2 shadow-xl">
+        <svg class="w-6 h-6 fill-slate-950" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+        <span>انضمام للمسابقة</span>
+      </button>
     </div>
 
     <div id="connection-status" class="mt-4 text-xs text-emerald-400 font-bold"></div>
   </div>
 </div>
 
-<!-- ================= 2. صفحة انتظار الفريقين المستقلة (QR Code فقط) ================= -->
+<!-- ================= 2. صفحة انتظار الفريقين المستقلة للهوست (QR Code فقط) ================= -->
 <div id="host-waiting-screen" class="ui-layer hidden items-center justify-center p-4 overflow-y-auto">
   <div class="studio-3d-card gold-3d-frame max-w-4xl w-full rounded-3xl p-6 sm:p-9 text-center my-auto animate-slide-up">
     
@@ -308,13 +303,13 @@
         فين الفريقين؟
       </h2>
       <p id="waiting-subheadline" class="text-sm sm:text-base font-bold text-slate-300">
-        امسح رمز الـ QR بالموبايل لتسجيل الفريقين (0 / 2)
+        امسح رمز الـ QR بالموبايل لتسجيل اسم الفريق (0 / 2)
       </p>
     </div>
 
-    <!-- منطقة الـ QR Code وبطاقتي الفريقين -->
+    <!-- منطقة الـ QR Code وبطاقتي الفريقين عند الهوست -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center my-4">
-      <!-- بطاقة الفريق الأول -->
+      <!-- بطاقة الفريق الأول (خاصة بالهوست فقط) -->
       <div id="wait-card-team1" class="studio-3d-card rounded-3xl p-6 text-center min-h-[185px] flex flex-col items-center justify-center border-2 border-dashed border-rose-500/40">
         <div id="wait-icon-team1" class="w-14 h-14 rounded-2xl bg-rose-500/15 border border-rose-500/40 flex items-center justify-center text-rose-400 mb-3">
           <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
@@ -330,7 +325,7 @@
         </div>
       </div>
 
-      <!-- بطاقة الفريق الثاني -->
+      <!-- بطاقة الفريق الثاني (خاصة بالهوست فقط) -->
       <div id="wait-card-team2" class="studio-3d-card rounded-3xl p-6 text-center min-h-[185px] flex flex-col items-center justify-center border-2 border-dashed border-blue-500/40">
         <div id="wait-icon-team2" class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-3">
           <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
@@ -489,15 +484,15 @@
   </div>
 </div>
 
-<!-- ================= 5. شاشة جهاز الفريق على الموبايل (3D Mobile Controller) ================= -->
+<!-- ================= 5. شاشة الموبايل (اسم الفريق فقط بدون الفريق الأول/الثاني) ================= -->
 <div id="team-screen" class="ui-layer hidden p-4 justify-between">
-  <!-- هيدر الموبايل -->
+  <!-- هيدر الموبايل باسم الفريق فقط -->
   <div class="studio-3d-card rounded-2xl p-3.5 px-4 flex items-center justify-between border-b-2 border-amber-400/50">
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center gap-3">
       <img src="pharmacy-logo.jpg" class="w-11 h-11 rounded-full border-2 border-amber-400 bg-white p-0.5" onerror="this.style.display='none'">
       <div>
-        <div id="team-slot-subtitle" class="text-[11px] text-amber-300 font-bold">الفريق الأول</div>
-        <h2 id="team-header-name" class="text-xl font-black text-white leading-tight">الفريق الأول</h2>
+        <div class="text-[10px] text-amber-300/90 font-bold">اسم الفريق</div>
+        <h2 id="team-header-name" class="text-xl sm:text-2xl font-black text-white leading-tight">—</h2>
       </div>
     </div>
     <div class="text-left bg-slate-950/90 px-4 py-1.5 rounded-xl border border-amber-400/40">
@@ -541,7 +536,7 @@
   <!-- شاشة النتيجة النهائية وقبعة التخرج على الموبايل -->
   <div id="team-end-area" class="hidden my-auto w-full max-w-md mx-auto animate-slide-up">
     <div id="team-end-card" class="studio-3d-card gold-3d-frame rounded-3xl p-8 text-center">
-      <div id="team-end-emoji" class="text-6xl mb-4 grad-cap-anim">🏆🎉</div>
+      <div id="team-end-emoji" class="text-6xl mb-4 grad-cap-anim">🏆🎓✨</div>
       <h2 id="team-end-headline" class="text-4xl font-black mb-3">مببروووك!</h2>
       <p id="team-end-subtext" class="text-base font-bold text-slate-200 mb-6"></p>
       <div class="bg-slate-950/90 rounded-2xl p-4 border border-amber-400/30">
@@ -575,7 +570,7 @@
     </div>
     <div class="text-5xl my-2 grad-cap-anim">🏆🎓✨</div>
     <div class="text-amber-400 font-black text-sm mb-1">النتيجة النهائية • مسابقة العباقرة</div>
-    <h2 id="winner-title" class="text-3xl sm:text-5xl font-black text-white mb-3">الفريق الأول</h2>
+    <h2 id="winner-title" class="text-3xl sm:text-5xl font-black text-white mb-3">الفائز</h2>
     <div id="final-scores-summary" class="text-lg sm:text-xl font-bold text-amber-300 bg-slate-950/90 py-3 px-4 rounded-2xl border border-amber-400/30 mb-6"></div>
 
     <div class="border-t border-slate-700/70 pt-5">
@@ -843,6 +838,7 @@
     });
   }
 
+  // التحقق مما إذا كانت الغرفة ممتلئة بالفعل (2/2) عند فتح الرابط على الموبايل
   function checkRoomAvailability(targetRoomId) {
     if (!targetRoomId || myRole !== '') return;
 
@@ -855,25 +851,17 @@
       });
       conn.on('data', (data) => {
         if (data.type === 'PROBE_RESULT') {
-          updateLobbyButtonsAvailability(data.team1Connected, data.team2Connected);
+          if (data.team1Connected && data.team2Connected) {
+            const btn = document.getElementById('join-auto-team-btn');
+            const inp = document.getElementById('custom-team-name-input');
+            inp.disabled = true;
+            btn.disabled = true;
+            btn.innerText = 'اكتمل عدد الفرق في هذه المباراة';
+            btn.className = 'w-full py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-base cursor-not-allowed';
+          }
         }
       });
     });
-  }
-
-  function updateLobbyButtonsAvailability(t1Taken, t2Taken) {
-    const btn1 = document.getElementById('join-team1-btn');
-    const btn2 = document.getElementById('join-team2-btn');
-    if (t1Taken) {
-      btn1.disabled = true;
-      btn1.innerText = 'الفريق الأول (مكتمل ✓)';
-      btn1.className = 'py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-sm cursor-not-allowed';
-    }
-    if (t2Taken) {
-      btn2.disabled = true;
-      btn2.innerText = 'الفريق الثاني (مكتمل ✓)';
-      btn2.className = 'py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-sm cursor-not-allowed';
-    }
   }
 
   function initHostPeerServer() {
@@ -900,21 +888,26 @@
             team1Connected: roomState.team1Connected,
             team2Connected: roomState.team2Connected
           });
-        } else if (data.type === 'JOIN') {
-          if ((data.team === 'team1' && roomState.team1Connected) || (data.team === 'team2' && roomState.team2Connected)) {
-            conn.send({ type: 'ROLE_TAKEN' });
+        } else if (data.type === 'JOIN_AUTO') {
+          // تعيين الفريق تلقائياً عند الهوست (أول موبايل يدخل = team1، ثاني موبايل = team2)
+          let assignedSlot = null;
+          if (!roomState.team1Connected) {
+            assignedSlot = 'team1';
+            roomState.team1Connected = true;
+            roomState.team1Name = (data.teamName && data.teamName.trim()) ? data.teamName.trim() : 'الفريق الأول';
+            document.getElementById('team1-name-input').value = roomState.team1Name;
+          } else if (!roomState.team2Connected) {
+            assignedSlot = 'team2';
+            roomState.team2Connected = true;
+            roomState.team2Name = (data.teamName && data.teamName.trim()) ? data.teamName.trim() : 'الفريق الثاني';
+            document.getElementById('team2-name-input').value = roomState.team2Name;
+          } else {
+            conn.send({ type: 'ROOM_FULL' });
             return;
           }
-          teamConns[data.team] = conn;
-          if (data.team === 'team1') {
-            roomState.team1Connected = true;
-            if (data.teamName) roomState.team1Name = data.teamName.trim();
-            document.getElementById('team1-name-input').value = roomState.team1Name;
-          } else if (data.team === 'team2') {
-            roomState.team2Connected = true;
-            if (data.teamName) roomState.team2Name = data.teamName.trim();
-            document.getElementById('team2-name-input').value = roomState.team2Name;
-          }
+
+          teamConns[assignedSlot] = conn;
+          conn.send({ type: 'ASSIGNED_ROLE', role: assignedSlot, state: roomState });
 
           if (roomState.team1Connected && roomState.team2Connected) {
             playTone('win');
@@ -932,7 +925,7 @@
             roomState.statusMessage = '';
             roomState.timer = 15;
             playTone('buzz');
-            set3DArenaState(data.team); // تحريك الكاميرا وإضاءة المسرح 3D نحو الفريق الأسرع
+            set3DArenaState(data.team);
             startTimer();
             broadcastState();
             renderUI();
@@ -983,16 +976,19 @@
     new QRCode(mainContainer, { text: joinUrl, width: 190, height: 190 });
   }
 
-  function joinAsTeam(teamSlot) {
+  // انضمام الفريق تلقائياً بمجرد كتابة اسم الفريق فقط على الموبايل
+  function joinCompetitionAuto() {
     const enteredName = document.getElementById('custom-team-name-input').value.trim();
 
     if (!enteredName) {
-      alert('يرجى إدخال اسم الفريق أولاً');
+      alert('يرجى كتابة اسم فريقك أولاً');
       document.getElementById('custom-team-name-input').focus();
       return;
     }
 
-    document.getElementById('connection-status').innerText = 'جاري الاتصال بالاستوديو...';
+    const joinBtn = document.getElementById('join-auto-team-btn');
+    joinBtn.disabled = true;
+    document.getElementById('connection-status').innerText = 'جاري تسجيل الفريق...';
     if (probePeer) { try { probePeer.destroy(); } catch (e) {} }
     peer = new Peer();
 
@@ -1000,36 +996,37 @@
       hostConn = peer.connect('mnu-abakera-' + roomId, { reliable: true });
 
       hostConn.on('open', () => {
-        hostConn.send({ type: 'JOIN', team: teamSlot, teamName: enteredName });
+        hostConn.send({ type: 'JOIN_AUTO', teamName: enteredName });
       });
 
       hostConn.on('data', (data) => {
-        if (data.type === 'ROLE_TAKEN') {
-          alert('هذا الفريق تم اختياره بالفعل، اختر الفريق الآخر.');
+        if (data.type === 'ROOM_FULL') {
+          alert('اكتمل عدد الفرق في هذه المباراة بالفعل.');
           location.reload();
+        } else if (data.type === 'ASSIGNED_ROLE') {
+          myRole = data.role;
+          roomState = data.state;
+          document.getElementById('lobby-screen').classList.add('hidden');
+          document.getElementById('team-screen').classList.remove('hidden');
+
+          const btn = document.getElementById('team-buzzer-btn');
+          const aura = document.getElementById('buzzer-aura');
+          if (myRole === 'team2') {
+            btn.className = "buzzer-dome buzzer-dome-team2";
+            aura.className = "buzzer-glow-aura bg-blue-500";
+          }
+          renderUI();
         } else if (data.type === 'SESSION_REPLACED') {
           alert('انتهت هذه الجولة. شكراً لمشاركتكم!');
           location.href = window.location.href.split('?')[0];
         } else if (data.type === 'STATE_UPDATE') {
-          if (!myRole) {
-            myRole = teamSlot;
-            document.getElementById('lobby-screen').classList.add('hidden');
-            document.getElementById('team-screen').classList.remove('hidden');
-            document.getElementById('team-slot-subtitle').innerText = teamSlot === 'team1' ? 'الفريق الأول' : 'الفريق الثاني';
-
-            const btn = document.getElementById('team-buzzer-btn');
-            const aura = document.getElementById('buzzer-aura');
-            if (teamSlot === 'team2') {
-              btn.className = "buzzer-dome buzzer-dome-team2";
-              aura.className = "buzzer-glow-aura bg-blue-500";
-            }
-          }
           roomState = data.state;
           renderUI();
         }
       });
 
       hostConn.on('error', () => {
+        joinBtn.disabled = false;
         alert('تعذر الاتصال بغرفة المسابقة، يرجى مسح رمز الـ QR مرة أخرى.');
       });
     });
@@ -1296,7 +1293,7 @@
         if (connectedCount === 0) {
           wHeadline.innerText = 'فين الفريقين؟';
           wHeadline.className = 'text-3xl sm:text-5xl font-black text-amber-300 mb-1';
-          wSub.innerText = 'امسح رمز الـ QR بالموبايل لتسجيل الفريقين (0 / 2)';
+          wSub.innerText = 'امسح رمز الـ QR بالموبايل لتسجيل اسم الفريق (0 / 2)';
           startBtn.disabled = true;
           startBtn.innerText = 'في انتظار اكتمال الفريقين (0 / 2)';
           startBtn.className = 'ctrl-3d-btn px-12 py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-lg sm:text-xl cursor-not-allowed';
@@ -1407,6 +1404,7 @@
         }
       }
     } else if (myRole === 'team1' || myRole === 'team2') {
+      // على الموبايل يظهر فقط اسم الفريق الذي كتبه الطالب دون كلمة "الفريق الأول / الثاني"
       document.getElementById('team-header-name').innerText = myRole === 'team1' ? roomState.team1Name : roomState.team2Name;
       document.getElementById('team-my-score').innerText = myRole === 'team1' ? roomState.team1Score : roomState.team2Score;
 
@@ -1499,8 +1497,8 @@
         optsBox.classList.add('hidden');
         const connectedCount = (roomState.team1Connected ? 1 : 0) + (roomState.team2Connected ? 1 : 0);
         statusText.innerText = connectedCount < 2
-          ? "تم تسجيل فريقك — فاضل الفريق التاني يدخل..."
-          : "يلا نبدأ كملنا! في انتظار ضغط المقدم لبدء السؤال الأول...";
+          ? "تم تسجيل فريقك — في انتظار انضمام الفريق المنافس..."
+          : "يلا نبدأ كملنا! في انتظار بدء السؤال الأول...";
         statusText.className = "text-base sm:text-lg font-black text-emerald-400";
       } else if (roomState.showTransition) {
         buzzWrapper.classList.remove('hidden');
@@ -1661,21 +1659,18 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-  // إضاءة المسرح الثلاثي الأبعاد
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
   const centerPointLight = new THREE.PointLight(0xf59e0b, 2.5, 35);
   centerPointLight.position.set(0, 2, 4);
   scene.add(centerPointLight);
 
-  // 1. أرضية ومنصة الاستوديو الدائرية (3D Stage Floor Grid)
   const gridHelper = new THREE.GridHelper(40, 40, 0xf59e0b, 0x1e3a8a);
   gridHelper.position.y = -4.5;
   gridHelper.material.transparent = true;
   gridHelper.material.opacity = 0.35;
   scene.add(gridHelper);
 
-  // 2. قلب الطاقة المركزي ثلاثي الأبعاد (3D Crystal Core)
   const coreGeo = new THREE.IcosahedronGeometry(2.1, 1);
   const coreMat = new THREE.MeshStandardMaterial({
     color: 0xf59e0b,
@@ -1686,7 +1681,6 @@
   const studioCore = new THREE.Mesh(coreGeo, coreMat);
   scene.add(studioCore);
 
-  // 3. الحلقات المدارية الثلاثية الأبعاد حول الاستوديو
   const ringGeo1 = new THREE.TorusGeometry(5.5, 0.06, 16, 120);
   const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.5 });
   const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
@@ -1703,7 +1697,6 @@
 
   scene.add(ring1, ring2, ring3);
 
-  // 4. أعمدة إضاءة الفريقين في عمق الاستوديو (Team1 Right Rose / Team2 Left Blue)
   const pillarGeo = new THREE.CylinderGeometry(0.18, 0.18, 14, 16);
   const pillarMat1 = new THREE.MeshBasicMaterial({ color: 0xf43f5e, transparent: true, opacity: 0.35 });
   const pillarMat2 = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.35 });
@@ -1713,7 +1706,6 @@
   leftPillar.position.set(-8.5, 0, -4);
   scene.add(rightPillar, leftPillar);
 
-  // 5. جزيئات ذهبية سابحة في فضاء الاستوديو
   const particlesGeo = new THREE.BufferGeometry();
   const particleCount = 160;
   const posArray = new Float32Array(particleCount * 3);
@@ -1730,7 +1722,6 @@
   let targetCamZ = 13;
   let coreRotationSpeed = 0.006;
 
-  // تفاعل الاستوديو 3D مع أحداث المسابقة (جرس الفريق الأول / الثاني / إجابة صحيحة / خاطئة)
   function set3DArenaState(state) {
     if (state === 'team1') {
       targetCamX = 2.2;
@@ -1772,8 +1763,6 @@
 
   function animate3D() {
     requestAnimationFrame(animate3D);
-
-    // حركة ناعمة للكاميرا نحو الفريق المتفاعل
     camera.position.x += (targetCamX - camera.position.x) * 0.05;
     camera.position.z += (targetCamZ - camera.position.z) * 0.05;
     camera.lookAt(0, 0, 0);
