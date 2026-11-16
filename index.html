@@ -3,23 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>العباقرة - فرع الصيدلة | جامعة المنصورة الأهلية</title>
+<title>مسابقة العباقرة | قسم الأدوية والسموم - كلية الصيدلة جامعة المنصورة الأهلية</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   * { font-family: 'Cairo', sans-serif; user-select: none; box-sizing: border-box; }
-  body { margin: 0; overflow: hidden; background: #040712; color: #f8fafc; }
+  input { user-select: text !important; }
+  .en-font { font-family: 'Poppins', 'Cairo', sans-serif; direction: ltr; }
+  body { margin: 0; overflow: hidden; background: #030712; color: #f8fafc; }
   #canvas-container { position: fixed; inset: 0; z-index: 0; }
   .ui-layer { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; }
   .glass-card {
-    background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.94));
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(145deg, rgba(13, 22, 42, 0.92), rgba(3, 8, 22, 0.96));
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  }
+  .logo-badge {
+    width: 68px; height: 68px;
+    border-radius: 9999px;
+    object-fit: cover;
+    background: #ffffff;
+    border: 2.5px solid #f59e0b;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+    padding: 2px;
+  }
+  .logo-badge-sm {
+    width: 46px; height: 46px;
+    border-radius: 9999px;
+    object-fit: cover;
+    background: #ffffff;
+    border: 2px solid #f59e0b;
+    padding: 1.5px;
   }
   .buzzer-btn {
     transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -44,97 +63,131 @@
 
 <div id="canvas-container"></div>
 
-<!-- ================= 1. شاشة البداية واختيار الجهاز ================= -->
-<div id="lobby-screen" class="ui-layer items-center justify-center p-4">
-  <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 text-center border-t-4 border-t-amber-400">
-    <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold mb-3">
-      <span>كلية الصيدلة • جامعة المنصورة الأهلية</span>
+<!-- ================= 1. شاشة البداية (مسابقة العباقرة) ================= -->
+<div id="lobby-screen" class="ui-layer items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div class="glass-card max-w-3xl w-full rounded-3xl p-5 sm:p-7 text-center border-t-4 border-t-amber-400 my-auto">
+    
+    <!-- شريط اللوجوهات الثلاثة -->
+    <div class="flex items-center justify-center gap-4 sm:gap-7 mb-3">
+      <img src="mnu-logo.jpg" alt="جامعة المنصورة الأهلية" class="logo-badge" onerror="this.style.display='none'">
+      <img src="pharmacy-logo.jpg" alt="كلية الصيدلة" class="logo-badge" onerror="this.style.display='none'">
+      <img src="pharma-dept-logo.jpg" alt="قسم الأدوية والسموم" class="logo-badge" onerror="this.style.display='none'">
     </div>
+
+    <div class="text-xs sm:text-sm font-extrabold text-sky-300 mb-1">
+      جامعة المنصورة الأهلية • كلية الصيدلة • قسم الأدوية والسموم
+    </div>
+
     <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-l from-amber-300 via-yellow-400 to-sky-400 mb-2">
-      العباقرة — فرع الصيدلة
+      مسابقة العباقرة
     </h1>
-    <p class="text-slate-300 text-sm sm:text-base mb-6">ربط مباشر بين 3 أجهزة (شاشة العرض + موبايل البنات + موبايل الولاد)</p>
+
+    <!-- شريط الإشراف الأكاديمي -->
+    <div class="bg-slate-900/90 border border-amber-400/35 rounded-2xl py-2.5 px-4 mb-5 inline-block max-w-full">
+      <div class="text-[11px] font-bold text-amber-300 mb-0.5">تحت إشراف</div>
+      <div class="text-xs sm:text-sm font-black text-white flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+        <span>أ.م/ مريهان مقلد</span>
+        <span class="text-amber-400">•</span>
+        <span>أ.م.د/ مروة زغلول</span>
+        <span class="text-amber-400">•</span>
+        <span>م.م/ هبة بهريز</span>
+      </div>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
+      <!-- شاشة العرض -->
       <div class="bg-slate-900/80 border border-sky-500/30 rounded-2xl p-5 flex flex-col justify-between">
         <div>
           <div class="text-xs font-bold text-sky-400 mb-1">1. اللابتوب / شاشة المدرج</div>
           <h3 class="text-xl font-black text-white mb-2">شاشة العرض والمقدم</h3>
-          <p class="text-xs text-slate-400 leading-relaxed mb-4">تُنشئ غرفة جديدة بكود و QR Code وتتحكم في الفقرات، الأسئلة، والنتيجة الحية.</p>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">تُنشئ غرفة المسابقة بكود و QR Code وتدير المرحلتين (20 سؤالاً).</p>
         </div>
         <button id="create-host-btn" onclick="createHostRoom()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-black text-base shadow-lg transition cursor-pointer">
           إنشاء غرفة جديدة (Host)
         </button>
       </div>
 
+      <!-- جهاز الفريق -->
       <div class="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-5 flex flex-col justify-between">
         <div>
           <div class="text-xs font-bold text-amber-400 mb-1">2. موبايل / تابلت الفرق</div>
           <h3 class="text-xl font-black text-white mb-2">انضمام كفريق متنافس</h3>
-          <div class="mb-3">
-            <label class="block text-xs text-slate-400 mb-1">كود الغرفة (4 أرقام)</label>
-            <input id="join-pin-input" type="tel" maxlength="4" placeholder="مثال: 4821" class="w-full text-center tracking-widest text-2xl font-black bg-slate-950 border border-slate-700 rounded-xl py-2 text-amber-300 focus:outline-none focus:border-amber-400">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">كود الغرفة (4 أرقام)</label>
+              <input id="join-pin-input" type="tel" maxlength="4" placeholder="مثال: 4821" class="w-full text-center tracking-widest text-xl font-black bg-slate-950 border border-slate-700 rounded-xl py-2 text-amber-300 focus:outline-none focus:border-amber-400">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">ادخل اسم فريقك</label>
+              <input id="custom-team-name-input" type="text" maxlength="22" placeholder="اكتب اسم فريقك..." class="w-full text-center text-sm font-black bg-slate-950 border border-slate-700 rounded-xl py-2.5 px-2 text-white focus:outline-none focus:border-amber-400">
+            </div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <button onclick="joinAsTeam('girls')" class="py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
-            فريق البنات
+          <button onclick="joinAsTeam('team1')" class="py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
+            الفريق الأول
           </button>
-          <button onclick="joinAsTeam('boys')" class="py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
-            فريق الولاد
+          <button onclick="joinAsTeam('team2')" class="py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
+            الفريق الثاني
           </button>
         </div>
       </div>
     </div>
 
-    <div id="connection-status" class="mt-4 text-xs text-emerald-400 font-bold"></div>
+    <div id="connection-status" class="mt-3 text-xs text-emerald-400 font-bold"></div>
   </div>
 </div>
 
 <!-- ================= 2. شاشة العرض الرئيسية (Host & Projector) ================= -->
-<div id="host-screen" class="ui-layer hidden p-3 sm:p-5 justify-between">
+<div id="host-screen" class="ui-layer hidden p-3 sm:p-4 justify-between">
+  <!-- الشريط العلوي: النقاط واللوجوهات -->
   <div class="grid grid-cols-12 gap-3 items-center">
-    <!-- فريق البنات -->
+    <!-- الفريق الأول -->
     <div class="col-span-4 glass-card rounded-2xl p-3 sm:p-4 border-r-4 border-r-rose-500 flex items-center justify-between transition-all">
       <div>
         <div class="flex items-center gap-2">
-          <input id="girls-name-input" value="فريق البنات" onchange="syncTeamNames()" class="bg-transparent font-black text-lg sm:text-2xl text-rose-400 w-36 sm:w-48 focus:outline-none border-b border-transparent focus:border-rose-400">
-          <span id="girls-online-dot" class="w-3 h-3 rounded-full bg-slate-600" title="غير متصل"></span>
+          <input id="team1-name-input" value="الفريق الأول" onchange="syncTeamNames()" class="bg-transparent font-black text-lg sm:text-2xl text-rose-400 w-32 sm:w-44 focus:outline-none border-b border-transparent focus:border-rose-400">
+          <span id="team1-online-dot" class="w-3 h-3 rounded-full bg-slate-600" title="غير متصل"></span>
         </div>
         <div class="flex items-center gap-1 mt-1">
-          <button onclick="adjustScore('girls', -10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-slate-300">-10</button>
-          <button onclick="adjustScore('girls', 10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-emerald-400">+10</button>
+          <button onclick="adjustScore('team1', -10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-slate-300">-10</button>
+          <button onclick="adjustScore('team1', 10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-emerald-400">+10</button>
         </div>
       </div>
-      <div id="host-girls-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
+      <div id="host-team1-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
     </div>
 
-    <!-- المنتصف: الكود والفقرة -->
-    <div class="col-span-4 glass-card rounded-2xl p-2 sm:p-3 text-center border-t-2 border-t-amber-400">
-      <div class="flex items-center justify-center gap-2 mb-1">
-        <span class="text-xs text-slate-400 font-bold">كود الغرفة:</span>
-        <span id="display-room-pin" class="text-xl sm:text-2xl font-black text-amber-400 tracking-widest">----</span>
-        <button onclick="toggleQrModal(true)" class="px-2.5 py-0.5 rounded bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold hover:bg-amber-500/30 cursor-pointer">QR / رابط</button>
+    <!-- المنتصف: اللوجوهات + كود الغرفة + المرحلة الحالية -->
+    <div class="col-span-4 glass-card rounded-2xl p-2 sm:p-2.5 text-center border-t-2 border-t-amber-400">
+      <div class="flex items-center justify-center gap-2.5 mb-1">
+        <img src="mnu-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
+        <div class="text-center">
+          <div class="text-sm sm:text-base font-black text-amber-400">مسابقة العباقرة</div>
+          <div class="flex items-center justify-center gap-1.5">
+            <span class="text-[11px] text-slate-400">كود:</span>
+            <span id="display-room-pin" class="text-base sm:text-lg font-black text-white tracking-widest">----</span>
+            <button onclick="toggleQrModal(true)" class="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[11px] font-bold hover:bg-amber-500/30 cursor-pointer">QR</button>
+          </div>
+        </div>
+        <img src="pharmacy-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
+        <img src="pharma-dept-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
       </div>
-      <select id="category-select" onchange="changeCategory()" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-1.5 px-2 text-xs sm:text-sm font-black text-sky-300 text-center focus:outline-none">
-        <option value="science">فقرة العلم (صيدلة وكلينيكال - 5 أسئلة)</option>
-        <option value="general">فقرة المعلومات العامة (5 أسئلة)</option>
-        <option value="rapid">فقرة السرعة (45 ثانية - 5 أسئلة)</option>
-        <option value="gamble">فقرة ضربة حظ (×2 نقاط - 5 أسئلة)</option>
-      </select>
+      <div id="stage-indicator-pill" class="w-full bg-sky-950/90 border border-sky-500/40 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-sky-300">
+        المرحلة الأولى (10 أسئلة • 10 نقاط)
+      </div>
     </div>
 
-    <!-- فريق الولاد -->
+    <!-- الفريق الثاني -->
     <div class="col-span-4 glass-card rounded-2xl p-3 sm:p-4 border-l-4 border-l-blue-500 flex items-center justify-between transition-all">
-      <div id="host-boys-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
+      <div id="host-team2-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
       <div class="text-left">
         <div class="flex items-center justify-end gap-2">
-          <span id="boys-online-dot" class="w-3 h-3 rounded-full bg-slate-600" title="غير متصل"></span>
-          <input id="boys-name-input" value="فريق الولاد" onchange="syncTeamNames()" class="bg-transparent text-left font-black text-lg sm:text-2xl text-blue-400 w-36 sm:w-48 focus:outline-none border-b border-transparent focus:border-blue-400">
+          <span id="team2-online-dot" class="w-3 h-3 rounded-full bg-slate-600" title="غير متصل"></span>
+          <input id="team2-name-input" value="الفريق الثاني" onchange="syncTeamNames()" class="bg-transparent text-left font-black text-lg sm:text-2xl text-blue-400 w-32 sm:w-44 focus:outline-none border-b border-transparent focus:border-blue-400">
         </div>
         <div class="flex items-center justify-end gap-1 mt-1">
-          <button onclick="adjustScore('boys', 10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-emerald-400">+10</button>
-          <button onclick="adjustScore('boys', -10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-slate-300">-10</button>
+          <button onclick="adjustScore('team2', 10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-emerald-400">+10</button>
+          <button onclick="adjustScore('team2', -10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-slate-300">-10</button>
         </div>
       </div>
     </div>
@@ -142,30 +195,34 @@
 
   <!-- منطقة السؤال الرئيسية -->
   <div class="my-auto max-w-5xl w-full mx-auto">
-    <div id="buzz-banner" class="hidden mb-3 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl transition-all"></div>
+    <div id="buzz-banner" class="hidden mb-2.5 py-2 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl transition-all"></div>
 
-    <div class="glass-card rounded-3xl p-6 sm:p-8 border-2 border-sky-500/30 relative">
-      <div class="flex items-center justify-between mb-4">
-        <span id="q-badge" class="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-black">جاهز للبدء • 5 أسئلة لكل فقرة</span>
+    <div class="glass-card rounded-3xl p-5 sm:p-7 border-2 border-sky-500/30 relative">
+      <div class="flex items-center justify-between mb-3">
+        <span id="q-badge" class="px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-black">جاهز لبدء المرحلة الأولى</span>
         <div class="flex items-center gap-3">
-          <div id="host-timer" class="px-4 py-1 rounded-full bg-slate-900 border border-amber-400/50 text-amber-300 font-black text-lg">15</div>
+          <div id="host-timer" class="px-4 py-1 rounded-full bg-slate-900 border border-amber-400/50 text-amber-300 font-black text-lg">20</div>
           <button onclick="toggleMute()" id="mute-btn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer">الصوت: مفعل</button>
         </div>
       </div>
 
-      <h2 id="host-question-text" class="text-2xl sm:text-4xl font-black text-white leading-snug text-center my-4 min-h-[80px] flex items-center justify-center">
-        اضغط على "السؤال التالي" لبدء الفقرة!
+      <h2 id="host-question-text" class="en-font text-xl sm:text-3xl font-bold text-white leading-snug text-center my-3 min-h-[70px] flex items-center justify-center">
+        اضغط على "السؤال التالي" لبدء مسابقة العباقرة!
       </h2>
 
-      <div id="host-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"></div>
+      <!-- الخيارات الأربعة -->
+      <div id="host-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4"></div>
+
+      <!-- التفسير العلمي (يظهر فقط بعد كشف الإجابة) -->
+      <div id="explanation-box" class="hidden mt-4 p-3.5 rounded-2xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-200 text-sm sm:text-base font-bold text-right"></div>
     </div>
   </div>
 
-  <!-- شريط تحكم المقدم السفلي -->
-  <div class="glass-card rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
+  <!-- شريط تحكم المقدم السفلي + الإشراف -->
+  <div class="glass-card rounded-2xl p-2.5 sm:p-3 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-2">
       <button id="next-q-btn" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer">
-        السؤال التالي ◀
+        السؤال التالي (1/20) ◀
       </button>
       <button onclick="unlockBuzzers()" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-black text-sm shadow cursor-pointer">
         فتح الجرس للجميع
@@ -175,23 +232,46 @@
       </button>
     </div>
 
+    <div class="hidden xl:block text-xs font-bold text-slate-300">
+      تحت إشراف: <span class="text-amber-300">أ.م/ مريهان مقلد • أ.م.د/ مروة زغلول • م.م/ هبة بهريز</span>
+    </div>
+
     <div class="flex items-center gap-2">
-      <button onclick="toggleEditorModal(true)" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-600 cursor-pointer">
-        إدارة الأسئلة (+ إضافة)
-      </button>
-      <button onclick="endMatch()" class="px-4 py-2.5 rounded-xl bg-rose-900/70 hover:bg-rose-800 text-rose-200 font-bold text-xs border border-rose-700 cursor-pointer">
+      <button onclick="endMatch()" class="px-4 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white font-black text-xs sm:text-sm shadow cursor-pointer">
         إنهاء وإعلان الفائز
       </button>
     </div>
   </div>
 </div>
 
-<!-- ================= 3. شاشة جهاز الفريق (موبايل البنات / الولاد) ================= -->
+<!-- ================= 3. شاشة الانتقال للمرحلة الثانية (الضعف) ================= -->
+<div id="stage-transition-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
+  <div class="glass-card winner-glow max-w-xl w-full rounded-3xl p-8 text-center border-2 border-amber-400">
+    <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-black mb-3">
+      انتهت المرحلة الأولى (10 أسئلة) بنجاح!
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-black text-amber-400 mb-3 leading-tight">
+      هننتقل للمرحلة الجاية! 🔥
+    </h2>
+    <p class="text-xl sm:text-2xl font-black text-white mb-2">
+      المرحلة الثانية: مرحلة الضعف (×2)
+    </p>
+    <p class="text-sm text-slate-300 mb-6">
+      الأسئلة الـ 10 القادمة كل سؤال بـ <span class="text-amber-400 font-black">20 نقطة كاملة</span>! استعدوا لقلب النتيجة.
+    </p>
+    <button id="continue-stage2-btn" onclick="startStageTwo()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-lg shadow-xl cursor-pointer">
+      ابدأ المرحلة الثانية (الضعف) ◀
+    </button>
+  </div>
+</div>
+
+<!-- ================= 4. شاشة جهاز الفريق (موبايل الفريق الأول / الثاني) ================= -->
 <div id="team-screen" class="ui-layer hidden p-4 justify-between">
   <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
     <div>
-      <div class="text-xs text-emerald-400 font-bold">متصل بغرفة <span id="team-room-pin" class="text-amber-400">----</span></div>
-      <h2 id="team-header-name" class="text-2xl font-black text-white">فريق البنات</h2>
+      <div class="text-xs text-emerald-400 font-bold">مسابقة العباقرة • غرفة <span id="team-room-pin" class="text-amber-400">----</span></div>
+      <h2 id="team-header-name" class="text-2xl font-black text-white">الفريق الأول</h2>
+      <div id="team-slot-subtitle" class="text-[11px] text-slate-400 font-bold">الفريق الأول</div>
     </div>
     <div class="text-left">
       <div class="text-xs text-slate-400">نقاط فريقك</div>
@@ -201,6 +281,10 @@
 
   <!-- منطقة اللعب على الموبايل -->
   <div id="team-play-area" class="my-auto flex flex-col items-center justify-center gap-5 w-full max-w-md mx-auto">
+    <div id="team-stage-pill" class="px-4 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black">
+      المرحلة الأولى (10 نقاط)
+    </div>
+
     <div id="team-status-box" class="w-full glass-card rounded-2xl p-4 text-center">
       <div id="team-status-text" class="text-lg font-black text-sky-300">في انتظار عرض السؤال على الشاشة...</div>
     </div>
@@ -226,7 +310,7 @@
     </div>
   </div>
 
-  <div class="text-center text-xs text-slate-500">كلية الصيدلة • جامعة المنصورة الأهلية</div>
+  <div class="text-center text-[11px] text-slate-400">كلية الصيدلة • جامعة المنصورة الأهلية</div>
 </div>
 
 <!-- ================= نافذة الـ QR Code والربط ================= -->
@@ -253,99 +337,182 @@
   </div>
 </div>
 
-<!-- ================= نافذة محرر الأسئلة ================= -->
-<div id="editor-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm items-center justify-center p-4">
-  <div class="glass-card max-w-2xl w-full rounded-3xl p-6 max-h-[90vh] flex flex-col">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="text-xl font-black text-amber-400">بنك أسئلة الإيفنت (إضافة / تعديل)</h3>
-      <button onclick="toggleEditorModal(false)" class="text-slate-400 hover:text-white font-black text-lg cursor-pointer">✕</button>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 bg-slate-900/90 p-4 rounded-2xl border border-slate-800 mb-4">
-      <select id="new-q-cat" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-sky-300">
-        <option value="science">فقرة العلم (صيدلة)</option>
-        <option value="general">فقرة المعلومات العامة</option>
-        <option value="rapid">فقرة السرعة</option>
-        <option value="gamble">فقرة ضربة حظ</option>
-      </select>
-      <input id="new-q-text" placeholder="اكتب نص السؤال هنا..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-      <input id="new-q-opt0" placeholder="الخيار الأول (أ)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-      <input id="new-q-opt1" placeholder="الخيار الثاني (ب)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-      <input id="new-q-opt2" placeholder="الخيار الثالث (ج)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-      <input id="new-q-opt3" placeholder="الخيار الرابع (د)" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-      <select id="new-q-ans" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-emerald-400">
-        <option value="0">الإجابة الصحيحة: الأول (أ)</option>
-        <option value="1">الإجابة الصحيحة: الثاني (ب)</option>
-        <option value="2">الإجابة الصحيحة: الثالث (ج)</option>
-        <option value="3">الإجابة الصحيحة: الرابع (د)</option>
-      </select>
-      <button onclick="addCustomQuestion()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl py-2 cursor-pointer">+ إضافة السؤال</button>
-    </div>
-
-    <div id="questions-list" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
-  </div>
-</div>
-
 <!-- ================= شاشة الفائز النهائية للهوست ================= -->
 <div id="winner-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
   <div class="glass-card winner-glow max-w-lg w-full rounded-3xl p-8 text-center border-2 border-amber-400">
-    <div class="text-amber-400 font-black text-sm mb-2">كأس العباقرة • كلية الصيدلة</div>
-    <h2 id="winner-title" class="text-4xl font-black text-white mb-4">فريق البنات</h2>
-    <div id="final-scores-summary" class="text-lg font-bold text-slate-300 mb-6"></div>
-    <div class="flex gap-3 justify-center">
-      <button onclick="resetMatch()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base cursor-pointer">مباراة جديدة بنفس الغرفة</button>
+    <div class="flex items-center justify-center gap-3 mb-3">
+      <img src="mnu-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
+      <img src="pharmacy-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
+      <img src="pharma-dept-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
     </div>
+    <div class="text-amber-400 font-black text-sm mb-2">مسابقة العباقرة • قسم الأدوية والسموم</div>
+    <h2 id="winner-title" class="text-4xl font-black text-white mb-4">الفريق الأول</h2>
+    <div id="final-scores-summary" class="text-lg font-bold text-slate-300 mb-6"></div>
+    <button onclick="resetMatch()" class="px-8 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base cursor-pointer">إعادة المسابقة</button>
   </div>
 </div>
 
 <script>
-  const QUESTIONS_PER_CATEGORY = 5;
+  const COMPETITION_QUESTIONS = [
+    // --- المرحلة الأولى: 10 أسئلة عادية (10 نقاط) ---
+    {
+      num: 1, stage: 1,
+      q: "Q1. Insulin resistance is best defined as:",
+      opts: ["Complete absence of insulin secretion", "Failure of body cells to respond adequately to insulin", "Increased insulin sensitivity", "Destruction of pancreatic alpha cells"],
+      ans: 1,
+      exp: "الخلايا لا تستجيب للإنسولين بشكل طبيعي، وبالتالي يحتاج الجسم لجرعات أكبر للحصول على نفس التأثير."
+    },
+    {
+      num: 2, stage: 1,
+      q: "Q2. Which of the following drugs may cause insulin resistance?",
+      opts: ["Metformin", "Acarbose", "Corticosteroids", "Sitagliptin"],
+      ans: 2,
+      exp: "Corticosteroids من العوامل التي تسبب insulin resistance."
+    },
+    {
+      num: 3, stage: 1,
+      q: "Q3. Sulfonylureas stimulate insulin secretion by:",
+      opts: ["Opening ATP-sensitive K⁺ channels", "Closing ATP-sensitive K⁺ channels", "Inhibiting calcium channels", "Increasing hepatic gluconeogenesis"],
+      ans: 1,
+      exp: "قفل K⁺ channels → Depolarization → دخول Ca²⁺ → Insulin release."
+    },
+    {
+      num: 4, stage: 1,
+      q: "Q4. Which of the following is a first-generation sulfonylurea?",
+      opts: ["Glimepiride", "Gliclazide", "Tolbutamide", "Glibenclamide"],
+      ans: 2,
+      exp: "First generation: Tolbutamide, Chlorpropamide | Second: Glibenclamide, Gliclazide | Third: Glimepiride."
+    },
+    {
+      num: 5, stage: 1,
+      q: "Q5. Sulfonylureas are mainly used in:",
+      opts: ["Type 1 DM", "Type 2 DM", "Diabetes insipidus", "Gestational diabetes only"],
+      ans: 1,
+      exp: "تحتاج وجود pancreatic β-cells قادرة على إفراز الإنسولين؛ لذلك لا تعمل في Type 1 DM."
+    },
+    {
+      num: 6, stage: 1,
+      q: "Q6. Which sulfonylurea is particularly associated with prolonged hypoglycemia?",
+      opts: ["Chlorpropamide", "Metformin", "Repaglinide", "Acarbose"],
+      ans: 0,
+      exp: "Chlorpropamide طويل المفعول، وبالتالي يزيد خطر prolonged hypoglycemia."
+    },
+    {
+      num: 7, stage: 1,
+      q: "Q7. Secondary failure of sulfonylureas is mainly due to:",
+      opts: ["Increased insulin receptor number", "Progressive decline in β-cell function", "Increased intestinal glucose absorption", "Increased GLP-1 secretion"],
+      ans: 1,
+      exp: "مع الوقت تقل قدرة β-cells على إفراز الإنسولين."
+    },
+    {
+      num: 8, stage: 1,
+      q: "Q8. Repaglinide and Nateglinide belong to which drug class?",
+      opts: ["Biguanides", "Meglitinides", "Thiazolidinediones", "Gliptins"],
+      ans: 1,
+      exp: "Meglitinides stimulate insulin secretion بطريقة مشابهة للـ sulfonylureas."
+    },
+    {
+      num: 9, stage: 1,
+      q: "Q9. Meglitinides should be administered:",
+      opts: ["After meals", "Just before meals", "Once weekly", "At bedtime only"],
+      ans: 1,
+      exp: "Fast onset and short duration → التحكم في postprandial hyperglycemia."
+    },
+    {
+      num: 10, stage: 1,
+      q: "Q10. Which drug can be used in patients allergic to sulfonylureas because it does not contain sulfur?",
+      opts: ["Glibenclamide", "Chlorpropamide", "Repaglinide", "Gliclazide"],
+      ans: 2,
+      exp: "Repaglinide من Meglitinides ولا يحتوي على sulfur."
+    },
 
-  // بنك الأسئلة الافتراضي: 5 أسئلة لكل فقرة بالضبط
-  const DEFAULT_QUESTIONS = [
-    // 1. فقرة العلم (5 أسئلة)
-    { cat: 'science', q: 'ما هو الترياق (Antidote) الأساسي المستخدم في حالات التسمم بجرعة زائدة من الباراسيتامول؟', opts: ['N-Acetylcysteine', 'Naloxone', 'Atropine', 'Flumazenil'], ans: 0 },
-    { cat: 'science', q: 'أي من أدوية الضغط التالية يُسبب كحة جافة كأثر جانبي شهير نتيجة تراكم البراديكينين؟', opts: ['Amlodipine', 'Captopril', 'Bisoprolol', 'Losartan'], ans: 1 },
-    { cat: 'science', q: 'ما هو الفيتامين الذي يؤدي نقصه إلى الإصابة بمرض الإسقربوط (Scurvy)؟', opts: ['Vitamin B12', 'Vitamin D', 'Vitamin C', 'Vitamin K'], ans: 2 },
-    { cat: 'science', q: 'أي مضاد حيوي يُمنع إعطاؤه للأطفال والحوامل لتسببه في تصبغ الأسنان الدائم؟', opts: ['Amoxicillin', 'Azithromycin', 'Tetracycline', 'Cefadroxil'], ans: 2 },
-    { cat: 'science', q: 'ما هو المستقبل الدوائي الذي يغلق دواء Propranolol عمله بشكل غير انتقائي؟', opts: ['Alpha-1 Receptor', 'Beta Receptors', 'Muscarinic M3', 'H2 Receptor'], ans: 1 },
-
-    // 2. فقرة المعلومات العامة (5 أسئلة)
-    { cat: 'general', q: 'ما هي أطول سورة في القرآن الكريم؟', opts: ['سورة آل عمران', 'سورة البقرة', 'سورة النساء', 'سورة الأعراف'], ans: 1 },
-    { cat: 'general', q: 'ما هو الكوكب الملقب بالكوكب الأحمر في المجموعة الشمسية؟', opts: ['الزهرة', 'المشتري', 'المريخ', 'عطارد'], ans: 2 },
-    { cat: 'general', q: 'من هو العالم العربي الملقب بأبي الكيمياء؟', opts: ['ابن سينا', 'جابر بن حيان', 'الرازي', 'الخوارزمي'], ans: 1 },
-    { cat: 'general', q: 'ما هي عاصمة دولة اليابان؟', opts: ['أوساكا', 'كيوتو', 'طوكيو', 'سيول'], ans: 2 },
-    { cat: 'general', q: 'كم عدد القارات في العالم؟', opts: ['5 قارات', '6 قارات', '7 قارات', '8 قارات'], ans: 2 },
-
-    // 3. فقرة السرعة (5 أسئلة)
-    { cat: 'rapid', q: 'الاسم العلمي لفيتامين B1 هو:', opts: ['Thiamine', 'Riboflavin', 'Niacin', 'Pyridoxine'], ans: 0 },
-    { cat: 'rapid', q: 'هرمون يفرزه البنكرياس لخفض مستوى السكر في الدم:', opts: ['Glucagon', 'Insulin', 'Cortisol', 'Adrenaline'], ans: 1 },
-    { cat: 'rapid', q: 'أكبر عضو في جسم الإنسان هو:', opts: ['الكبد', 'الجلد', 'المخ', 'الرئة'], ans: 1 },
-    { cat: 'rapid', q: 'المادة الفعالة في دواء Panadol هي:', opts: ['Ibuprofen', 'Paracetamol', 'Diclofenac', 'Aspirin'], ans: 1 },
-    { cat: 'rapid', q: 'عدد عظام جسم الإنسان البالغ هو:', opts: ['186 عظمة', '206 عظمة', '226 عظمة', '256 عظمة'], ans: 1 },
-
-    // 4. فقرة ضربة حظ (5 أسئلة)
-    { cat: 'gamble', q: 'مريض يتناول Warfarin، أي مسكن مما يلي يرفع خطر النزيف بشدة معه؟', opts: ['Paracetamol', 'Aspirin / NSAIDs', 'Vitamin C', 'Loratadine'], ans: 1 },
-    { cat: 'gamble', q: 'أي من أدوية السكري التالية قد يسبب نقص فيتامين B12 عند استخدامه لفترات طويلة؟', opts: ['Metformin', 'Gliclazide', 'Sitagliptin', 'Empagliflozin'], ans: 0 },
-    { cat: 'gamble', q: 'ما هو الترياق (Antidote) المستخدم لعكس تأثير الجرعة الزائدة من المورفين والترامادول؟', opts: ['Flumazenil', 'Naloxone', 'Protamine Sulfate', 'Vitamin K'], ans: 1 },
-    { cat: 'gamble', q: 'أي من الأدوية التالية يُستخدم كخط أول في علاج صدمة الحساسية المفرطة (Anaphylaxis)؟', opts: ['Hydrocortisone IV', 'Epinephrine IM', 'Chlorpheniramine', 'Salbutamol'], ans: 1 },
-    { cat: 'gamble', q: 'يُمنع تناول عصير الجريب فروت مع دواء Simvastatin لأنه:', opts: ['يُثبط إنزيم CYP3A4 ويرفع سمية الدواء', 'يمنع امتصاص الدواء', 'يسبب هبوط سكر حاد', 'يرفع ضغط الدم'], ans: 0 }
+    // --- المرحلة الثانية: 10 أسئلة الضعف (20 نقطة) ---
+    {
+      num: 11, stage: 2,
+      q: "Q11. The main mechanism of metformin is:",
+      opts: ["Increasing insulin secretion", "Decreasing hepatic gluconeogenesis", "Closing potassium channels", "Increasing glucagon secretion"],
+      ans: 1,
+      exp: "Metformin يقلل hepatic glucose output ويقلل intestinal glucose absorption."
+    },
+    {
+      num: 12, stage: 2,
+      q: "Q12. Why does metformin rarely cause hypoglycemia when used alone?",
+      opts: ["It increases insulin secretion", "It stimulates glucagon release", "It does not increase insulin secretion", "It destroys pancreatic β-cells"],
+      ans: 2,
+      exp: "Metformin لا يحفز إفراز الإنسولين، لكنه يحسن حساسية الخلايا له."
+    },
+    {
+      num: 13, stage: 2,
+      q: "Q13. A patient taking metformin develops severe lactic acidosis. Which condition increases this risk?",
+      opts: ["Severe renal impairment", "Mild headache", "Increased HDL", "Increased insulin sensitivity"],
+      ans: 0,
+      exp: "Renal impairment يقلل التخلص من metformin ويزيد خطر lactic acidosis."
+    },
+    {
+      num: 14, stage: 2,
+      q: "Q14. Long-term metformin therapy may decrease the absorption of:",
+      opts: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K"],
+      ans: 1,
+      exp: "Metformin may reduce vitamin B12 absorption."
+    },
+    {
+      num: 15, stage: 2,
+      q: "Q15. Thiazolidinediones exert their action through activation of:",
+      opts: ["PPAR-γ", "DPP-4", "ATP-sensitive potassium channels", "α-glucosidase"],
+      ans: 0,
+      exp: "PPAR-γ nuclear receptor activation → increased insulin sensitivity and GLUT4 expression."
+    },
+    {
+      num: 16, stage: 2,
+      q: "Q16. Which of the following is an important adverse effect of pioglitazone?",
+      opts: ["Severe hypoglycemia when used alone", "Fluid retention and peripheral edema", "Increased gastric emptying", "Vitamin B12 deficiency"],
+      ans: 1,
+      exp: "Thiazolidinediones cause fluid retention and weight gain and should be avoided in CHF."
+    },
+    {
+      num: 17, stage: 2,
+      q: "Q17. Which thiazolidinedione has a greater association with myocardial infarction risk according to the lecture?",
+      opts: ["Pioglitazone", "Rosiglitazone", "Both have exactly equal risk", "Neither"],
+      ans: 1,
+      exp: "Rosiglitazone > Pioglitazone حسب المقارنة المذكورة في المحاضرة."
+    },
+    {
+      num: 18, stage: 2,
+      q: "Q18. Acarbose reduces blood glucose mainly by:",
+      opts: ["Increasing insulin secretion", "Inhibiting intestinal α-glucosidase", "Inhibiting DPP-4", "Increasing GLUT4 transporters"],
+      ans: 1,
+      exp: "يمنع تكسير وامتصاص الكربوهيدرات، وبالتالي يقلل postprandial glucose."
+    },
+    {
+      num: 19, stage: 2,
+      q: "Q19. GLP-1 mimetics produce all the following effects EXCEPT:",
+      opts: ["Increased insulin secretion", "Decreased glucagon secretion", "Delayed gastric emptying", "Increased appetite"],
+      ans: 3,
+      exp: "GLP-1 mimetics تقلل appetite وتبطئ gastric emptying."
+    },
+    {
+      num: 20, stage: 2,
+      q: "Q20. Sitagliptin lowers blood glucose by:",
+      opts: ["Activating α-glucosidase", "Inhibiting DPP-4 enzyme", "Blocking insulin receptors", "Increasing hepatic glucose production"],
+      ans: 1,
+      exp: "DPP-4 inhibition prevents GLP-1 degradation → prolongs incretin activity."
+    }
   ];
 
-  let questionsBank = JSON.parse(localStorage.getItem('abakera_mnu_qs_v2')) || DEFAULT_QUESTIONS;
   let roomPin = '';
-  let myRole = ''; // 'host' | 'girls' | 'boys'
+  let myRole = ''; // 'host' | 'team1' | 'team2'
   let peer = null;
   let hostConn = null;
-  let teamConns = { girls: null, boys: null };
+  let teamConns = { team1: null, team2: null };
 
   let roomState = {
-    girlsName: 'فريق البنات',
-    boysName: 'فريق الولاد',
-    girlsScore: 0,
-    boysScore: 0,
-    category: 'science',
-    catQuestionCount: 0,  // عداد الأسئلة في الفقرة الحالية (من 1 إلى 5)
+    team1Name: 'الفريق الأول',
+    team2Name: 'الفريق الثاني',
+    team1Score: 0,
+    team2Score: 0,
+    qIndex: -1,
+    stage: 1,
+    showTransition: false,
     currentQ: null,
     buzzerOpen: false,
     buzzedTeam: null,
@@ -355,8 +522,8 @@
     selectedOpt: null,
     statusMessage: '',
     matchEnded: false,
-    winnerTeam: null,     // 'girls' | 'boys' | 'tie'
-    timer: 15
+    winnerTeam: null,
+    timer: 20
   };
 
   let timerInterval = null;
@@ -382,14 +549,14 @@
 
   function broadcastState() {
     if (myRole !== 'host') return;
-    ['girls', 'boys'].forEach(t => {
+    ['team1', 'team2'].forEach(t => {
       if (teamConns[t] && teamConns[t].open) {
         teamConns[t].send({ type: 'STATE_UPDATE', state: roomState });
       }
     });
   }
 
-  // 1. إنشاء غرفة جديدة على اللابتوب (Host)
+  // 1. إنشاء غرفة جديدة (Host)
   function createHostRoom() {
     const btn = document.getElementById('create-host-btn');
     btn.innerText = 'جاري تجهيز الغرفة...';
@@ -406,16 +573,26 @@
       document.getElementById('display-room-pin').innerText = roomPin;
       document.getElementById('modal-pin-text').innerText = roomPin;
       generateRoomQR(roomPin);
-      renderQuestionsList();
     });
 
     peer.on('connection', (conn) => {
       conn.on('data', (data) => {
         if (data.type === 'JOIN') {
           teamConns[data.team] = conn;
+          // تحديث اسم الفريق إذا أدخله الطالب عند الانضمام
+          if (data.teamName && data.teamName.trim() !== '') {
+            if (data.team === 'team1') {
+              roomState.team1Name = data.teamName.trim();
+              document.getElementById('team1-name-input').value = roomState.team1Name;
+            } else if (data.team === 'team2') {
+              roomState.team2Name = data.teamName.trim();
+              document.getElementById('team2-name-input').value = roomState.team2Name;
+            }
+          }
           const dot = document.getElementById(data.team + '-online-dot');
           if (dot) dot.className = 'w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]';
-          conn.send({ type: 'STATE_UPDATE', state: roomState });
+          broadcastState();
+          renderUI();
         } else if (data.type === 'BUZZ') {
           if (roomState.buzzerOpen && !roomState.buzzedTeam && !roomState.lockedTeams.includes(data.team)) {
             roomState.buzzerOpen = false;
@@ -431,7 +608,7 @@
       });
 
       conn.on('close', () => {
-        ['girls', 'boys'].forEach(t => {
+        ['team1', 'team2'].forEach(t => {
           if (teamConns[t] === conn) {
             document.getElementById(t + '-online-dot').className = 'w-3 h-3 rounded-full bg-slate-600';
           }
@@ -459,14 +636,22 @@
     const inp = document.getElementById('share-url-input');
     inp.select();
     navigator.clipboard.writeText(inp.value);
-    alert('تم نسخ الرابط! أرسله لموبايلات فريق البنات وفريق الولاد.');
+    alert('تم نسخ الرابط! أرسله لموبايلات الفريقين.');
   }
 
-  // 2. انضمام فريق (موبايل البنات أو الولاد)
-  function joinAsTeam(team) {
+  // 2. انضمام فريق (الفريق الأول أو الفريق الثاني مع اسمه المخصص)
+  function joinAsTeam(teamSlot) {
     const pin = document.getElementById('join-pin-input').value.trim();
+    const enteredName = document.getElementById('custom-team-name-input').value.trim();
+
     if (pin.length !== 4) {
       alert('أدخل كود الغرفة المكون من 4 أرقام الظاهر على شاشة العرض.');
+      return;
+    }
+
+    if (!enteredName) {
+      alert('من فضلك ادخل اسم فريقك أولاً قبل الانضمام!');
+      document.getElementById('custom-team-name-input').focus();
       return;
     }
 
@@ -477,18 +662,23 @@
       hostConn = peer.connect('mnu-abakera-room-' + pin, { reliable: true });
 
       hostConn.on('open', () => {
-        myRole = team;
+        myRole = teamSlot;
         roomPin = pin;
+        if (teamSlot === 'team1') roomState.team1Name = enteredName;
+        if (teamSlot === 'team2') roomState.team2Name = enteredName;
+
         document.getElementById('lobby-screen').classList.add('hidden');
         document.getElementById('team-screen').classList.remove('hidden');
         document.getElementById('team-room-pin').innerText = pin;
+        document.getElementById('team-header-name').innerText = enteredName;
+        document.getElementById('team-slot-subtitle').innerText = teamSlot === 'team1' ? 'الفريق الأول' : 'الفريق الثاني';
 
         const btn = document.getElementById('team-buzzer-btn');
-        if (team === 'boys') {
+        if (teamSlot === 'team2') {
           btn.className = "buzzer-btn w-60 h-60 sm:w-68 sm:h-68 rounded-full bg-gradient-to-b from-blue-500 to-blue-700 border-8 border-blue-300/40 flex flex-col items-center justify-center text-white cursor-pointer";
         }
 
-        hostConn.send({ type: 'JOIN', team: team });
+        hostConn.send({ type: 'JOIN', team: teamSlot, teamName: enteredName });
       });
 
       hostConn.on('data', (data) => {
@@ -504,26 +694,27 @@
     });
   }
 
-  // عرض السؤال التالي (بحد أقصى 5 أسئلة لكل فقرة)
   function nextQuestion() {
-    const cat = document.getElementById('category-select').value;
-    const filtered = questionsBank.filter(item => item.cat === cat);
-    const pool = filtered.slice(0, QUESTIONS_PER_CATEGORY);
-
-    if (pool.length === 0) {
-      alert('لا توجد أسئلة في هذه الفقرة.');
+    if (roomState.qIndex === 9 && roomState.stage === 1 && !roomState.showTransition) {
+      clearInterval(timerInterval);
+      roomState.showTransition = true;
+      roomState.buzzerOpen = false;
+      playTone('win');
+      broadcastState();
+      renderUI();
       return;
     }
 
-    if (roomState.catQuestionCount >= QUESTIONS_PER_CATEGORY) {
-      alert(`انتهت أسئلة هذه الفقرة (${QUESTIONS_PER_CATEGORY} أسئلة)! اختر فقرة أخرى من القائمة العلوية أو اضغط "إنهاء وإعلان الفائز".`);
+    if (roomState.qIndex >= COMPETITION_QUESTIONS.length - 1) {
+      endMatch();
       return;
     }
 
-    const qIdx = roomState.catQuestionCount;
-    roomState.catQuestionCount++;
-    roomState.category = cat;
-    roomState.currentQ = pool[qIdx % pool.length];
+    roomState.qIndex++;
+    const qObj = COMPETITION_QUESTIONS[roomState.qIndex];
+    roomState.stage = qObj.stage;
+    roomState.showTransition = false;
+    roomState.currentQ = qObj;
     roomState.buzzerOpen = true;
     roomState.buzzedTeam = null;
     roomState.lockedTeams = [];
@@ -531,7 +722,7 @@
     roomState.revealed = false;
     roomState.selectedOpt = null;
     roomState.statusMessage = '';
-    roomState.timer = cat === 'rapid' ? 45 : 15;
+    roomState.timer = 20;
 
     playTone('next');
     startTimer();
@@ -539,18 +730,23 @@
     renderUI();
   }
 
-  // عند تغيير الفقرة يتم تصفير عداد الـ 5 أسئلة للفقرة الجديدة
-  function changeCategory() {
-    roomState.category = document.getElementById('category-select').value;
-    roomState.catQuestionCount = 0;
-    roomState.currentQ = null;
-    roomState.buzzerOpen = false;
+  function startStageTwo() {
+    roomState.stage = 2;
+    roomState.showTransition = false;
+    roomState.qIndex = 10;
+    const qObj = COMPETITION_QUESTIONS[10];
+    roomState.currentQ = qObj;
+    roomState.buzzerOpen = true;
     roomState.buzzedTeam = null;
     roomState.lockedTeams = [];
     roomState.wrongOptions = [];
     roomState.revealed = false;
-    roomState.statusMessage = 'تم اختيار فقرة جديدة • اضغط "السؤال التالي" لبدء أول سؤال من 5';
-    clearInterval(timerInterval);
+    roomState.selectedOpt = null;
+    roomState.statusMessage = '';
+    roomState.timer = 20;
+
+    playTone('next');
+    startTimer();
     broadcastState();
     renderUI();
   }
@@ -558,7 +754,7 @@
   function startTimer() {
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
-      if (roomState.timer > 0 && !roomState.revealed) {
+      if (roomState.timer > 0 && !roomState.revealed && !roomState.showTransition) {
         roomState.timer--;
         document.getElementById('host-timer').innerText = roomState.timer;
         if (roomState.timer === 0) {
@@ -600,7 +796,7 @@
     if (roomState.wrongOptions.includes(optIdx)) return;
 
     const isCorrect = optIdx === roomState.currentQ.ans;
-    const pts = roomState.category === 'gamble' ? 20 : 10;
+    const pts = roomState.stage === 2 ? 20 : 10;
 
     if (isCorrect) {
       playTone('correct');
@@ -608,8 +804,8 @@
       roomState.revealed = true;
       roomState.buzzerOpen = false;
       roomState.statusMessage = '';
-      if (answeringTeam === 'girls') roomState.girlsScore += pts;
-      if (answeringTeam === 'boys') roomState.boysScore += pts;
+      if (answeringTeam === 'team1') roomState.team1Score += pts;
+      if (answeringTeam === 'team2') roomState.team2Score += pts;
     } else {
       playTone('wrong');
       if (!roomState.wrongOptions.includes(optIdx)) {
@@ -619,14 +815,9 @@
         roomState.lockedTeams.push(answeringTeam);
       }
 
-      if (roomState.category === 'gamble') {
-        if (answeringTeam === 'girls') roomState.girlsScore = Math.max(0, roomState.girlsScore - 10);
-        if (answeringTeam === 'boys') roomState.boysScore = Math.max(0, roomState.boysScore - 10);
-      }
-
-      const wrongTeamName = answeringTeam === 'girls' ? roomState.girlsName : roomState.boysName;
-      const otherTeam = answeringTeam === 'girls' ? 'boys' : 'girls';
-      const otherTeamName = otherTeam === 'girls' ? roomState.girlsName : roomState.boysName;
+      const wrongTeamName = answeringTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
+      const otherTeam = answeringTeam === 'team1' ? 'team2' : 'team1';
+      const otherTeamName = otherTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
 
       if (answeringTeam && !roomState.lockedTeams.includes(otherTeam)) {
         roomState.buzzedTeam = null;
@@ -655,55 +846,79 @@
   }
 
   function adjustScore(team, delta) {
-    if (team === 'girls') roomState.girlsScore = Math.max(0, roomState.girlsScore + delta);
-    if (team === 'boys') roomState.boysScore = Math.max(0, roomState.boysScore + delta);
+    if (team === 'team1') roomState.team1Score = Math.max(0, roomState.team1Score + delta);
+    if (team === 'team2') roomState.team2Score = Math.max(0, roomState.team2Score + delta);
     broadcastState();
     renderUI();
   }
 
   function syncTeamNames() {
-    roomState.girlsName = document.getElementById('girls-name-input').value || 'فريق البنات';
-    roomState.boysName = document.getElementById('boys-name-input').value || 'فريق الولاد';
+    roomState.team1Name = document.getElementById('team1-name-input').value.trim() || 'الفريق الأول';
+    roomState.team2Name = document.getElementById('team2-name-input').value.trim() || 'الفريق الثاني';
     broadcastState();
   }
 
   function renderUI() {
     if (myRole === 'host') {
-      document.getElementById('host-girls-score').innerText = roomState.girlsScore;
-      document.getElementById('host-boys-score').innerText = roomState.boysScore;
+      document.getElementById('host-team1-score').innerText = roomState.team1Score;
+      document.getElementById('host-team2-score').innerText = roomState.team2Score;
       document.getElementById('host-timer').innerText = roomState.timer;
 
+      const stagePill = document.getElementById('stage-indicator-pill');
+      if (roomState.stage === 2) {
+        stagePill.innerText = '🔥 المرحلة الثانية: الضعف (×2 • 20 نقطة)';
+        stagePill.className = 'w-full bg-amber-500/20 border border-amber-400/60 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-amber-300';
+      } else {
+        stagePill.innerText = 'المرحلة الأولى (10 أسئلة • 10 نقاط)';
+        stagePill.className = 'w-full bg-sky-950/90 border border-sky-500/40 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-sky-300';
+      }
+
+      const transModal = document.getElementById('stage-transition-modal');
+      if (roomState.showTransition) {
+        transModal.classList.remove('hidden');
+        transModal.classList.add('flex');
+      } else {
+        transModal.classList.add('hidden');
+        transModal.classList.remove('flex');
+      }
+
       const nextBtn = document.getElementById('next-q-btn');
-      if (roomState.catQuestionCount >= QUESTIONS_PER_CATEGORY) {
-        nextBtn.innerText = 'انتهت أسئلة الفقرة (5/5)';
+      const currentNum = roomState.qIndex + 1;
+      if (currentNum === 10 && roomState.stage === 1) {
+        nextBtn.innerText = 'الانتقال للمرحلة الثانية (الضعف) ◀';
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow cursor-pointer';
+      } else if (currentNum >= 20) {
+        nextBtn.innerText = 'انتهت جميع الأسئلة (20/20)';
         nextBtn.className = 'px-5 py-2.5 rounded-xl bg-slate-700 text-amber-300 font-black text-sm shadow cursor-pointer';
       } else {
-        nextBtn.innerText = `السؤال التالي (${roomState.catQuestionCount}/${QUESTIONS_PER_CATEGORY}) ◀`;
+        nextBtn.innerText = `السؤال التالي (${currentNum + 1}/20) ◀`;
         nextBtn.className = 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer';
       }
 
       const banner = document.getElementById('buzz-banner');
       if (roomState.buzzedTeam) {
-        const isGirls = roomState.buzzedTeam === 'girls';
-        const name = isGirls ? roomState.girlsName : roomState.boysName;
+        const isTeam1 = roomState.buzzedTeam === 'team1';
+        const name = isTeam1 ? roomState.team1Name : roomState.team2Name;
         banner.classList.remove('hidden');
-        banner.className = `mb-3 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl ${isGirls ? 'bg-rose-600 text-white' : 'bg-blue-600 text-white'}`;
+        banner.className = `mb-2.5 py-2 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl ${isTeam1 ? 'bg-rose-600 text-white' : 'bg-blue-600 text-white'}`;
         banner.innerText = `🔔 الأسرع في الجرس: ${name}!`;
       } else if (roomState.statusMessage) {
         banner.classList.remove('hidden');
-        banner.className = 'mb-3 py-2.5 px-6 rounded-2xl text-center font-black text-lg sm:text-xl shadow-xl bg-amber-600 text-white';
+        banner.className = 'mb-2.5 py-2 px-6 rounded-2xl text-center font-black text-lg sm:text-xl shadow-xl bg-amber-600 text-white';
         banner.innerText = roomState.statusMessage;
       } else {
         banner.classList.add('hidden');
       }
 
+      const expBox = document.getElementById('explanation-box');
+
       if (roomState.currentQ) {
-        const ptsLabel = roomState.category === 'gamble' ? '20 نقطة (ضربة حظ)' : '10 نقاط';
-        document.getElementById('q-badge').innerText = `سؤال ${roomState.catQuestionCount} من ${QUESTIONS_PER_CATEGORY} • ${ptsLabel}`;
+        const ptsLabel = roomState.stage === 2 ? '20 نقطة (الضعف ×2)' : '10 نقاط';
+        document.getElementById('q-badge').innerText = `سؤال ${roomState.currentQ.num} من 20 • ${ptsLabel}`;
         document.getElementById('host-question-text').innerText = roomState.currentQ.q;
 
         const grid = document.getElementById('host-options-grid');
-        const letters = ['أ', 'ب', 'ج', 'د'];
+        const letters = ['A', 'B', 'C', 'D'];
         grid.innerHTML = roomState.currentQ.opts.map((opt, i) => {
           let style = 'bg-slate-900/90 border-slate-700 text-white hover:border-sky-400';
           if (roomState.revealed) {
@@ -713,24 +928,35 @@
           } else if (roomState.wrongOptions.includes(i)) {
             style = 'bg-rose-900/80 border-rose-500 text-rose-200 opacity-75';
           }
-          return `<button onclick="submitAnswer(${i})" class="p-4 rounded-2xl border-2 text-right font-bold text-lg flex items-center gap-3 transition cursor-pointer ${style}">
-            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-black text-sm">${letters[i]}</span>
+          return `<button onclick="submitAnswer(${i})" class="en-font p-4 rounded-2xl border-2 text-left font-bold text-base sm:text-lg flex items-center gap-3 transition cursor-pointer ${style}">
+            <span class="w-8 h-8 shrink-0 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-black text-sm">${letters[i]}</span>
             <span>${opt}</span>
           </button>`;
         }).join('');
-      } else {
-        document.getElementById('q-badge').innerText = `فقرة جديدة • ${QUESTIONS_PER_CATEGORY} أسئلة`;
-        document.getElementById('host-question-text').innerText = 'اضغط على "السؤال التالي" لبدء الفقرة!';
-        document.getElementById('host-options-grid').innerHTML = '';
+
+        if (roomState.revealed && roomState.currentQ.exp) {
+          expBox.classList.remove('hidden');
+          expBox.innerHTML = `💡 <span class="text-amber-300">التفسير العلمي:</span> ${roomState.currentQ.exp}`;
+        } else {
+          expBox.classList.add('hidden');
+        }
       }
-    } else if (myRole === 'girls' || myRole === 'boys') {
-      document.getElementById('team-header-name').innerText = myRole === 'girls' ? roomState.girlsName : roomState.boysName;
-      document.getElementById('team-my-score').innerText = myRole === 'girls' ? roomState.girlsScore : roomState.boysScore;
+    } else if (myRole === 'team1' || myRole === 'team2') {
+      document.getElementById('team-header-name').innerText = myRole === 'team1' ? roomState.team1Name : roomState.team2Name;
+      document.getElementById('team-my-score').innerText = myRole === 'team1' ? roomState.team1Score : roomState.team2Score;
+
+      const teamStagePill = document.getElementById('team-stage-pill');
+      if (roomState.stage === 2) {
+        teamStagePill.innerText = '🔥 المرحلة الثانية: الضعف (×2 • 20 نقطة)';
+        teamStagePill.className = 'px-4 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-black';
+      } else {
+        teamStagePill.innerText = 'المرحلة الأولى (10 نقاط)';
+        teamStagePill.className = 'px-4 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black';
+      }
 
       const playArea = document.getElementById('team-play-area');
       const endArea = document.getElementById('team-end-area');
 
-      // إذا أنهى الهوست المباراة: إظهار "مببروووك" للفائز و"متزعلش متعوضة" للآخر
       if (roomState.matchEnded) {
         playArea.classList.add('hidden');
         endArea.classList.remove('hidden');
@@ -741,14 +967,14 @@
         const subtext = document.getElementById('team-end-subtext');
         const scoresEl = document.getElementById('team-end-scores');
 
-        scoresEl.innerText = `${roomState.girlsName}: ${roomState.girlsScore}  |  ${roomState.boysName}: ${roomState.boysScore}`;
+        scoresEl.innerText = `${roomState.team1Name}: ${roomState.team1Score}  |  ${roomState.team2Name}: ${roomState.team2Score}`;
 
         if (roomState.winnerTeam === myRole) {
           card.className = 'glass-card winner-glow rounded-3xl p-8 text-center border-2 border-amber-400';
           emoji.innerText = '🏆🎉';
           headline.innerText = 'مببروووك!';
           headline.className = 'text-4xl sm:text-5xl font-black text-amber-400 mb-3';
-          subtext.innerText = 'ألف مبروك الفوز بالمسابقة يا أبطال! أداء مشرف وعباقرة بجد.';
+          subtext.innerText = 'ألف مبروك الفوز في مسابقة العباقرة يا أبطال! أداء مشرف وعباقرة بجد.';
         } else if (roomState.winnerTeam === 'tie') {
           card.className = 'glass-card rounded-3xl p-8 text-center border-2 border-sky-400';
           emoji.innerText = '🤝✨';
@@ -775,16 +1001,21 @@
 
       buzzBtn.disabled = !roomState.buzzerOpen || isTeamLocked;
 
-      if (roomState.buzzedTeam === myRole && !roomState.revealed) {
+      if (roomState.showTransition) {
+        buzzBtn.classList.remove('hidden');
+        optsBox.classList.add('hidden');
+        statusText.innerText = "🔥 هننتقل للمرحلة الجاية: مرحلة الضعف (×2)! استعدوا";
+        statusText.className = "text-lg font-black text-amber-400";
+      } else if (roomState.buzzedTeam === myRole && !roomState.revealed) {
         statusText.innerText = "أنت الأسرع! اختر الإجابة الآن:";
         statusText.className = "text-lg font-black text-emerald-400";
         buzzBtn.classList.add('hidden');
         optsBox.classList.remove('hidden');
-        const letters = ['أ', 'ب', 'ج', 'د'];
+        const letters = ['A', 'B', 'C', 'D'];
         optsBox.innerHTML = roomState.currentQ.opts.map((opt, i) => {
           const isWrong = roomState.wrongOptions.includes(i);
-          return `<button onclick="submitAnswer(${i})" ${isWrong ? 'disabled' : ''} class="w-full p-4 rounded-2xl ${isWrong ? 'bg-rose-950/60 border-rose-800 text-rose-400 line-through opacity-50' : 'bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border-slate-600'} border text-right font-black text-base transition cursor-pointer">
-            ${letters[i]} - ${opt}
+          return `<button onclick="submitAnswer(${i})" ${isWrong ? 'disabled' : ''} class="en-font w-full p-4 rounded-2xl ${isWrong ? 'bg-rose-950/60 border-rose-800 text-rose-400 line-through opacity-50' : 'bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border-slate-600'} border text-left font-bold text-sm sm:text-base transition cursor-pointer">
+            <span class="text-amber-400 font-black mr-2">${letters[i]})</span> ${opt}
           </button>`;
         }).join('');
       } else {
@@ -799,7 +1030,7 @@
             : "الجرس مفتوح! اضغط بسرعة للإجابة";
           statusText.className = "text-lg font-black text-amber-400";
         } else if (roomState.buzzedTeam) {
-          const otherName = roomState.buzzedTeam === 'girls' ? roomState.girlsName : roomState.boysName;
+          const otherName = roomState.buzzedTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
           statusText.innerText = `يجيب الآن: ${otherName}`;
           statusText.className = "text-lg font-black text-rose-400";
         } else {
@@ -816,76 +1047,29 @@
     m.classList.toggle('flex', show);
   }
 
-  function toggleEditorModal(show) {
-    const m = document.getElementById('editor-modal');
-    m.classList.toggle('hidden', !show);
-    m.classList.toggle('flex', show);
-    if (show) renderQuestionsList();
-  }
-
-  function addCustomQuestion() {
-    const cat = document.getElementById('new-q-cat').value;
-    const q = document.getElementById('new-q-text').value.trim();
-    const opts = [
-      document.getElementById('new-q-opt0').value.trim(),
-      document.getElementById('new-q-opt1').value.trim(),
-      document.getElementById('new-q-opt2').value.trim(),
-      document.getElementById('new-q-opt3').value.trim()
-    ];
-    const ans = parseInt(document.getElementById('new-q-ans').value);
-    if (!q || opts.some(o => !o)) {
-      alert('يرجى كتابة السؤال والخيارات الأربعة كاملة.');
-      return;
-    }
-    questionsBank.unshift({ cat, q, opts, ans });
-    localStorage.setItem('abakera_mnu_qs_v2', JSON.stringify(questionsBank));
-    document.getElementById('new-q-text').value = '';
-    [0, 1, 2, 3].forEach(i => document.getElementById('new-q-opt' + i).value = '');
-    renderQuestionsList();
-  }
-
-  function deleteQuestion(idx) {
-    questionsBank.splice(idx, 1);
-    localStorage.setItem('abakera_mnu_qs_v2', JSON.stringify(questionsBank));
-    renderQuestionsList();
-  }
-
-  function renderQuestionsList() {
-    const list = document.getElementById('questions-list');
-    list.innerHTML = questionsBank.map((item, idx) => `
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-        <div>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold">${item.cat}</span>
-          <div class="text-xs font-bold text-white mt-1">${item.q}</div>
-        </div>
-        <button onclick="deleteQuestion(${idx})" class="text-rose-400 hover:text-rose-300 text-xs font-black px-2 cursor-pointer">حذف</button>
-      </div>
-    `).join('');
-  }
-
-  // إنهاء المباراة وإرسال النتيجة (مببروووك / متزعلش متعوضة) لموبايلات الفرق
   function endMatch() {
     clearInterval(timerInterval);
     roomState.matchEnded = true;
     roomState.buzzerOpen = false;
+    roomState.showTransition = false;
 
     const modal = document.getElementById('winner-modal');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     const title = document.getElementById('winner-title');
 
-    if (roomState.girlsScore > roomState.boysScore) {
-      roomState.winnerTeam = 'girls';
-      title.innerText = `🏆 الفائز: ${roomState.girlsName}`;
-    } else if (roomState.boysScore > roomState.girlsScore) {
-      roomState.winnerTeam = 'boys';
-      title.innerText = `🏆 الفائز: ${roomState.boysName}`;
+    if (roomState.team1Score > roomState.team2Score) {
+      roomState.winnerTeam = 'team1';
+      title.innerText = `🏆 الفائز: ${roomState.team1Name}`;
+    } else if (roomState.team2Score > roomState.team1Score) {
+      roomState.winnerTeam = 'team2';
+      title.innerText = `🏆 الفائز: ${roomState.team2Name}`;
     } else {
       roomState.winnerTeam = 'tie';
       title.innerText = '🤝 تعادل مثير بين الفريقين!';
     }
 
-    document.getElementById('final-scores-summary').innerText = `${roomState.girlsName}: ${roomState.girlsScore} نقطة  |  ${roomState.boysName}: ${roomState.boysScore} نقطة`;
+    document.getElementById('final-scores-summary').innerText = `${roomState.team1Name}: ${roomState.team1Score} نقطة  |  ${roomState.team2Name}: ${roomState.team2Score} نقطة`;
     playTone('win');
     broadcastState();
   }
@@ -893,9 +1077,11 @@
   function resetMatch() {
     document.getElementById('winner-modal').classList.add('hidden');
     document.getElementById('winner-modal').classList.remove('flex');
-    roomState.girlsScore = 0;
-    roomState.boysScore = 0;
-    roomState.catQuestionCount = 0;
+    roomState.team1Score = 0;
+    roomState.team2Score = 0;
+    roomState.qIndex = -1;
+    roomState.stage = 1;
+    roomState.showTransition = false;
     roomState.currentQ = null;
     roomState.buzzerOpen = false;
     roomState.buzzedTeam = null;
@@ -905,6 +1091,9 @@
     roomState.matchEnded = false;
     roomState.winnerTeam = null;
     roomState.statusMessage = '';
+    document.getElementById('explanation-box').classList.add('hidden');
+    document.getElementById('host-question-text').innerText = 'اضغط على "السؤال التالي" لبدء مسابقة العباقرة!';
+    document.getElementById('host-options-grid').innerHTML = '';
     broadcastState();
     renderUI();
   }
