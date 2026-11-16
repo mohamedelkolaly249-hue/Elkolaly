@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>مسابقة العباقرة | قسم الأدوية والسموم - كلية الصيدلة جامعة المنصورة الأهلية</title>
+<title>مسابقة العباقرة | كلية الصيدلة - جامعة المنصورة الأهلية</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
@@ -18,84 +18,97 @@
   body {
     margin: 0;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 10%, #10244d 0%, #050b1c 55%, #010308 100%);
+    background: radial-gradient(circle at 50% 12%, #0e1e40 0%, #050a18 58%, #010308 100%);
     color: #f8fafc;
   }
   #canvas-container { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
   .ui-layer { position: relative; z-index: 10; height: 100vh; width: 100vw; display: flex; flex-direction: column; }
 
-  /* زجاج الاستوديو الملكي */
-  .royal-glass {
-    background: linear-gradient(155deg, rgba(15, 28, 60, 0.88), rgba(4, 9, 24, 0.96));
-    border: 1px solid rgba(250, 204, 21, 0.28);
+  /* لوحات زجاجية احترافية */
+  .exec-glass {
+    background: linear-gradient(155deg, rgba(14, 25, 52, 0.9), rgba(4, 9, 22, 0.97));
+    border: 1px solid rgba(212, 175, 55, 0.3);
     backdrop-filter: blur(24px);
-    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 30px 75px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-  .gold-crown-border {
-    border: 2px solid rgba(250, 204, 21, 0.72);
-    box-shadow: 0 0 45px rgba(245, 158, 11, 0.25), inset 0 0 25px rgba(245, 158, 11, 0.08);
+  .gold-frame {
+    border: 1.5px solid rgba(212, 175, 55, 0.68);
+    box-shadow: 0 0 45px rgba(212, 175, 55, 0.18), inset 0 0 25px rgba(212, 175, 55, 0.06);
   }
 
-  /* اللوجوهات الدائرية النقية (إخفاء أي حواف سوداء في لوجو الصيدلة) */
+  /* الشعارات الرسمية */
   .logo-badge {
-    width: 76px; height: 76px;
+    width: 74px; height: 74px;
     border-radius: 9999px;
     object-fit: cover;
     background: #ffffff;
-    border: 3px solid #f59e0b;
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    border: 2.5px solid #d4af37;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
     padding: 2px;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .logo-badge:hover { transform: scale(1.08) rotate(3deg); }
   .logo-badge-sm {
-    width: 48px; height: 48px;
+    width: 46px; height: 46px;
     border-radius: 9999px;
     object-fit: cover;
     background: #ffffff;
-    border: 2px solid #f59e0b;
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
     padding: 1.5px;
   }
 
-  /* ================= جرس الموبايل ثلاثي الأبعاد الخارق (3D Arcade Reactor Buzzer) ================= */
+  /* مؤشرات الحالة الضوئية */
+  .status-led {
+    width: 12px; height: 12px;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+  .led-waiting {
+    background: #475569;
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.5);
+  }
+  .led-ready {
+    background: #10b981;
+    box-shadow: 0 0 14px #10b981;
+  }
+
+  /* جرس الموبايل الاحترافي ثلاثي الأبعاد */
   .buzzer-rig {
     position: relative;
-    width: 280px;
-    height: 280px;
+    width: 270px;
+    height: 270px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .buzzer-pulse-ring {
     position: absolute;
-    inset: -12px;
+    inset: -10px;
     border-radius: 9999px;
-    border: 3px dashed rgba(250, 204, 21, 0.55);
-    animation: spinSlow 14s linear infinite;
+    border: 2px solid rgba(212, 175, 55, 0.55);
+    animation: pulseRing 1.6s infinite;
     pointer-events: none;
   }
   .buzzer-glow-aura {
     position: absolute;
-    inset: 4px;
+    inset: 6px;
     border-radius: 9999px;
-    filter: blur(22px);
-    opacity: 0.65;
+    filter: blur(24px);
+    opacity: 0.6;
     transition: all 0.3s ease;
     pointer-events: none;
   }
   .buzzer-chassis {
     position: relative;
-    width: 250px;
-    height: 250px;
+    width: 244px;
+    height: 244px;
     border-radius: 9999px;
-    background: linear-gradient(145deg, #334155, #0f172a);
+    background: linear-gradient(145deg, #273549, #0b1120);
     padding: 18px;
     box-shadow:
       0 26px 50px rgba(0, 0, 0, 0.9),
-      inset 0 3px 6px rgba(255, 255, 255, 0.25),
+      inset 0 2px 5px rgba(255, 255, 255, 0.2),
       inset 0 -6px 12px rgba(0, 0, 0, 0.85);
-    border: 3px solid #475569;
+    border: 2.5px solid #475569;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,215 +125,183 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: translateY(-12px);
+    transform: translateY(-10px);
     transition: all 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
   }
-  /* إضاءة القبة الزجاجية العلوية */
   .buzzer-dome::before {
     content: '';
     position: absolute;
     top: 6%;
-    left: 14%;
-    right: 14%;
-    height: 42%;
+    left: 15%;
+    right: 15%;
+    height: 38%;
     border-radius: 9999px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.02) 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.01) 100%);
     pointer-events: none;
   }
   .buzzer-dome-team1 {
-    background: radial-gradient(circle at 50% 30%, #ff4d79 0%, #e11d48 55%, #881337 100%);
+    background: radial-gradient(circle at 50% 30%, #f43f5e 0%, #be123c 60%, #881337 100%);
     box-shadow:
-      0 16px 0 #4c0519,
-      0 24px 35px rgba(0, 0, 0, 0.85),
-      0 0 40px rgba(244, 63, 94, 0.55),
+      0 14px 0 #4c0519,
+      0 22px 35px rgba(0, 0, 0, 0.85),
+      0 0 35px rgba(244, 63, 94, 0.5),
       inset 0 -8px 18px rgba(0, 0, 0, 0.45);
   }
   .buzzer-dome-team2 {
-    background: radial-gradient(circle at 50% 30%, #60a5fa 0%, #2563eb 55%, #1e3a8a 100%);
+    background: radial-gradient(circle at 50% 30%, #3b82f6 0%, #1d4ed8 60%, #1e3a8a 100%);
     box-shadow:
-      0 16px 0 #172554,
-      0 24px 35px rgba(0, 0, 0, 0.85),
-      0 0 40px rgba(59, 130, 246, 0.55),
+      0 14px 0 #172554,
+      0 22px 35px rgba(0, 0, 0, 0.85),
+      0 0 35px rgba(59, 130, 246, 0.5),
       inset 0 -8px 18px rgba(0, 0, 0, 0.45);
   }
   .buzzer-dome:active:not(:disabled) {
-    transform: translateY(3px);
+    transform: translateY(2px);
     box-shadow:
       0 2px 0 #1e293b,
       0 6px 15px rgba(0, 0, 0, 0.8),
-      0 0 65px rgba(250, 204, 21, 0.9),
+      0 0 60px rgba(212, 175, 55, 0.85),
       inset 0 6px 20px rgba(0, 0, 0, 0.6);
   }
   .buzzer-dome:disabled {
-    background: radial-gradient(circle at 50% 30%, #475569 0%, #1e293b 70%, #0f172a 100%);
+    background: radial-gradient(circle at 50% 30%, #334155 0%, #1e293b 70%, #0f172a 100%);
     box-shadow:
       0 8px 0 #090d16,
       0 12px 20px rgba(0, 0, 0, 0.7),
       inset 0 -4px 10px rgba(0, 0, 0, 0.6);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     cursor: not-allowed;
-    opacity: 0.55;
+    opacity: 0.5;
   }
 
-  @keyframes spinSlow { 100% { transform: rotate(360deg); } }
   @keyframes pulseRing {
-    0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.8); }
-    70% { box-shadow: 0 0 0 28px rgba(250, 204, 21, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    70% { box-shadow: 0 0 0 24px rgba(212, 175, 55, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
   }
-  .winner-glow { animation: pulseRing 1.5s infinite; }
-  @keyframes floatSlow {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-7px); }
-  }
-  .float-anim { animation: floatSlow 2.8s ease-in-out infinite; }
+  .winner-glow { animation: pulseRing 1.6s infinite; }
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-slide-up { animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 </head>
 <body>
 
 <div id="canvas-container"></div>
 
-<!-- ================= 1. شاشة البداية واختيار الدور ================= -->
-<div id="lobby-screen" class="ui-layer items-center justify-center p-3 sm:p-5 overflow-y-auto">
-  <div class="royal-glass gold-crown-border max-w-3xl w-full rounded-3xl p-5 sm:p-8 text-center my-auto relative overflow-hidden animate-slide-up">
+<!-- ================= 1. شاشة البداية (Host أو دخول الفرق عبر QR) ================= -->
+<div id="lobby-screen" class="ui-layer items-center justify-center p-4 overflow-y-auto">
+  <div class="exec-glass gold-frame max-w-2xl w-full rounded-3xl p-6 sm:p-10 text-center my-auto animate-slide-up">
     
-    <!-- شريط اللوجوهات الثلاثة -->
-    <div class="flex items-center justify-center gap-5 sm:gap-8 mb-3">
+    <!-- الشعارات الثلاثة -->
+    <div class="flex items-center justify-center gap-6 sm:gap-8 mb-4">
       <img src="mnu-logo.jpg" alt="جامعة المنصورة الأهلية" class="logo-badge" onerror="this.style.display='none'">
       <img src="pharmacy-logo.jpg" alt="كلية الصيدلة" class="logo-badge" onerror="this.style.display='none'">
       <img src="pharma-dept-logo.jpg" alt="قسم الأدوية والسموم" class="logo-badge" onerror="this.style.display='none'">
     </div>
 
-    <div class="text-xs sm:text-sm font-extrabold text-amber-300 tracking-wide mb-1">
+    <div class="text-xs sm:text-sm font-extrabold text-amber-300/90 tracking-wide mb-1">
       جامعة المنصورة الأهلية • كلية الصيدلة • قسم الأدوية والسموم
     </div>
 
-    <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-l from-amber-200 via-yellow-400 to-amber-500 drop-shadow mb-3">
+    <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-l from-amber-200 via-yellow-400 to-amber-500 mb-4">
       مسابقة العباقرة
     </h1>
 
     <!-- شريط الإشراف الأكاديمي -->
-    <div class="bg-slate-950/90 border border-amber-400/45 rounded-2xl py-2.5 px-5 mb-6 inline-block max-w-full shadow-inner">
+    <div class="bg-slate-950/90 border border-amber-400/40 rounded-2xl py-2.5 px-6 mb-8 inline-block max-w-full">
       <div class="text-[11px] font-bold text-amber-400 mb-0.5">تحت إشراف</div>
       <div class="text-xs sm:text-sm font-black text-slate-100 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
         <span>أ.م/ مريهان مقلد</span>
-        <span class="text-amber-400">✦</span>
+        <span class="text-amber-400">•</span>
         <span>أ.م.د/ مروة زغلول</span>
-        <span class="text-amber-400">✦</span>
+        <span class="text-amber-400">•</span>
         <span>م.م/ هبة بهريز</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
-      <!-- بطاقة شاشة العرض (Host) -->
-      <div id="host-role-card" class="bg-slate-950/85 border border-sky-400/35 rounded-2xl p-5 flex flex-col justify-between transition-all hover:border-amber-400/60">
-        <div>
-          <span class="text-xs font-bold text-sky-400 block mb-1">1. اللابتوب / شاشة المدرج</span>
-          <h3 class="text-xl font-black text-white mb-2">شاشة العرض والمقدم</h3>
-          <p class="text-xs text-slate-400 leading-relaxed mb-4">تفتح صفحة انتظار الفريقين بـ QR Code، ولا تبدأ المسابقة إلا بعد اكتمال الفريقين.</p>
-        </div>
-        <button id="create-host-btn" onclick="createHostRoom()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-base shadow-lg shadow-amber-500/25 transition cursor-pointer">
-          دخول كـ شاشة العرض (Host)
-        </button>
-      </div>
+    <!-- قسم الـ Host فقط (يظهر على اللابتوب ويختفي تلقائياً عند المسح بالـ QR) -->
+    <div id="host-role-card" class="max-w-sm mx-auto">
+      <button id="create-host-btn" onclick="createHostRoom()" class="en-font w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-extrabold text-2xl tracking-wider shadow-xl shadow-amber-500/20 transition cursor-pointer">
+        Host
+      </button>
+    </div>
 
-      <!-- بطاقة انضمام الفرق -->
-      <div class="bg-slate-950/85 border border-amber-400/35 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400/60 transition-all">
-        <div>
-          <div class="text-xs font-bold text-amber-400 mb-1">2. موبايل / تابلت الفرق</div>
-          <h3 class="text-xl font-black text-white mb-2">انضمام كفريق متنافس</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">كود الغرفة (4 أرقام)</label>
-              <input id="join-pin-input" type="tel" maxlength="4" oninput="checkRoomAvailability()" placeholder="4821" class="w-full text-center tracking-widest text-xl font-black bg-slate-900 border border-slate-700 rounded-xl py-2 text-amber-300 focus:outline-none focus:border-amber-400">
-            </div>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">ادخل اسم فريقك</label>
-              <input id="custom-team-name-input" type="text" maxlength="22" placeholder="اكتب اسم فريقك..." class="w-full text-center text-sm font-black bg-slate-900 border border-slate-700 rounded-xl py-2.5 px-2 text-white focus:outline-none focus:border-amber-400">
-            </div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <button id="join-team1-btn" onclick="joinAsTeam('team1')" class="py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
-            الفريق الأول
-          </button>
-          <button id="join-team2-btn" onclick="joinAsTeam('team2')" class="py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-lg transition cursor-pointer">
-            الفريق الثاني
-          </button>
-        </div>
+    <!-- قسم الفرق (يظهر تلقائياً عند فتح الرابط من الـ QR Code بدون أي كود يدوي) -->
+    <div id="team-role-card" class="hidden max-w-md mx-auto mt-4 pt-4 border-t border-slate-800/80">
+      <div class="mb-4">
+        <input id="custom-team-name-input" type="text" maxlength="22" placeholder="اسم الفريق" class="w-full text-center text-lg font-black bg-slate-950 border border-amber-400/40 rounded-2xl py-3.5 px-4 text-white focus:outline-none focus:border-amber-400">
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button id="join-team1-btn" onclick="joinAsTeam('team1')" class="py-4 rounded-2xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-base shadow-lg transition cursor-pointer">
+          الفريق الأول
+        </button>
+        <button id="join-team2-btn" onclick="joinAsTeam('team2')" class="py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-black text-base shadow-lg transition cursor-pointer">
+          الفريق الثاني
+        </button>
       </div>
     </div>
 
-    <div id="connection-status" class="mt-3 text-xs text-emerald-400 font-bold"></div>
+    <div id="connection-status" class="mt-4 text-xs text-emerald-400 font-bold"></div>
   </div>
 </div>
 
-<!-- ================= 2. صفحة انتظار الفريقين المستقلة تماماً (Standalone Waiting Page) ================= -->
+<!-- ================= 2. صفحة انتظار الفريقين المستقلة (QR Code فقط بدون أرقام) ================= -->
 <div id="host-waiting-screen" class="ui-layer hidden items-center justify-center p-4 overflow-y-auto">
-  <div class="royal-glass gold-crown-border max-w-4xl w-full rounded-3xl p-6 sm:p-9 text-center my-auto animate-slide-up">
+  <div class="exec-glass gold-frame max-w-4xl w-full rounded-3xl p-6 sm:p-9 text-center my-auto animate-slide-up">
     
-    <!-- هيدر اللوجوهات والإشراف -->
+    <!-- هيدر اللوجوهات -->
     <div class="flex items-center justify-center gap-4 sm:gap-6 mb-3">
       <img src="mnu-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
       <div class="text-center">
         <div class="text-xs font-extrabold text-amber-300">كلية الصيدلة • قسم الأدوية والسموم</div>
-        <div class="text-xl sm:text-2xl font-black text-white">مسابقة العباقرة — بوابة دخول الفرق</div>
+        <div class="text-xl sm:text-2xl font-black text-white">مسابقة العباقرة</div>
       </div>
       <img src="pharmacy-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
       <img src="pharma-dept-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
     </div>
 
-    <!-- الرسالة التفاعلية الكبرى (فين الفريقين؟ -> فاضل واحد -> يلا نبدأ كملنا) -->
-    <div class="my-4 py-3 px-6 rounded-2xl bg-slate-950/80 border border-amber-400/30 inline-block">
-      <h2 id="waiting-headline" class="text-3xl sm:text-5xl font-black text-amber-300 mb-1 float-anim">
-        فين الفريقين؟ 👀
+    <!-- الرسالة التفاعلية (فين الفريقين؟ -> فاضل فريق واحد -> يلا نبدأ كملنا) -->
+    <div class="my-3 py-3 px-8 rounded-2xl bg-slate-950/85 border border-amber-400/35 inline-block">
+      <h2 id="waiting-headline" class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">
+        فين الفريقين؟
       </h2>
-      <p id="waiting-subheadline" class="text-sm sm:text-lg font-bold text-slate-300">
-        امسحوا الـ QR Code بالموبايل وسجلوا اسم الفريق للدخول (0 / 2)
+      <p id="waiting-subheadline" class="text-sm sm:text-base font-bold text-slate-300">
+        امسح رمز الـ QR بالموبايل لتسجيل الفريقين (0 / 2)
       </p>
     </div>
 
     <!-- منطقة الـ QR Code وبطاقتي الفريقين -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center my-4">
       <!-- بطاقة الفريق الأول -->
-      <div id="wait-card-team1" class="bg-slate-950/90 border-2 border-dashed border-rose-500/40 rounded-3xl p-6 text-center transition-all min-h-[170px] flex flex-col items-center justify-center">
-        <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-2xl mb-2" id="wait-icon-team1">⏳</div>
+      <div id="wait-card-team1" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 text-center transition-all min-h-[175px] flex flex-col items-center justify-center">
+        <span id="wait-led-team1" class="status-led led-waiting mb-3"></span>
         <div class="text-xs font-bold text-rose-400 mb-1">الفريق الأول</div>
-        <div id="wait-status-team1" class="text-lg font-black text-slate-400">في انتظار التسجيل...</div>
+        <div id="wait-status-team1" class="text-lg font-black text-slate-500">في الانتظار</div>
       </div>
 
-      <!-- الـ QR Code المركزي وكود الغرفة -->
+      <!-- الـ QR Code المركزي فقط (بدون أي كود نصي) -->
       <div class="flex flex-col items-center justify-center">
-        <div class="bg-white p-4 rounded-3xl shadow-[0_0_45px_rgba(245,158,11,0.35)] border-4 border-amber-400 mb-3">
+        <div class="bg-white p-4 rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.3)] border-4 border-amber-400">
           <div id="main-qrcode-container"></div>
-        </div>
-        <div class="bg-slate-950 border border-amber-400/50 rounded-2xl py-1.5 px-5">
-          <span class="text-xs text-slate-400 font-bold ml-2">كود الغرفة:</span>
-          <span id="wait-room-pin" class="text-2xl font-black text-amber-400 tracking-widest">----</span>
         </div>
       </div>
 
       <!-- بطاقة الفريق الثاني -->
-      <div id="wait-card-team2" class="bg-slate-950/90 border-2 border-dashed border-blue-500/40 rounded-3xl p-6 text-center transition-all min-h-[170px] flex flex-col items-center justify-center">
-        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl mb-2" id="wait-icon-team2">⏳</div>
+      <div id="wait-card-team2" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 text-center transition-all min-h-[175px] flex flex-col items-center justify-center">
+        <span id="wait-led-team2" class="status-led led-waiting mb-3"></span>
         <div class="text-xs font-bold text-blue-400 mb-1">الفريق الثاني</div>
-        <div id="wait-status-team2" class="text-lg font-black text-slate-400">في انتظار التسجيل...</div>
+        <div id="wait-status-team2" class="text-lg font-black text-slate-500">في الانتظار</div>
       </div>
     </div>
 
-    <!-- زر بدء المسابقة (مقفل تماماً حتى يدخل الفريقان 2/2) -->
-    <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
-      <button id="start-game-locked-btn" onclick="startMatchFromWaiting()" disabled class="px-10 py-4 rounded-2xl bg-slate-800/90 border border-slate-700 text-slate-500 font-black text-lg sm:text-xl transition-all cursor-not-allowed">
-        🔒 لا يمكن البدء قبل دخول الفريقين (0 / 2)
-      </button>
-      <button onclick="copyShareUrl()" class="px-5 py-4 rounded-2xl bg-sky-950/90 hover:bg-sky-900 border border-sky-500/40 text-sky-300 font-bold text-sm cursor-pointer transition">
-        نسخ رابط الدعوة 🔗
+    <!-- زر بدء المسابقة (مقفل حتى يدخل الفريقان 2/2) -->
+    <div class="mt-5 flex items-center justify-center">
+      <button id="start-game-locked-btn" onclick="startMatchFromWaiting()" disabled class="px-12 py-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-500 font-black text-lg sm:text-xl transition-all cursor-not-allowed">
+        في انتظار اكتمال الفريقين (0 / 2)
       </button>
     </div>
 
@@ -330,16 +311,16 @@
   </div>
 </div>
 
-<!-- ================= 3. شاشة استوديو اللعب الرئيسية (تظهر فقط بعد دخول الفريقين والبدء) ================= -->
+<!-- ================= 3. شاشة استوديو اللعب الرئيسية (Host) ================= -->
 <div id="host-game-screen" class="ui-layer hidden p-3 sm:p-4 justify-between">
-  <!-- الشريط العلوي: النقاط واللوجوهات -->
+  <!-- الشريط العلوي -->
   <div class="grid grid-cols-12 gap-3 items-center">
     <!-- الفريق الأول -->
-    <div id="host-team1-box" class="col-span-4 royal-glass rounded-2xl p-3 sm:p-4 border-r-4 border-r-rose-500 flex items-center justify-between transition-all">
+    <div id="host-team1-box" class="col-span-4 exec-glass rounded-2xl p-3 sm:p-4 border-r-4 border-r-rose-500 flex items-center justify-between transition-all">
       <div>
         <div class="flex items-center gap-2">
           <input id="team1-name-input" value="الفريق الأول" onchange="syncTeamNames()" class="bg-transparent font-black text-lg sm:text-2xl text-rose-400 w-32 sm:w-44 focus:outline-none border-b border-transparent focus:border-rose-400">
-          <span id="team1-online-dot" class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>
+          <span class="status-led led-ready"></span>
         </div>
         <div class="flex items-center gap-1 mt-1">
           <button onclick="adjustScore('team1', -10)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 rounded text-xs font-bold text-slate-300 cursor-pointer">-10</button>
@@ -349,17 +330,15 @@
       <div id="host-team1-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
     </div>
 
-    <!-- المنتصف: اللوجوهات + المرحلة الحالية -->
-    <div class="col-span-4 royal-glass rounded-2xl p-2 sm:p-2.5 text-center border-t-2 border-t-amber-400">
-      <div class="flex items-center justify-center gap-2.5 mb-1">
+    <!-- المنتصف: اللوجوهات + المرحلة الحالية + زر QR -->
+    <div class="col-span-4 exec-glass rounded-2xl p-2 sm:p-2.5 text-center border-t-2 border-t-amber-400">
+      <div class="flex items-center justify-center gap-2.5 mb-1.5">
         <img src="mnu-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
-        <div class="text-center">
+        <div class="text-center px-1">
           <div class="text-sm sm:text-base font-black text-amber-400">مسابقة العباقرة</div>
-          <div class="flex items-center justify-center gap-1.5">
-            <span class="text-[11px] text-slate-400">كود:</span>
-            <span id="display-room-pin" class="text-sm sm:text-base font-black text-white tracking-widest">----</span>
-            <button onclick="toggleQrModal(true)" class="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold hover:bg-amber-500/30 cursor-pointer">QR</button>
-          </div>
+          <button onclick="toggleQrModal(true)" class="mt-0.5 px-3 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-[11px] font-bold hover:bg-amber-500/25 cursor-pointer">
+            QR Code
+          </button>
         </div>
         <img src="pharmacy-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
         <img src="pharma-dept-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
@@ -370,11 +349,11 @@
     </div>
 
     <!-- الفريق الثاني -->
-    <div id="host-team2-box" class="col-span-4 royal-glass rounded-2xl p-3 sm:p-4 border-l-4 border-l-blue-500 flex items-center justify-between transition-all">
+    <div id="host-team2-box" class="col-span-4 exec-glass rounded-2xl p-3 sm:p-4 border-l-4 border-l-blue-500 flex items-center justify-between transition-all">
       <div id="host-team2-score" class="text-4xl sm:text-6xl font-black text-white">0</div>
       <div class="text-left">
         <div class="flex items-center justify-end gap-2">
-          <span id="team2-online-dot" class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>
+          <span class="status-led led-ready"></span>
           <input id="team2-name-input" value="الفريق الثاني" onchange="syncTeamNames()" class="bg-transparent text-left font-black text-lg sm:text-2xl text-blue-400 w-32 sm:w-44 focus:outline-none border-b border-transparent focus:border-blue-400">
         </div>
         <div class="flex items-center justify-end gap-1 mt-1">
@@ -389,8 +368,8 @@
   <div class="my-auto max-w-5xl w-full mx-auto">
     <div id="buzz-banner" class="hidden mb-2.5 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl transition-all"></div>
 
-    <div class="royal-glass gold-crown-border rounded-3xl p-5 sm:p-7 relative">
-      <!-- شريط تقدم الـ 20 سؤالاً -->
+    <div class="exec-glass gold-frame rounded-3xl p-5 sm:p-7 relative">
+      <!-- شريط التقدم -->
       <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden mb-3">
         <div id="question-progress-bar" class="h-full bg-gradient-to-l from-amber-400 to-sky-400 transition-all duration-500" style="width: 5%"></div>
       </div>
@@ -399,7 +378,7 @@
         <span id="q-badge" class="px-4 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-black">سؤال 1 من 20</span>
         <div class="flex items-center gap-3">
           <div id="host-timer" class="px-5 py-1 rounded-full bg-slate-950 border-2 border-amber-400/70 text-amber-300 font-black text-xl shadow-lg">20</div>
-          <button onclick="toggleMute()" id="mute-btn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer">الصوت: مفعل</button>
+          <button onclick="toggleMute()" id="mute-btn" class="p-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer">الصوت: مفعل</button>
         </div>
       </div>
 
@@ -413,14 +392,14 @@
     </div>
   </div>
 
-  <!-- شريط تحكم المقدم السفلي + الإشراف -->
-  <div class="royal-glass rounded-2xl p-2.5 sm:p-3 flex flex-wrap items-center justify-between gap-2">
+  <!-- شريط تحكم المقدم السفلي -->
+  <div class="exec-glass rounded-2xl p-2.5 sm:p-3 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-2">
       <button id="next-q-btn" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer">
-        السؤال التالي (1/20) ◀
+        السؤال التالي (1/20)
       </button>
       <button onclick="unlockBuzzers()" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-black text-sm shadow cursor-pointer">
-        فتح الجرس للجميع
+        فتح الجرس
       </button>
       <button onclick="revealAnswer()" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-black text-sm shadow cursor-pointer">
         إظهار الإجابة
@@ -432,8 +411,8 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <button onclick="endMatch()" class="px-4 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white font-black text-xs sm:text-sm shadow cursor-pointer">
-        إنهاء وإعلان الفائز
+      <button onclick="endMatch()" class="px-5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white font-black text-xs sm:text-sm shadow cursor-pointer">
+        إنهاء المسابقة
       </button>
     </div>
   </div>
@@ -441,29 +420,29 @@
 
 <!-- ================= 4. شاشة الانتقال للمرحلة الثانية (الضعف) ================= -->
 <div id="stage-transition-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
-  <div class="royal-glass winner-glow max-w-xl w-full rounded-3xl p-8 text-center border-2 border-amber-400 animate-slide-up">
+  <div class="exec-glass winner-glow max-w-xl w-full rounded-3xl p-8 text-center border-2 border-amber-400 animate-slide-up">
     <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-black mb-3">
-      انتهت المرحلة الأولى (10 أسئلة) بنجاح!
+      اكتملت المرحلة الأولى (10 أسئلة)
     </div>
     <h2 class="text-3xl sm:text-5xl font-black text-amber-400 mb-3 leading-tight">
-      هننتقل للمرحلة الجاية! 🔥
+      هننتقل للمرحلة الجاية
     </h2>
     <p class="text-xl sm:text-2xl font-black text-white mb-2">
       المرحلة الثانية: مرحلة الضعف (×2)
     </p>
     <p class="text-sm text-slate-300 mb-6">
-      الأسئلة الـ 10 القادمة كل سؤال بـ <span class="text-amber-400 font-black">20 نقطة كاملة</span>! استعدوا لقلب النتيجة.
+      الأسئلة الـ 10 القادمة كل سؤال بـ <span class="text-amber-400 font-black">20 نقطة</span>
     </p>
-    <button id="continue-stage2-btn" onclick="startStageTwo()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-lg shadow-xl cursor-pointer">
-      ابدأ المرحلة الثانية (الضعف) ◀
+    <button id="continue-stage2-btn" onclick="startStageTwo()" class="px-10 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-lg shadow-xl cursor-pointer">
+      بدء المرحلة الثانية
     </button>
   </div>
 </div>
 
-<!-- ================= 5. شاشة جهاز الفريق على الموبايل (بتصميم الجرس ثلاثي الأبعاد الخارق) ================= -->
+<!-- ================= 5. شاشة جهاز الفريق على الموبايل ================= -->
 <div id="team-screen" class="ui-layer hidden p-4 justify-between">
   <!-- هيدر الموبايل -->
-  <div class="royal-glass rounded-2xl p-3.5 px-4 flex items-center justify-between border-b-2 border-amber-400/40">
+  <div class="exec-glass rounded-2xl p-3.5 px-4 flex items-center justify-between border-b-2 border-amber-400/40">
     <div class="flex items-center gap-2.5">
       <img src="pharmacy-logo.jpg" class="w-10 h-10 rounded-full border border-amber-400 bg-white p-0.5" onerror="this.style.display='none'">
       <div>
@@ -477,30 +456,29 @@
     </div>
   </div>
 
-  <!-- منطقة اللعب والجرس ثلاثي الأبعاد على الموبايل -->
+  <!-- منطقة اللعب والجرس ثلاثي الأبعاد -->
   <div id="team-play-area" class="my-auto flex flex-col items-center justify-center gap-4 w-full max-w-md mx-auto">
     <div class="flex items-center gap-2">
       <span id="team-stage-pill" class="px-4 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black">
         المرحلة الأولى (10 نقاط)
       </span>
       <span id="team-timer-pill" class="hidden px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-black">
-        ⏱ 15 ث
+        15 ث
       </span>
     </div>
 
-    <div id="team-status-box" class="w-full royal-glass rounded-2xl p-3.5 text-center border border-slate-700/80">
+    <div id="team-status-box" class="w-full exec-glass rounded-2xl p-3.5 text-center border border-slate-700/80">
       <div id="team-status-text" class="text-base sm:text-lg font-black text-sky-300">في انتظار اكتمال الفريقين وبدء المسابقة...</div>
     </div>
 
-    <!-- الجرس ثلاثي الأبعاد (3D Arcade Reactor Buzzer) -->
+    <!-- الجرس الاحترافي ثلاثي الأبعاد -->
     <div id="team-buzzer-wrapper" class="buzzer-rig my-2">
       <div id="buzzer-ring-anim" class="buzzer-pulse-ring hidden"></div>
       <div id="buzzer-aura" class="buzzer-glow-aura bg-rose-500"></div>
       <div class="buzzer-chassis">
         <button id="team-buzzer-btn" onclick="pressBuzzer()" disabled class="buzzer-dome buzzer-dome-team1">
-          <span class="text-3xl mb-1 drop-shadow">⚡</span>
-          <span id="buzzer-main-label" class="text-3xl sm:text-4xl font-black text-white tracking-wider drop-shadow-md">اضغط!</span>
-          <span id="buzzer-sub-label" class="text-[11px] font-extrabold text-white/80 tracking-widest mt-1">BUZZER READY</span>
+          <span id="buzzer-main-label" class="text-3xl sm:text-4xl font-black text-white tracking-wider drop-shadow-md">اضغط</span>
+          <span id="buzzer-sub-label" class="en-font text-[11px] font-extrabold text-white/80 tracking-widest mt-1">BUZZER</span>
         </button>
       </div>
     </div>
@@ -509,14 +487,13 @@
     <div id="team-options-box" class="hidden w-full grid grid-cols-1 gap-2.5 animate-slide-up"></div>
   </div>
 
-  <!-- شاشة النتيجة النهائية المخصصة لكل فريق على موبايله -->
+  <!-- شاشة النتيجة النهائية على الموبايل -->
   <div id="team-end-area" class="hidden my-auto w-full max-w-md mx-auto animate-slide-up">
-    <div id="team-end-card" class="royal-glass rounded-3xl p-8 text-center border-2">
-      <div id="team-end-emoji" class="text-6xl mb-4">🏆</div>
+    <div id="team-end-card" class="exec-glass rounded-3xl p-8 text-center border-2">
       <h2 id="team-end-headline" class="text-4xl font-black mb-3">مببروووك!</h2>
       <p id="team-end-subtext" class="text-base font-bold text-slate-300 mb-6"></p>
       <div class="bg-slate-950/85 rounded-2xl p-4 border border-slate-800">
-        <div class="text-xs text-slate-400 mb-1">النتيجة النهائية للمباراة</div>
+        <div class="text-xs text-slate-400 mb-1">النتيجة النهائية</div>
         <div id="team-end-scores" class="text-lg font-black text-amber-400"></div>
       </div>
     </div>
@@ -525,33 +502,20 @@
   <div class="text-center text-[11px] text-slate-400 font-bold">كلية الصيدلة • جامعة المنصورة الأهلية</div>
 </div>
 
-<!-- ================= نافذة الـ QR Code السريعة أثناء اللعب ================= -->
-<div id="qr-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
-  <div class="royal-glass max-w-md w-full rounded-3xl p-6 text-center">
-    <h3 class="text-2xl font-black text-amber-400 mb-1">دخول الفرق بالموبايل</h3>
-    <p class="text-xs text-slate-300 mb-4">امسح الكود بكاميرا الموبايل للدخول مباشرة على الغرفة</p>
-
-    <div class="bg-white p-4 rounded-2xl inline-block mb-3 shadow-xl">
+<!-- ================= نافذة الـ QR Code فقط ================= -->
+<div id="qr-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm items-center justify-center p-4">
+  <div class="exec-glass gold-frame max-w-sm w-full rounded-3xl p-6 text-center">
+    <h3 class="text-xl font-black text-amber-400 mb-4">رمز الانضمام للمسابقة</h3>
+    <div class="bg-white p-4 rounded-2xl inline-block mb-5 shadow-xl">
       <div id="qrcode-container"></div>
     </div>
-
-    <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 mb-3">
-      <div class="text-xs text-slate-400">كود الغرفة اليدوي:</div>
-      <div id="modal-pin-text" class="text-3xl font-black text-amber-400 tracking-widest">----</div>
-    </div>
-
-    <div class="flex gap-2 mb-4">
-      <input id="share-url-input" type="text" readonly class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 text-left" dir="ltr">
-      <button onclick="copyShareUrl()" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-black cursor-pointer">نسخ الرابط</button>
-    </div>
-
-    <button onclick="toggleQrModal(false)" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm cursor-pointer">إغلاق</button>
+    <button onclick="toggleQrModal(false)" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm cursor-pointer">إغلاق</button>
   </div>
 </div>
 
-<!-- ================= شاشة النتيجة وسؤال: نغير الفريق ولا كفاية؟ ================= -->
+<!-- ================= شاشة النتيجة النهائية للهوست ================= -->
 <div id="winner-modal" class="fixed inset-0 z-50 hidden bg-black/92 backdrop-blur-md items-center justify-center p-4">
-  <div class="royal-glass winner-glow max-w-xl w-full rounded-3xl p-7 sm:p-9 text-center border-2 border-amber-400 animate-slide-up">
+  <div class="exec-glass winner-glow max-w-xl w-full rounded-3xl p-7 sm:p-9 text-center border-2 border-amber-400 animate-slide-up">
     <div class="flex items-center justify-center gap-3 mb-3">
       <img src="mnu-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
       <img src="pharmacy-logo.jpg" class="logo-badge-sm" onerror="this.style.display='none'">
@@ -562,28 +526,28 @@
     <div id="final-scores-summary" class="text-lg sm:text-xl font-bold text-amber-300 bg-slate-950/85 py-3 px-4 rounded-2xl border border-slate-800 mb-6"></div>
 
     <div class="border-t border-slate-700/70 pt-5">
-      <p class="text-lg sm:text-xl font-black text-sky-300 mb-4">نغير الفريقين ونبدأ ماتش جديد؟ ولا كفاية كده؟</p>
+      <p class="text-lg sm:text-xl font-black text-sky-300 mb-4">نغير الفريقين ولا كفاية؟</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button onclick="switchToNewTeams()" class="py-3.5 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-black text-base shadow-lg cursor-pointer">
-          فريق تاني (كود و QR جديد) 🔄
+          فريق تاني (QR جديد)
         </button>
         <button onclick="closeCompetition()" class="py-3.5 px-5 rounded-2xl bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-500 hover:to-red-600 text-white font-black text-base shadow-lg cursor-pointer">
-          كفاية (قفل المسابقة) 🏁
+          كفاية (إنهاء المسابقة)
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ================= شاشة الختام النهائية عند اختيار "كفاية" ================= -->
+<!-- ================= شاشة الختام النهائية ================= -->
 <div id="goodbye-screen" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-lg items-center justify-center p-4">
-  <div class="royal-glass gold-crown-border max-w-2xl w-full rounded-3xl p-8 sm:p-10 text-center animate-slide-up">
+  <div class="exec-glass gold-frame max-w-2xl w-full rounded-3xl p-8 sm:p-10 text-center animate-slide-up">
     <div class="flex items-center justify-center gap-5 mb-4">
       <img src="mnu-logo.jpg" class="logo-badge" onerror="this.style.display='none'">
       <img src="pharmacy-logo.jpg" class="logo-badge" onerror="this.style.display='none'">
       <img src="pharma-dept-logo.jpg" class="logo-badge" onerror="this.style.display='none'">
     </div>
-    <h2 class="text-3xl sm:text-5xl font-black text-amber-400 mb-3">شكراً لمشاركتكم في مسابقة العباقرة!</h2>
+    <h2 class="text-3xl sm:text-5xl font-black text-amber-400 mb-3">شكراً لمشاركتكم في مسابقة العباقرة</h2>
     <p class="text-base sm:text-lg font-bold text-slate-200 mb-4">
       كلية الصيدلة • قسم الأدوية والسموم • جامعة المنصورة الأهلية
     </p>
@@ -592,8 +556,8 @@
       <div class="text-sm font-black text-white">أ.م/ مريهان مقلد • أ.م.د/ مروة زغلول • م.م/ هبة بهريز</div>
     </div>
     <div>
-      <button onclick="location.reload()" class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs cursor-pointer">
-        العودة للشاشة الرئيسية
+      <button onclick="location.href = window.location.href.split('?')[0]" class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs cursor-pointer">
+        العودة للبداية
       </button>
     </div>
   </div>
@@ -604,1092 +568,4 @@
     // --- المرحلة الأولى: 10 أسئلة عادية (10 نقاط) ---
     {
       num: 1, stage: 1,
-      q: "Q1. Insulin resistance is best defined as:",
-      opts: ["Complete absence of insulin secretion", "Failure of body cells to respond adequately to insulin", "Increased insulin sensitivity", "Destruction of pancreatic alpha cells"],
-      ans: 1,
-      exp: "الخلايا لا تستجيب للإنسولين بشكل طبيعي، وبالتالي يحتاج الجسم لجرعات أكبر للحصول على نفس التأثير."
-    },
-    {
-      num: 2, stage: 1,
-      q: "Q2. Which of the following drugs may cause insulin resistance?",
-      opts: ["Metformin", "Acarbose", "Corticosteroids", "Sitagliptin"],
-      ans: 2,
-      exp: "Corticosteroids من العوامل التي تسبب insulin resistance."
-    },
-    {
-      num: 3, stage: 1,
-      q: "Q3. Sulfonylureas stimulate insulin secretion by:",
-      opts: ["Opening ATP-sensitive K⁺ channels", "Closing ATP-sensitive K⁺ channels", "Inhibiting calcium channels", "Increasing hepatic gluconeogenesis"],
-      ans: 1,
-      exp: "قفل K⁺ channels → Depolarization → دخول Ca²⁺ → Insulin release."
-    },
-    {
-      num: 4, stage: 1,
-      q: "Q4. Which of the following is a first-generation sulfonylurea?",
-      opts: ["Glimepiride", "Gliclazide", "Tolbutamide", "Glibenclamide"],
-      ans: 2,
-      exp: "First generation: Tolbutamide, Chlorpropamide | Second: Glibenclamide, Gliclazide | Third: Glimepiride."
-    },
-    {
-      num: 5, stage: 1,
-      q: "Q5. Sulfonylureas are mainly used in:",
-      opts: ["Type 1 DM", "Type 2 DM", "Diabetes insipidus", "Gestational diabetes only"],
-      ans: 1,
-      exp: "تحتاج وجود pancreatic β-cells قادرة على إفراز الإنسولين؛ لذلك لا تعمل في Type 1 DM."
-    },
-    {
-      num: 6, stage: 1,
-      q: "Q6. Which sulfonylurea is particularly associated with prolonged hypoglycemia?",
-      opts: ["Chlorpropamide", "Metformin", "Repaglinide", "Acarbose"],
-      ans: 0,
-      exp: "Chlorpropamide طويل المفعول، وبالتالي يزيد خطر prolonged hypoglycemia."
-    },
-    {
-      num: 7, stage: 1,
-      q: "Q7. Secondary failure of sulfonylureas is mainly due to:",
-      opts: ["Increased insulin receptor number", "Progressive decline in β-cell function", "Increased intestinal glucose absorption", "Increased GLP-1 secretion"],
-      ans: 1,
-      exp: "مع الوقت تقل قدرة β-cells على إفراز الإنسولين."
-    },
-    {
-      num: 8, stage: 1,
-      q: "Q8. Repaglinide and Nateglinide belong to which drug class?",
-      opts: ["Biguanides", "Meglitinides", "Thiazolidinediones", "Gliptins"],
-      ans: 1,
-      exp: "Meglitinides stimulate insulin secretion بطريقة مشابهة للـ sulfonylureas."
-    },
-    {
-      num: 9, stage: 1,
-      q: "Q9. Meglitinides should be administered:",
-      opts: ["After meals", "Just before meals", "Once weekly", "At bedtime only"],
-      ans: 1,
-      exp: "Fast onset and short duration → التحكم في postprandial hyperglycemia."
-    },
-    {
-      num: 10, stage: 1,
-      q: "Q10. Which drug can be used in patients allergic to sulfonylureas because it does not contain sulfur?",
-      opts: ["Glibenclamide", "Chlorpropamide", "Repaglinide", "Gliclazide"],
-      ans: 2,
-      exp: "Repaglinide من Meglitinides ولا يحتوي على sulfur."
-    },
-
-    // --- المرحلة الثانية: 10 أسئلة الضعف (20 نقطة) ---
-    {
-      num: 11, stage: 2,
-      q: "Q11. The main mechanism of metformin is:",
-      opts: ["Increasing insulin secretion", "Decreasing hepatic gluconeogenesis", "Closing potassium channels", "Increasing glucagon secretion"],
-      ans: 1,
-      exp: "Metformin يقلل hepatic glucose output ويقلل intestinal glucose absorption."
-    },
-    {
-      num: 12, stage: 2,
-      q: "Q12. Why does metformin rarely cause hypoglycemia when used alone?",
-      opts: ["It increases insulin secretion", "It stimulates glucagon release", "It does not increase insulin secretion", "It destroys pancreatic β-cells"],
-      ans: 2,
-      exp: "Metformin لا يحفز إفراز الإنسولين، لكنه يحسن حساسية الخلايا له."
-    },
-    {
-      num: 13, stage: 2,
-      q: "Q13. A patient taking metformin develops severe lactic acidosis. Which condition increases this risk?",
-      opts: ["Severe renal impairment", "Mild headache", "Increased HDL", "Increased insulin sensitivity"],
-      ans: 0,
-      exp: "Renal impairment يقلل التخلص من metformin ويزيد خطر lactic acidosis."
-    },
-    {
-      num: 14, stage: 2,
-      q: "Q14. Long-term metformin therapy may decrease the absorption of:",
-      opts: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K"],
-      ans: 1,
-      exp: "Metformin may reduce vitamin B12 absorption."
-    },
-    {
-      num: 15, stage: 2,
-      q: "Q15. Thiazolidinediones exert their action through activation of:",
-      opts: ["PPAR-γ", "DPP-4", "ATP-sensitive potassium channels", "α-glucosidase"],
-      ans: 0,
-      exp: "PPAR-γ nuclear receptor activation → increased insulin sensitivity and GLUT4 expression."
-    },
-    {
-      num: 16, stage: 2,
-      q: "Q16. Which of the following is an important adverse effect of pioglitazone?",
-      opts: ["Severe hypoglycemia when used alone", "Fluid retention and peripheral edema", "Increased gastric emptying", "Vitamin B12 deficiency"],
-      ans: 1,
-      exp: "Thiazolidinediones cause fluid retention and weight gain and should be avoided in CHF."
-    },
-    {
-      num: 17, stage: 2,
-      q: "Q17. Which thiazolidinedione has a greater association with myocardial infarction risk according to the lecture?",
-      opts: ["Pioglitazone", "Rosiglitazone", "Both have exactly equal risk", "Neither"],
-      ans: 1,
-      exp: "Rosiglitazone > Pioglitazone حسب المقارنة المذكورة في المحاضرة."
-    },
-    {
-      num: 18, stage: 2,
-      q: "Q18. Acarbose reduces blood glucose mainly by:",
-      opts: ["Increasing insulin secretion", "Inhibiting intestinal α-glucosidase", "Inhibiting DPP-4", "Increasing GLUT4 transporters"],
-      ans: 1,
-      exp: "يمنع تكسير وامتصاص الكربوهيدرات، وبالتالي يقلل postprandial glucose."
-    },
-    {
-      num: 19, stage: 2,
-      q: "Q19. GLP-1 mimetics produce all the following effects EXCEPT:",
-      opts: ["Increased insulin secretion", "Decreased glucagon secretion", "Delayed gastric emptying", "Increased appetite"],
-      ans: 3,
-      exp: "GLP-1 mimetics تقلل appetite وتبطئ gastric emptying."
-    },
-    {
-      num: 20, stage: 2,
-      q: "Q20. Sitagliptin lowers blood glucose by:",
-      opts: ["Activating α-glucosidase", "Inhibiting DPP-4 enzyme", "Blocking insulin receptors", "Increasing hepatic glucose production"],
-      ans: 1,
-      exp: "DPP-4 inhibition prevents GLP-1 degradation → prolongs incretin activity."
-    }
-  ];
-
-  let roomPin = '';
-  let myRole = ''; // 'host' | 'team1' | 'team2'
-  let peer = null;
-  let hostConn = null;
-  let teamConns = { team1: null, team2: null };
-  let probePeer = null;
-
-  let roomState = {
-    team1Name: 'الفريق الأول',
-    team2Name: 'الفريق الثاني',
-    team1Connected: false,
-    team2Connected: false,
-    gameStarted: false,
-    team1Score: 0,
-    team2Score: 0,
-    qIndex: -1,
-    stage: 1,
-    showTransition: false,
-    currentQ: null,
-    buzzerOpen: false,
-    buzzedTeam: null,
-    lockedTeams: [],
-    wrongOptions: [],
-    revealed: false,
-    selectedOpt: null,
-    statusMessage: '',
-    matchEnded: false,
-    winnerTeam: null,
-    sessionClosed: false,
-    timer: 20
-  };
-
-  let timerInterval = null;
-  let isMuted = false;
-
-  async function playTone(type) {
-    if (isMuted) return;
-    try {
-      await Tone.start();
-      const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-      if (type === 'buzz') synth.triggerAttackRelease(["C5", "G5", "C6"], "8n");
-      else if (type === 'correct') synth.triggerAttackRelease(["C5", "E5", "G5", "C6"], "8n");
-      else if (type === 'wrong') synth.triggerAttackRelease(["F3", "B2"], "4n");
-      else if (type === 'next') synth.triggerAttackRelease(["E4", "A4"], "16n");
-      else if (type === 'win') synth.triggerAttackRelease(["C5", "E5", "G5", "B5", "C6"], "4n");
-    } catch (e) {}
-  }
-
-  function vibrateDevice(pattern) {
-    if (navigator.vibrate) {
-      try { navigator.vibrate(pattern); } catch (e) {}
-    }
-  }
-
-  function toggleMute() {
-    isMuted = !isMuted;
-    document.getElementById('mute-btn').innerText = isMuted ? 'الصوت: مكتوم' : 'الصوت: مفعل';
-  }
-
-  function broadcastState() {
-    if (myRole !== 'host') return;
-    ['team1', 'team2'].forEach(t => {
-      if (teamConns[t] && teamConns[t].open) {
-        teamConns[t].send({ type: 'STATE_UPDATE', state: roomState });
-      }
-    });
-  }
-
-  function checkRoomAvailability() {
-    const pin = document.getElementById('join-pin-input').value.trim();
-    if (pin.length !== 4 || myRole !== '') return;
-
-    if (probePeer) { try { probePeer.destroy(); } catch (e) {} }
-    probePeer = new Peer();
-    probePeer.on('open', () => {
-      const conn = probePeer.connect('mnu-abakera-room-' + pin, { reliable: true });
-      conn.on('open', () => {
-        document.getElementById('host-role-card').classList.add('hidden');
-        conn.send({ type: 'PROBE' });
-      });
-      conn.on('data', (data) => {
-        if (data.type === 'PROBE_RESULT') {
-          updateLobbyButtonsAvailability(data.team1Connected, data.team2Connected);
-        }
-      });
-    });
-  }
-
-  function updateLobbyButtonsAvailability(t1Taken, t2Taken) {
-    const btn1 = document.getElementById('join-team1-btn');
-    const btn2 = document.getElementById('join-team2-btn');
-    if (t1Taken) {
-      btn1.disabled = true;
-      btn1.innerText = 'الفريق الأول (مكتمل ✓)';
-      btn1.className = 'py-3 rounded-xl bg-slate-800 text-slate-500 font-black text-xs cursor-not-allowed';
-    }
-    if (t2Taken) {
-      btn2.disabled = true;
-      btn2.innerText = 'الفريق الثاني (مكتمل ✓)';
-      btn2.className = 'py-3 rounded-xl bg-slate-800 text-slate-500 font-black text-xs cursor-not-allowed';
-    }
-  }
-
-  function initHostPeerServer() {
-    if (peer) { try { peer.destroy(); } catch (e) {} }
-    roomPin = Math.floor(1000 + Math.random() * 9000).toString();
-    const peerId = 'mnu-abakera-room-' + roomPin;
-    peer = new Peer(peerId);
-
-    peer.on('open', () => {
-      myRole = 'host';
-      document.getElementById('lobby-screen').classList.add('hidden');
-      // فتح صفحة الانتظار المستقلة تماماً وإخفاء شاشة اللعب
-      document.getElementById('host-waiting-screen').classList.remove('hidden');
-      document.getElementById('host-game-screen').classList.add('hidden');
-
-      document.getElementById('display-room-pin').innerText = roomPin;
-      document.getElementById('wait-room-pin').innerText = roomPin;
-      document.getElementById('modal-pin-text').innerText = roomPin;
-      generateRoomQR(roomPin);
-      renderUI();
-    });
-
-    peer.on('connection', (conn) => {
-      conn.on('data', (data) => {
-        if (data.type === 'PROBE') {
-          conn.send({
-            type: 'PROBE_RESULT',
-            team1Connected: roomState.team1Connected,
-            team2Connected: roomState.team2Connected
-          });
-        } else if (data.type === 'JOIN') {
-          if ((data.team === 'team1' && roomState.team1Connected) || (data.team === 'team2' && roomState.team2Connected)) {
-            conn.send({ type: 'ROLE_TAKEN' });
-            return;
-          }
-          teamConns[data.team] = conn;
-          if (data.team === 'team1') {
-            roomState.team1Connected = true;
-            if (data.teamName) roomState.team1Name = data.teamName.trim();
-            document.getElementById('team1-name-input').value = roomState.team1Name;
-          } else if (data.team === 'team2') {
-            roomState.team2Connected = true;
-            if (data.teamName) roomState.team2Name = data.teamName.trim();
-            document.getElementById('team2-name-input').value = roomState.team2Name;
-          }
-
-          // إذا اكتمل الفريقان (2/2) نطلق نغمة الفوز واحتفال Confetti
-          if (roomState.team1Connected && roomState.team2Connected) {
-            playTone('win');
-            fireCelebrationConfetti();
-          } else {
-            playTone('next');
-          }
-
-          broadcastState();
-          renderUI();
-        } else if (data.type === 'BUZZ') {
-          if (roomState.buzzerOpen && !roomState.buzzedTeam && !roomState.lockedTeams.includes(data.team)) {
-            roomState.buzzerOpen = false;
-            roomState.buzzedTeam = data.team;
-            roomState.statusMessage = '';
-            roomState.timer = 15;
-            playTone('buzz');
-            startTimer();
-            broadcastState();
-            renderUI();
-          }
-        } else if (data.type === 'ANSWER') {
-          handleAnswerSubmission(data.optIdx, data.team);
-        }
-      });
-
-      conn.on('close', () => {
-        ['team1', 'team2'].forEach(t => {
-          if (teamConns[t] === conn) {
-            teamConns[t] = null;
-            roomState[t + 'Connected'] = false;
-            broadcastState();
-            renderUI();
-          }
-        });
-      });
-    });
-
-    peer.on('error', () => {
-      const btn = document.getElementById('create-host-btn');
-      if (btn) {
-        btn.disabled = false;
-        btn.innerText = 'دخول كـ شاشة العرض (Host)';
-      }
-    });
-  }
-
-  function createHostRoom() {
-    const btn = document.getElementById('create-host-btn');
-    btn.innerText = 'جاري تجهيز بوابة الفريقين...';
-    btn.disabled = true;
-    initHostPeerServer();
-  }
-
-  function generateRoomQR(pin) {
-    const baseUrl = window.location.href.split('?')[0];
-    const joinUrl = `${baseUrl}?pin=${pin}`;
-    document.getElementById('share-url-input').value = joinUrl;
-
-    const modalContainer = document.getElementById('qrcode-container');
-    modalContainer.innerHTML = '';
-    new QRCode(modalContainer, { text: joinUrl, width: 180, height: 180 });
-
-    const mainContainer = document.getElementById('main-qrcode-container');
-    mainContainer.innerHTML = '';
-    new QRCode(mainContainer, { text: joinUrl, width: 175, height: 175 });
-  }
-
-  function copyShareUrl() {
-    const inp = document.getElementById('share-url-input');
-    inp.select();
-    navigator.clipboard.writeText(inp.value);
-    alert('تم نسخ الرابط! أرسله لموبايلات الفريقين.');
-  }
-
-  function joinAsTeam(teamSlot) {
-    const pin = document.getElementById('join-pin-input').value.trim();
-    const enteredName = document.getElementById('custom-team-name-input').value.trim();
-
-    if (pin.length !== 4) {
-      alert('أدخل كود الغرفة المكون من 4 أرقام الظاهر على شاشة العرض.');
-      return;
-    }
-    if (!enteredName) {
-      alert('من فضلك ادخل اسم فريقك أولاً قبل الانضمام!');
-      document.getElementById('custom-team-name-input').focus();
-      return;
-    }
-
-    document.getElementById('connection-status').innerText = 'جاري الانضمام للغرفة...';
-    if (probePeer) { try { probePeer.destroy(); } catch (e) {} }
-    peer = new Peer();
-
-    peer.on('open', () => {
-      hostConn = peer.connect('mnu-abakera-room-' + pin, { reliable: true });
-
-      hostConn.on('open', () => {
-        hostConn.send({ type: 'JOIN', team: teamSlot, teamName: enteredName });
-      });
-
-      hostConn.on('data', (data) => {
-        if (data.type === 'ROLE_TAKEN') {
-          alert('عذراً، هذا الفريق تم اختياره بالفعل! اختر الفريق الآخر.');
-          location.reload();
-        } else if (data.type === 'SESSION_REPLACED') {
-          alert('انتهت جولتكم وبدأ المقدم جولة جديدة لفريقين آخرين. شكراً لمشاركتكم!');
-          location.href = window.location.href.split('?')[0];
-        } else if (data.type === 'STATE_UPDATE') {
-          if (!myRole) {
-            myRole = teamSlot;
-            roomPin = pin;
-            document.getElementById('lobby-screen').classList.add('hidden');
-            document.getElementById('team-screen').classList.remove('hidden');
-            document.getElementById('team-slot-subtitle').innerText = teamSlot === 'team1' ? 'الفريق الأول' : 'الفريق الثاني';
-
-            const btn = document.getElementById('team-buzzer-btn');
-            const aura = document.getElementById('buzzer-aura');
-            if (teamSlot === 'team2') {
-              btn.className = "buzzer-dome buzzer-dome-team2";
-              aura.className = "buzzer-glow-aura bg-blue-500";
-            }
-          }
-          roomState = data.state;
-          renderUI();
-        }
-      });
-
-      hostConn.on('error', () => {
-        alert('تعذر الوصول للغرفة، تأكد من كتابة الكود الصحيح.');
-      });
-    });
-  }
-
-  // لا يعمل هذا الزر إطلاقاً إلا بعد دخول الفريقين معاً (team1Connected && team2Connected)
-  function startMatchFromWaiting() {
-    if (!roomState.team1Connected || !roomState.team2Connected) {
-      return;
-    }
-    roomState.gameStarted = true;
-    document.getElementById('host-waiting-screen').classList.add('hidden');
-    document.getElementById('host-game-screen').classList.remove('hidden');
-    nextQuestion();
-  }
-
-  function nextQuestion() {
-    if (!roomState.team1Connected || !roomState.team2Connected) return;
-    roomState.gameStarted = true;
-
-    if (roomState.qIndex === 9 && roomState.stage === 1 && !roomState.showTransition) {
-      clearInterval(timerInterval);
-      roomState.showTransition = true;
-      roomState.buzzerOpen = false;
-      playTone('win');
-      broadcastState();
-      renderUI();
-      return;
-    }
-
-    if (roomState.qIndex >= COMPETITION_QUESTIONS.length - 1) {
-      endMatch();
-      return;
-    }
-
-    roomState.qIndex++;
-    const qObj = COMPETITION_QUESTIONS[roomState.qIndex];
-    roomState.stage = qObj.stage;
-    roomState.showTransition = false;
-    roomState.currentQ = qObj;
-    roomState.buzzerOpen = true;
-    roomState.buzzedTeam = null;
-    roomState.lockedTeams = [];
-    roomState.wrongOptions = [];
-    roomState.revealed = false;
-    roomState.selectedOpt = null;
-    roomState.statusMessage = '';
-    roomState.timer = 20;
-
-    playTone('next');
-    startTimer();
-    broadcastState();
-    renderUI();
-  }
-
-  function startStageTwo() {
-    roomState.stage = 2;
-    roomState.showTransition = false;
-    roomState.qIndex = 10;
-    const qObj = COMPETITION_QUESTIONS[10];
-    roomState.currentQ = qObj;
-    roomState.buzzerOpen = true;
-    roomState.buzzedTeam = null;
-    roomState.lockedTeams = [];
-    roomState.wrongOptions = [];
-    roomState.revealed = false;
-    roomState.selectedOpt = null;
-    roomState.statusMessage = '';
-    roomState.timer = 20;
-
-    playTone('next');
-    startTimer();
-    broadcastState();
-    renderUI();
-  }
-
-  function startTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      if (roomState.timer > 0 && !roomState.revealed && !roomState.showTransition) {
-        roomState.timer--;
-        document.getElementById('host-timer').innerText = roomState.timer;
-
-        if (roomState.timer === 0) {
-          playTone('wrong');
-          if (roomState.buzzedTeam) {
-            const timedOutTeam = roomState.buzzedTeam;
-            const timedOutName = timedOutTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
-            const otherTeam = timedOutTeam === 'team1' ? 'team2' : 'team1';
-            const otherTeamName = otherTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
-
-            if (!roomState.lockedTeams.includes(timedOutTeam)) {
-              roomState.lockedTeams.push(timedOutTeam);
-            }
-
-            if (!roomState.lockedTeams.includes(otherTeam)) {
-              roomState.buzzedTeam = null;
-              roomState.buzzerOpen = true;
-              roomState.timer = 15;
-              roomState.statusMessage = `⏰ انتهى وقت ${timedOutName}! الجرس مفتوح الآن لـ ${otherTeamName}`;
-            } else {
-              roomState.buzzedTeam = null;
-              roomState.buzzerOpen = false;
-              roomState.statusMessage = `⏰ انتهى الوقت! اضغط على "إظهار الإجابة" لكشف الحل`;
-              clearInterval(timerInterval);
-            }
-          } else {
-            roomState.buzzerOpen = false;
-            roomState.statusMessage = `⏰ انتهى وقت السؤال! اضغط على "إظهار الإجابة"`;
-            clearInterval(timerInterval);
-          }
-          broadcastState();
-          renderUI();
-        } else {
-          broadcastState();
-        }
-      }
-    }, 1000);
-  }
-
-  function pressBuzzer() {
-    if (!roomState.buzzerOpen || roomState.buzzedTeam || roomState.lockedTeams.includes(myRole)) return;
-    vibrateDevice([70, 40, 100]);
-    playTone('buzz');
-    if (hostConn && hostConn.open) {
-      hostConn.send({ type: 'BUZZ', team: myRole });
-    }
-  }
-
-  function unlockBuzzers() {
-    roomState.buzzerOpen = true;
-    roomState.buzzedTeam = null;
-    roomState.lockedTeams = [];
-    roomState.statusMessage = '';
-    roomState.timer = 20;
-    startTimer();
-    broadcastState();
-    renderUI();
-  }
-
-  function submitAnswer(optIdx) {
-    vibrateDevice(50);
-    if (myRole === 'host') {
-      handleAnswerSubmission(optIdx, roomState.buzzedTeam);
-    } else if (hostConn && hostConn.open) {
-      hostConn.send({ type: 'ANSWER', optIdx: optIdx, team: myRole });
-    }
-  }
-
-  function handleAnswerSubmission(optIdx, answeringTeam) {
-    if (!roomState.currentQ || roomState.revealed) return;
-    if (roomState.wrongOptions.includes(optIdx)) return;
-
-    const isCorrect = optIdx === roomState.currentQ.ans;
-    const pts = roomState.stage === 2 ? 20 : 10;
-
-    if (isCorrect) {
-      clearInterval(timerInterval);
-      playTone('correct');
-      fireCelebrationConfetti();
-      roomState.selectedOpt = optIdx;
-      roomState.revealed = true;
-      roomState.buzzerOpen = false;
-      roomState.statusMessage = '';
-      if (answeringTeam === 'team1') roomState.team1Score += pts;
-      if (answeringTeam === 'team2') roomState.team2Score += pts;
-    } else {
-      playTone('wrong');
-      if (!roomState.wrongOptions.includes(optIdx)) {
-        roomState.wrongOptions.push(optIdx);
-      }
-      if (answeringTeam && !roomState.lockedTeams.includes(answeringTeam)) {
-        roomState.lockedTeams.push(answeringTeam);
-      }
-
-      const wrongTeamName = answeringTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
-      const otherTeam = answeringTeam === 'team1' ? 'team2' : 'team1';
-      const otherTeamName = otherTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
-
-      if (answeringTeam && !roomState.lockedTeams.includes(otherTeam)) {
-        roomState.buzzedTeam = null;
-        roomState.buzzerOpen = true;
-        roomState.revealed = false;
-        roomState.timer = 15;
-        roomState.statusMessage = `❌ إجابة خاطئة من ${wrongTeamName}! الجرس مفتوح الآن لـ ${otherTeamName}`;
-      } else {
-        clearInterval(timerInterval);
-        roomState.buzzedTeam = null;
-        roomState.buzzerOpen = false;
-        roomState.revealed = false;
-        roomState.statusMessage = `❌ إجابة خاطئة! اضغط على "إظهار الإجابة" لكشف الحل`;
-      }
-    }
-
-    broadcastState();
-    renderUI();
-  }
-
-  function revealAnswer() {
-    clearInterval(timerInterval);
-    roomState.revealed = true;
-    roomState.buzzerOpen = false;
-    roomState.statusMessage = '';
-    broadcastState();
-    renderUI();
-  }
-
-  function adjustScore(team, delta) {
-    if (team === 'team1') roomState.team1Score = Math.max(0, roomState.team1Score + delta);
-    if (team === 'team2') roomState.team2Score = Math.max(0, roomState.team2Score + delta);
-    broadcastState();
-    renderUI();
-  }
-
-  function syncTeamNames() {
-    roomState.team1Name = document.getElementById('team1-name-input').value.trim() || 'الفريق الأول';
-    roomState.team2Name = document.getElementById('team2-name-input').value.trim() || 'الفريق الثاني';
-    broadcastState();
-  }
-
-  function renderUI() {
-    if (myRole === 'host') {
-      const waitScreen = document.getElementById('host-waiting-screen');
-      const gameScreen = document.getElementById('host-game-screen');
-
-      // إذا لم تبدأ المباراة بعد، نظل في شاشة الانتظار المستقلة تماماً
-      if (!roomState.gameStarted) {
-        waitScreen.classList.remove('hidden');
-        gameScreen.classList.add('hidden');
-
-        const connectedCount = (roomState.team1Connected ? 1 : 0) + (roomState.team2Connected ? 1 : 0);
-        const wHeadline = document.getElementById('waiting-headline');
-        const wSub = document.getElementById('waiting-subheadline');
-        const startBtn = document.getElementById('start-game-locked-btn');
-
-        const c1 = document.getElementById('wait-card-team1');
-        const s1 = document.getElementById('wait-status-team1');
-        const ic1 = document.getElementById('wait-icon-team1');
-        if (roomState.team1Connected) {
-          c1.className = 'bg-rose-950/60 border-2 border-rose-500 rounded-3xl p-6 text-center shadow-[0_0_30px_rgba(244,63,94,0.3)] min-h-[170px] flex flex-col items-center justify-center';
-          ic1.innerText = '✅';
-          s1.innerText = roomState.team1Name;
-          s1.className = 'text-2xl font-black text-white';
-        } else {
-          c1.className = 'bg-slate-950/90 border-2 border-dashed border-rose-500/40 rounded-3xl p-6 text-center min-h-[170px] flex flex-col items-center justify-center';
-          ic1.innerText = '⏳';
-          s1.innerText = 'في انتظار التسجيل...';
-          s1.className = 'text-lg font-black text-slate-500';
-        }
-
-        const c2 = document.getElementById('wait-card-team2');
-        const s2 = document.getElementById('wait-status-team2');
-        const ic2 = document.getElementById('wait-icon-team2');
-        if (roomState.team2Connected) {
-          c2.className = 'bg-blue-950/60 border-2 border-blue-500 rounded-3xl p-6 text-center shadow-[0_0_30px_rgba(59,130,246,0.3)] min-h-[170px] flex flex-col items-center justify-center';
-          ic2.innerText = '✅';
-          s2.innerText = roomState.team2Name;
-          s2.className = 'text-2xl font-black text-white';
-        } else {
-          c2.className = 'bg-slate-950/90 border-2 border-dashed border-blue-500/40 rounded-3xl p-6 text-center min-h-[170px] flex flex-col items-center justify-center';
-          ic2.innerText = '⏳';
-          s2.innerText = 'في انتظار التسجيل...';
-          s2.className = 'text-lg font-black text-slate-500';
-        }
-
-        if (connectedCount === 0) {
-          wHeadline.innerText = 'فين الفريقين؟ 👀';
-          wHeadline.className = 'text-3xl sm:text-5xl font-black text-amber-300 mb-1 float-anim';
-          wSub.innerText = 'امسحوا الـ QR Code بالموبايل وسجلوا اسم الفريق للدخول (0 / 2)';
-          startBtn.disabled = true;
-          startBtn.innerText = '🔒 لا يمكن البدء قبل دخول الفريقين (0 / 2)';
-          startBtn.className = 'px-10 py-4 rounded-2xl bg-slate-800/90 border border-slate-700 text-slate-500 font-black text-lg sm:text-xl cursor-not-allowed';
-        } else if (connectedCount === 1) {
-          wHeadline.innerText = 'عاش! فاضل فريق واحد بس ⏳';
-          wHeadline.className = 'text-3xl sm:text-5xl font-black text-sky-300 mb-1';
-          wSub.innerText = 'سجّل فريق واحد، في انتظار دخول الفريق التاني لفتح المسابقة (1 / 2)';
-          startBtn.disabled = true;
-          startBtn.innerText = '⏳ في انتظار دخول الفريق التاني (1 / 2)...';
-          startBtn.className = 'px-10 py-4 rounded-2xl bg-sky-950/80 border border-sky-500/40 text-sky-300/70 font-black text-lg sm:text-xl cursor-not-allowed';
-        } else {
-          wHeadline.innerText = 'يلا نبدأ كملنا! 🔥🚀';
-          wHeadline.className = 'text-4xl sm:text-6xl font-black text-emerald-400 mb-1';
-          wSub.innerText = 'الفريقين جاهزين! اضغط بالأسفل لفتح استوديو الأسئلة (2 / 2)';
-          startBtn.disabled = false;
-          startBtn.innerText = '🚀 يلا نبدأ المسابقة الآن! (2 / 2) ◀';
-          startBtn.className = 'winner-glow px-12 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xl sm:text-2xl shadow-2xl cursor-pointer';
-        }
-        return;
-      }
-
-      // في حالة بدء المباراة
-      waitScreen.classList.add('hidden');
-      gameScreen.classList.remove('hidden');
-
-      document.getElementById('host-team1-score').innerText = roomState.team1Score;
-      document.getElementById('host-team2-score').innerText = roomState.team2Score;
-      document.getElementById('host-timer').innerText = roomState.timer;
-
-      const box1 = document.getElementById('host-team1-box');
-      const box2 = document.getElementById('host-team2-box');
-      box1.classList.toggle('winner-glow', roomState.buzzedTeam === 'team1');
-      box2.classList.toggle('winner-glow', roomState.buzzedTeam === 'team2');
-
-      const stagePill = document.getElementById('stage-indicator-pill');
-      if (roomState.stage === 2) {
-        stagePill.innerText = '🔥 المرحلة الثانية: الضعف (×2 • 20 نقطة)';
-        stagePill.className = 'w-full bg-amber-500/20 border border-amber-400/60 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-amber-300';
-      } else {
-        stagePill.innerText = 'المرحلة الأولى (10 أسئلة • 10 نقاط)';
-        stagePill.className = 'w-full bg-sky-950/90 border border-sky-500/40 rounded-xl py-1 px-2 text-xs sm:text-sm font-black text-sky-300';
-      }
-
-      const transModal = document.getElementById('stage-transition-modal');
-      if (roomState.showTransition) {
-        transModal.classList.remove('hidden');
-        transModal.classList.add('flex');
-      } else {
-        transModal.classList.add('hidden');
-        transModal.classList.remove('flex');
-      }
-
-      const currentNum = roomState.qIndex + 1;
-      document.getElementById('question-progress-bar').style.width = `${Math.max(5, (currentNum / 20) * 100)}%`;
-
-      const nextBtn = document.getElementById('next-q-btn');
-      if (currentNum === 10 && roomState.stage === 1) {
-        nextBtn.innerText = 'الانتقال للمرحلة الثانية (الضعف) ◀';
-        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow cursor-pointer';
-      } else if (currentNum >= 20) {
-        nextBtn.innerText = 'انتهت جميع الأسئلة (20/20)';
-        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-slate-700 text-amber-300 font-black text-sm shadow cursor-pointer';
-      } else {
-        nextBtn.innerText = `السؤال التالي (${currentNum + 1}/20) ◀`;
-        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer';
-      }
-
-      const banner = document.getElementById('buzz-banner');
-      if (roomState.buzzedTeam) {
-        const isTeam1 = roomState.buzzedTeam === 'team1';
-        const name = isTeam1 ? roomState.team1Name : roomState.team2Name;
-        banner.classList.remove('hidden');
-        banner.className = `mb-2.5 py-2.5 px-6 rounded-2xl text-center font-black text-xl sm:text-2xl shadow-xl ${isTeam1 ? 'bg-rose-600 text-white' : 'bg-blue-600 text-white'}`;
-        banner.innerText = `🔔 الأسرع في الجرس: ${name}!`;
-      } else if (roomState.statusMessage) {
-        banner.classList.remove('hidden');
-        banner.className = 'mb-2.5 py-2.5 px-6 rounded-2xl text-center font-black text-lg sm:text-xl shadow-xl bg-amber-600 text-white';
-        banner.innerText = roomState.statusMessage;
-      } else {
-        banner.classList.add('hidden');
-      }
-
-      const expBox = document.getElementById('explanation-box');
-
-      if (roomState.currentQ) {
-        const ptsLabel = roomState.stage === 2 ? '20 نقطة (الضعف ×2)' : '10 نقاط';
-        document.getElementById('q-badge').innerText = `سؤال ${roomState.currentQ.num} من 20 • ${ptsLabel}`;
-        document.getElementById('host-question-text').innerText = roomState.currentQ.q;
-
-        const grid = document.getElementById('host-options-grid');
-        const letters = ['A', 'B', 'C', 'D'];
-        grid.innerHTML = roomState.currentQ.opts.map((opt, i) => {
-          let style = 'bg-slate-900/90 border-slate-700 text-white hover:border-amber-400';
-          if (roomState.revealed) {
-            if (i === roomState.currentQ.ans) style = 'bg-emerald-600 border-emerald-300 text-white shadow-lg shadow-emerald-600/30';
-            else if (roomState.wrongOptions.includes(i) || i === roomState.selectedOpt) style = 'bg-rose-600 border-rose-300 text-white';
-            else style = 'bg-slate-900/40 border-slate-800 text-slate-500';
-          } else if (roomState.wrongOptions.includes(i)) {
-            style = 'bg-rose-900/80 border-rose-500 text-rose-200 opacity-75';
-          }
-          return `<button onclick="submitAnswer(${i})" class="en-font p-4 rounded-2xl border-2 text-left font-bold text-base sm:text-lg flex items-center gap-3 transition cursor-pointer ${style}">
-            <span class="w-8 h-8 shrink-0 rounded-full bg-slate-800 flex items-center justify-center text-amber-400 font-black text-sm">${letters[i]}</span>
-            <span>${opt}</span>
-          </button>`;
-        }).join('');
-
-        if (roomState.revealed && roomState.currentQ.exp) {
-          expBox.classList.remove('hidden');
-          expBox.innerHTML = `💡 <span class="text-amber-300">التفسير العلمي:</span> ${roomState.currentQ.exp}`;
-        } else {
-          expBox.classList.add('hidden');
-        }
-      }
-    } else if (myRole === 'team1' || myRole === 'team2') {
-      document.getElementById('team-header-name').innerText = myRole === 'team1' ? roomState.team1Name : roomState.team2Name;
-      document.getElementById('team-my-score').innerText = myRole === 'team1' ? roomState.team1Score : roomState.team2Score;
-
-      const teamStagePill = document.getElementById('team-stage-pill');
-      if (roomState.stage === 2) {
-        teamStagePill.innerText = '🔥 المرحلة الثانية: الضعف (×2 • 20 نقطة)';
-        teamStagePill.className = 'px-4 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-black';
-      } else {
-        teamStagePill.innerText = 'المرحلة الأولى (10 نقاط)';
-        teamStagePill.className = 'px-4 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-black';
-      }
-
-      const timerPill = document.getElementById('team-timer-pill');
-      if (roomState.gameStarted && !roomState.revealed && !roomState.showTransition) {
-        timerPill.classList.remove('hidden');
-        timerPill.innerText = `⏱ ${roomState.timer} ث`;
-      } else {
-        timerPill.classList.add('hidden');
-      }
-
-      const playArea = document.getElementById('team-play-area');
-      const endArea = document.getElementById('team-end-area');
-
-      if (roomState.matchEnded) {
-        playArea.classList.add('hidden');
-        endArea.classList.remove('hidden');
-
-        const card = document.getElementById('team-end-card');
-        const emoji = document.getElementById('team-end-emoji');
-        const headline = document.getElementById('team-end-headline');
-        const subtext = document.getElementById('team-end-subtext');
-        const scoresEl = document.getElementById('team-end-scores');
-
-        scoresEl.innerText = `${roomState.team1Name}: ${roomState.team1Score}  |  ${roomState.team2Name}: ${roomState.team2Score}`;
-
-        if (roomState.sessionClosed) {
-          card.className = 'royal-glass rounded-3xl p-8 text-center border-2 border-amber-400';
-          emoji.innerText = '🎓✨';
-          headline.innerText = 'تم إنهاء المسابقة!';
-          headline.className = 'text-3xl sm:text-4xl font-black text-amber-400 mb-3';
-          subtext.innerText = 'شكراً لمشاركتكم المميزة في مسابقة العباقرة بكلية الصيدلة - جامعة المنصورة الأهلية.';
-        } else if (roomState.winnerTeam === myRole) {
-          card.className = 'royal-glass winner-glow rounded-3xl p-8 text-center border-2 border-amber-400';
-          emoji.innerText = '🏆🎉';
-          headline.innerText = 'مببروووك!';
-          headline.className = 'text-4xl sm:text-5xl font-black text-amber-400 mb-3';
-          subtext.innerText = 'ألف مبروك الفوز في مسابقة العباقرة يا أبطال! أداء مشرف وعباقرة بجد.';
-        } else if (roomState.winnerTeam === 'tie') {
-          card.className = 'royal-glass rounded-3xl p-8 text-center border-2 border-sky-400';
-          emoji.innerText = '🤝✨';
-          headline.innerText = 'تعادل بطولي!';
-          headline.className = 'text-4xl font-black text-sky-400 mb-3';
-          subtext.innerText = 'منافسة قوية جداً وتعادل مستحق بين الفريقين!';
-        } else {
-          card.className = 'royal-glass rounded-3xl p-8 text-center border-2 border-rose-400/60';
-          emoji.innerText = '💪💙';
-          headline.innerText = 'متزعلش متعوضة!';
-          headline.className = 'text-3xl sm:text-4xl font-black text-rose-300 mb-3';
-          subtext.innerText = 'متزعلش متعوضة المرة الجاية بإذن الله.. عملتوا ماتش عالمي وعاش على مجهودكم!';
-        }
-        return;
-      } else {
-        playArea.classList.remove('hidden');
-        endArea.classList.add('hidden');
-      }
-
-      const buzzWrapper = document.getElementById('team-buzzer-wrapper');
-      const buzzBtn = document.getElementById('team-buzzer-btn');
-      const ringAnim = document.getElementById('buzzer-ring-anim');
-      const mainLabel = document.getElementById('buzzer-main-label');
-      const subLabel = document.getElementById('buzzer-sub-label');
-      const statusText = document.getElementById('team-status-text');
-      const optsBox = document.getElementById('team-options-box');
-      const isTeamLocked = roomState.lockedTeams.includes(myRole);
-
-      const canBuzz = roomState.buzzerOpen && !isTeamLocked && roomState.gameStarted;
-      buzzBtn.disabled = !canBuzz;
-      ringAnim.classList.toggle('hidden', !canBuzz);
-
-      if (canBuzz) {
-        mainLabel.innerText = 'اضغط!';
-        subLabel.innerText = 'BUZZER ACTIVE';
-      } else {
-        mainLabel.innerText = 'مغلق';
-        subLabel.innerText = 'STANDBY';
-      }
-
-      if (!roomState.gameStarted) {
-        buzzWrapper.classList.remove('hidden');
-        optsBox.classList.add('hidden');
-        const connectedCount = (roomState.team1Connected ? 1 : 0) + (roomState.team2Connected ? 1 : 0);
-        statusText.innerText = connectedCount < 2
-          ? "✅ تم تسجيل فريقك! فاضل الفريق التاني يدخل..."
-          : "🔥 يلا نبدأ كملنا! في انتظار ضغط المقدم لبدء السؤال الأول...";
-        statusText.className = "text-base sm:text-lg font-black text-emerald-400";
-      } else if (roomState.showTransition) {
-        buzzWrapper.classList.remove('hidden');
-        optsBox.classList.add('hidden');
-        statusText.innerText = "🔥 هننتقل للمرحلة الجاية: مرحلة الضعف (×2)! استعدوا";
-        statusText.className = "text-base sm:text-lg font-black text-amber-400";
-      } else if (roomState.buzzedTeam === myRole && !roomState.revealed) {
-        statusText.innerText = `⚡ أنت الأسرع! اختر الإجابة الآن (${roomState.timer} ثانية):`;
-        statusText.className = "text-base sm:text-lg font-black text-emerald-400";
-        buzzWrapper.classList.add('hidden');
-        optsBox.classList.remove('hidden');
-        const letters = ['A', 'B', 'C', 'D'];
-        optsBox.innerHTML = roomState.currentQ.opts.map((opt, i) => {
-          const isWrong = roomState.wrongOptions.includes(i);
-          return `<button onclick="submitAnswer(${i})" ${isWrong ? 'disabled' : ''} class="en-font w-full p-4 rounded-2xl ${isWrong ? 'bg-rose-950/60 border-rose-800 text-rose-400 line-through opacity-50' : 'bg-slate-900/95 hover:bg-amber-500 hover:text-slate-950 border-amber-400/40 shadow-lg'} border-2 text-left font-bold text-sm sm:text-base transition cursor-pointer flex items-center gap-3">
-            <span class="w-8 h-8 shrink-0 rounded-full bg-slate-800 text-amber-400 font-black flex items-center justify-center">${letters[i]}</span>
-            <span>${opt}</span>
-          </button>`;
-        }).join('');
-      } else {
-        buzzWrapper.classList.remove('hidden');
-        optsBox.classList.add('hidden');
-        if (isTeamLocked && !roomState.revealed) {
-          statusText.innerText = "❌ انتهت فرصتك في هذا السؤال! الفرصة للفريق المنافس";
-          statusText.className = "text-base sm:text-lg font-black text-rose-400";
-        } else if (roomState.buzzerOpen) {
-          statusText.innerText = roomState.lockedTeams.length > 0
-            ? "🔥 فرصتك الذهبية! الفريق المنافس أخطأ.. اضغط الجرس!"
-            : "🔔 الجرس مفتوح! اضغط بسرعة للإجابة";
-          statusText.className = "text-base sm:text-lg font-black text-amber-400";
-        } else if (roomState.buzzedTeam) {
-          const otherName = roomState.buzzedTeam === 'team1' ? roomState.team1Name : roomState.team2Name;
-          statusText.innerText = `⏳ يجيب الآن: ${otherName}`;
-          statusText.className = "text-base sm:text-lg font-black text-rose-400";
-        } else {
-          statusText.innerText = "في انتظار السؤال التالي من المقدم...";
-          statusText.className = "text-base font-bold text-slate-300";
-        }
-      }
-    }
-  }
-
-  function toggleQrModal(show) {
-    const m = document.getElementById('qr-modal');
-    m.classList.toggle('hidden', !show);
-    m.classList.toggle('flex', show);
-  }
-
-  function fireCelebrationConfetti() {
-    if (typeof confetti === 'function') {
-      confetti({ particleCount: 95, spread: 80, origin: { y: 0.6 }, colors: ['#f59e0b', '#38bdf8', '#f43f5e', '#10b981'] });
-    }
-  }
-
-  function endMatch() {
-    clearInterval(timerInterval);
-    roomState.matchEnded = true;
-    roomState.buzzerOpen = false;
-    roomState.showTransition = false;
-
-    const modal = document.getElementById('winner-modal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    const title = document.getElementById('winner-title');
-
-    if (roomState.team1Score > roomState.team2Score) {
-      roomState.winnerTeam = 'team1';
-      title.innerText = `🏆 الفائز: ${roomState.team1Name}`;
-    } else if (roomState.team2Score > roomState.team1Score) {
-      roomState.winnerTeam = 'team2';
-      title.innerText = `🏆 الفائز: ${roomState.team2Name}`;
-    } else {
-      roomState.winnerTeam = 'tie';
-      title.innerText = '🤝 تعادل مثير بين الفريقين!';
-    }
-
-    document.getElementById('final-scores-summary').innerText = `${roomState.team1Name}: ${roomState.team1Score} نقطة  |  ${roomState.team2Name}: ${roomState.team2Score} نقطة`;
-    playTone('win');
-    fireCelebrationConfetti();
-    broadcastState();
-  }
-
-  // خيار 1 بعد النتيجة: "فريق تاني" -> فصل الفريقين القدامى والعودة لشاشة الانتظار المستقلة بـ QR جديد
-  function switchToNewTeams() {
-    ['team1', 'team2'].forEach(t => {
-      if (teamConns[t] && teamConns[t].open) {
-        teamConns[t].send({ type: 'SESSION_REPLACED' });
-        try { teamConns[t].close(); } catch (e) {}
-      }
-      teamConns[t] = null;
-    });
-
-    document.getElementById('winner-modal').classList.add('hidden');
-    document.getElementById('winner-modal').classList.remove('flex');
-    document.getElementById('explanation-box').classList.add('hidden');
-    document.getElementById('team1-name-input').value = 'الفريق الأول';
-    document.getElementById('team2-name-input').value = 'الفريق الثاني';
-
-    roomState = {
-      team1Name: 'الفريق الأول',
-      team2Name: 'الفريق الثاني',
-      team1Connected: false,
-      team2Connected: false,
-      gameStarted: false,
-      team1Score: 0,
-      team2Score: 0,
-      qIndex: -1,
-      stage: 1,
-      showTransition: false,
-      currentQ: null,
-      buzzerOpen: false,
-      buzzedTeam: null,
-      lockedTeams: [],
-      wrongOptions: [],
-      revealed: false,
-      selectedOpt: null,
-      statusMessage: '',
-      matchEnded: false,
-      winnerTeam: null,
-      sessionClosed: false,
-      timer: 20
-    };
-
-    initHostPeerServer();
-  }
-
-  // خيار 2 بعد النتيجة: "كفاية" -> قفل المسابقة وعرض شاشة الختام
-  function closeCompetition() {
-    clearInterval(timerInterval);
-    roomState.sessionClosed = true;
-    broadcastState();
-
-    document.getElementById('winner-modal').classList.add('hidden');
-    document.getElementById('winner-modal').classList.remove('flex');
-    document.getElementById('host-game-screen').classList.add('hidden');
-    document.getElementById('host-waiting-screen').classList.add('hidden');
-
-    const bye = document.getElementById('goodbye-screen');
-    bye.classList.remove('hidden');
-    bye.classList.add('flex');
-    fireCelebrationConfetti();
-  }
-
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('pin')) {
-    document.getElementById('join-pin-input').value = urlParams.get('pin');
-    setTimeout(checkRoomAvailability, 300);
-  }
-
-  // خلفية الاستوديو ثلاثية الأبعاد (حلقات ذهبية وياقوتية + نجوم مضيئة)
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-  const ringGeo = new THREE.TorusGeometry(6.8, 0.055, 16, 120);
-  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.4 });
-  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.3 });
-  const ring1 = new THREE.Mesh(ringGeo, ringMat1);
-  const ring2 = new THREE.Mesh(ringGeo, ringMat2);
-  ring2.rotation.x = Math.PI / 3;
-  scene.add(ring1, ring2);
-
-  // جزيئات ضوئية عائمة في الاستوديو
-  const particlesGeo = new THREE.BufferGeometry();
-  const particleCount = 120;
-  const posArray = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 28;
-  }
-  particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const particlesMat = new THREE.PointsMaterial({ size: 0.09, color: 0xfbbf24, transparent: true, opacity: 0.55 });
-  const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-  scene.add(particlesMesh);
-
-  camera.position.z = 12;
-
-  function animate3D() {
-    requestAnimationFrame(animate3D);
-    ring1.rotation.y += 0.0028;
-    ring1.rotation.x += 0.0014;
-    ring2.rotation.y -= 0.0036;
-    particlesMesh.rotation.y += 0.0008;
-    renderer.render(scene, camera);
-  }
-  animate3D();
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-</script>
-</body>
-</html>
+      q
