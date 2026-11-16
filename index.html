@@ -56,7 +56,6 @@
     <p class="text-slate-300 text-sm sm:text-base mb-6">ربط مباشر بين 3 أجهزة (شاشة العرض + موبايل البنات + موبايل الولاد)</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right">
-      <!-- خيار شاشة العرض -->
       <div class="bg-slate-900/80 border border-sky-500/30 rounded-2xl p-5 flex flex-col justify-between">
         <div>
           <div class="text-xs font-bold text-sky-400 mb-1">1. اللابتوب / شاشة المدرج</div>
@@ -68,7 +67,6 @@
         </button>
       </div>
 
-      <!-- خيار جهاز الفريق -->
       <div class="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-5 flex flex-col justify-between">
         <div>
           <div class="text-xs font-bold text-amber-400 mb-1">2. موبايل / تابلت الفرق</div>
@@ -95,7 +93,6 @@
 
 <!-- ================= 2. شاشة العرض الرئيسية (Host & Projector) ================= -->
 <div id="host-screen" class="ui-layer hidden p-3 sm:p-5 justify-between">
-  <!-- الشريط العلوي: النقاط وكود الغرفة -->
   <div class="grid grid-cols-12 gap-3 items-center">
     <!-- فريق البنات -->
     <div class="col-span-4 glass-card rounded-2xl p-3 sm:p-4 border-r-4 border-r-rose-500 flex items-center justify-between transition-all">
@@ -120,10 +117,10 @@
         <button onclick="toggleQrModal(true)" class="px-2.5 py-0.5 rounded bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold hover:bg-amber-500/30 cursor-pointer">QR / رابط</button>
       </div>
       <select id="category-select" onchange="changeCategory()" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-1.5 px-2 text-xs sm:text-sm font-black text-sky-300 text-center focus:outline-none">
-        <option value="science">فقرة العلم (صيدلة وكلينيكال)</option>
-        <option value="general">فقرة المعلومات العامة</option>
-        <option value="rapid">فقرة السرعة (45 ثانية)</option>
-        <option value="gamble">فقرة ضربة حظ (×2 نقاط)</option>
+        <option value="science">فقرة العلم (صيدلة وكلينيكال - 5 أسئلة)</option>
+        <option value="general">فقرة المعلومات العامة (5 أسئلة)</option>
+        <option value="rapid">فقرة السرعة (45 ثانية - 5 أسئلة)</option>
+        <option value="gamble">فقرة ضربة حظ (×2 نقاط - 5 أسئلة)</option>
       </select>
     </div>
 
@@ -149,7 +146,7 @@
 
     <div class="glass-card rounded-3xl p-6 sm:p-8 border-2 border-sky-500/30 relative">
       <div class="flex items-center justify-between mb-4">
-        <span id="q-badge" class="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-black">سؤال 1 • 10 نقاط</span>
+        <span id="q-badge" class="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-black">جاهز للبدء • 5 أسئلة لكل فقرة</span>
         <div class="flex items-center gap-3">
           <div id="host-timer" class="px-4 py-1 rounded-full bg-slate-900 border border-amber-400/50 text-amber-300 font-black text-lg">15</div>
           <button onclick="toggleMute()" id="mute-btn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer">الصوت: مفعل</button>
@@ -157,7 +154,7 @@
       </div>
 
       <h2 id="host-question-text" class="text-2xl sm:text-4xl font-black text-white leading-snug text-center my-4 min-h-[80px] flex items-center justify-center">
-        اضغط على "السؤال التالي" لبدء المسابقة!
+        اضغط على "السؤال التالي" لبدء الفقرة!
       </h2>
 
       <div id="host-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"></div>
@@ -167,7 +164,7 @@
   <!-- شريط تحكم المقدم السفلي -->
   <div class="glass-card rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-2">
-      <button onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer">
+      <button id="next-q-btn" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer">
         السؤال التالي ◀
       </button>
       <button onclick="unlockBuzzers()" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-black text-sm shadow cursor-pointer">
@@ -202,7 +199,8 @@
     </div>
   </div>
 
-  <div class="my-auto flex flex-col items-center justify-center gap-5 w-full max-w-md mx-auto">
+  <!-- منطقة اللعب على الموبايل -->
+  <div id="team-play-area" class="my-auto flex flex-col items-center justify-center gap-5 w-full max-w-md mx-auto">
     <div id="team-status-box" class="w-full glass-card rounded-2xl p-4 text-center">
       <div id="team-status-text" class="text-lg font-black text-sky-300">في انتظار عرض السؤال على الشاشة...</div>
     </div>
@@ -213,6 +211,19 @@
     </button>
 
     <div id="team-options-box" class="hidden w-full grid grid-cols-1 gap-2.5"></div>
+  </div>
+
+  <!-- شاشة النتيجة النهائية المخصصة لكل فريق على موبايله -->
+  <div id="team-end-area" class="hidden my-auto w-full max-w-md mx-auto">
+    <div id="team-end-card" class="glass-card rounded-3xl p-8 text-center border-2">
+      <div id="team-end-emoji" class="text-6xl mb-4">🏆</div>
+      <h2 id="team-end-headline" class="text-4xl font-black mb-3">مببروووك!</h2>
+      <p id="team-end-subtext" class="text-base font-bold text-slate-300 mb-6"></p>
+      <div class="bg-slate-950/80 rounded-2xl p-4 border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">النتيجة النهائية للمباراة</div>
+        <div id="team-end-scores" class="text-lg font-black text-amber-400"></div>
+      </div>
+    </div>
   </div>
 
   <div class="text-center text-xs text-slate-500">كلية الصيدلة • جامعة المنصورة الأهلية</div>
@@ -275,31 +286,53 @@
   </div>
 </div>
 
-<!-- ================= شاشة الفائز النهائية ================= -->
+<!-- ================= شاشة الفائز النهائية للهوست ================= -->
 <div id="winner-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-4">
   <div class="glass-card winner-glow max-w-lg w-full rounded-3xl p-8 text-center border-2 border-amber-400">
     <div class="text-amber-400 font-black text-sm mb-2">كأس العباقرة • كلية الصيدلة</div>
     <h2 id="winner-title" class="text-4xl font-black text-white mb-4">فريق البنات</h2>
     <div id="final-scores-summary" class="text-lg font-bold text-slate-300 mb-6"></div>
-    <button onclick="location.reload()" class="px-8 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base cursor-pointer">مباراة جديدة</button>
+    <div class="flex gap-3 justify-center">
+      <button onclick="resetMatch()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base cursor-pointer">مباراة جديدة بنفس الغرفة</button>
+    </div>
   </div>
 </div>
 
 <script>
+  const QUESTIONS_PER_CATEGORY = 5;
+
+  // بنك الأسئلة الافتراضي: 5 أسئلة لكل فقرة بالضبط
   const DEFAULT_QUESTIONS = [
+    // 1. فقرة العلم (5 أسئلة)
     { cat: 'science', q: 'ما هو الترياق (Antidote) الأساسي المستخدم في حالات التسمم بجرعة زائدة من الباراسيتامول؟', opts: ['N-Acetylcysteine', 'Naloxone', 'Atropine', 'Flumazenil'], ans: 0 },
     { cat: 'science', q: 'أي من أدوية الضغط التالية يُسبب كحة جافة كأثر جانبي شهير نتيجة تراكم البراديكينين؟', opts: ['Amlodipine', 'Captopril', 'Bisoprolol', 'Losartan'], ans: 1 },
     { cat: 'science', q: 'ما هو الفيتامين الذي يؤدي نقصه إلى الإصابة بمرض الإسقربوط (Scurvy)؟', opts: ['Vitamin B12', 'Vitamin D', 'Vitamin C', 'Vitamin K'], ans: 2 },
     { cat: 'science', q: 'أي مضاد حيوي يُمنع إعطاؤه للأطفال والحوامل لتسببه في تصبغ الأسنان الدائم؟', opts: ['Amoxicillin', 'Azithromycin', 'Tetracycline', 'Cefadroxil'], ans: 2 },
+    { cat: 'science', q: 'ما هو المستقبل الدوائي الذي يغلق دواء Propranolol عمله بشكل غير انتقائي؟', opts: ['Alpha-1 Receptor', 'Beta Receptors', 'Muscarinic M3', 'H2 Receptor'], ans: 1 },
+
+    // 2. فقرة المعلومات العامة (5 أسئلة)
     { cat: 'general', q: 'ما هي أطول سورة في القرآن الكريم؟', opts: ['سورة آل عمران', 'سورة البقرة', 'سورة النساء', 'سورة الأعراف'], ans: 1 },
     { cat: 'general', q: 'ما هو الكوكب الملقب بالكوكب الأحمر في المجموعة الشمسية؟', opts: ['الزهرة', 'المشتري', 'المريخ', 'عطارد'], ans: 2 },
     { cat: 'general', q: 'من هو العالم العربي الملقب بأبي الكيمياء؟', opts: ['ابن سينا', 'جابر بن حيان', 'الرازي', 'الخوارزمي'], ans: 1 },
+    { cat: 'general', q: 'ما هي عاصمة دولة اليابان؟', opts: ['أوساكا', 'كيوتو', 'طوكيو', 'سيول'], ans: 2 },
+    { cat: 'general', q: 'كم عدد القارات في العالم؟', opts: ['5 قارات', '6 قارات', '7 قارات', '8 قارات'], ans: 2 },
+
+    // 3. فقرة السرعة (5 أسئلة)
     { cat: 'rapid', q: 'الاسم العلمي لفيتامين B1 هو:', opts: ['Thiamine', 'Riboflavin', 'Niacin', 'Pyridoxine'], ans: 0 },
     { cat: 'rapid', q: 'هرمون يفرزه البنكرياس لخفض مستوى السكر في الدم:', opts: ['Glucagon', 'Insulin', 'Cortisol', 'Adrenaline'], ans: 1 },
-    { cat: 'gamble', q: 'مريض يتناول Warfarin، أي مسكن مما يلي يرفع خطر النزيف بشدة معه؟', opts: ['Paracetamol', 'Aspirin / NSAIDs', 'Vitamin C', 'Loratadine'], ans: 1 }
+    { cat: 'rapid', q: 'أكبر عضو في جسم الإنسان هو:', opts: ['الكبد', 'الجلد', 'المخ', 'الرئة'], ans: 1 },
+    { cat: 'rapid', q: 'المادة الفعالة في دواء Panadol هي:', opts: ['Ibuprofen', 'Paracetamol', 'Diclofenac', 'Aspirin'], ans: 1 },
+    { cat: 'rapid', q: 'عدد عظام جسم الإنسان البالغ هو:', opts: ['186 عظمة', '206 عظمة', '226 عظمة', '256 عظمة'], ans: 1 },
+
+    // 4. فقرة ضربة حظ (5 أسئلة)
+    { cat: 'gamble', q: 'مريض يتناول Warfarin، أي مسكن مما يلي يرفع خطر النزيف بشدة معه؟', opts: ['Paracetamol', 'Aspirin / NSAIDs', 'Vitamin C', 'Loratadine'], ans: 1 },
+    { cat: 'gamble', q: 'أي من أدوية السكري التالية قد يسبب نقص فيتامين B12 عند استخدامه لفترات طويلة؟', opts: ['Metformin', 'Gliclazide', 'Sitagliptin', 'Empagliflozin'], ans: 0 },
+    { cat: 'gamble', q: 'ما هو الترياق (Antidote) المستخدم لعكس تأثير الجرعة الزائدة من المورفين والترامادول؟', opts: ['Flumazenil', 'Naloxone', 'Protamine Sulfate', 'Vitamin K'], ans: 1 },
+    { cat: 'gamble', q: 'أي من الأدوية التالية يُستخدم كخط أول في علاج صدمة الحساسية المفرطة (Anaphylaxis)؟', opts: ['Hydrocortisone IV', 'Epinephrine IM', 'Chlorpheniramine', 'Salbutamol'], ans: 1 },
+    { cat: 'gamble', q: 'يُمنع تناول عصير الجريب فروت مع دواء Simvastatin لأنه:', opts: ['يُثبط إنزيم CYP3A4 ويرفع سمية الدواء', 'يمنع امتصاص الدواء', 'يسبب هبوط سكر حاد', 'يرفع ضغط الدم'], ans: 0 }
   ];
 
-  let questionsBank = JSON.parse(localStorage.getItem('abakera_mnu_qs')) || DEFAULT_QUESTIONS;
+  let questionsBank = JSON.parse(localStorage.getItem('abakera_mnu_qs_v2')) || DEFAULT_QUESTIONS;
   let roomPin = '';
   let myRole = ''; // 'host' | 'girls' | 'boys'
   let peer = null;
@@ -312,15 +345,17 @@
     girlsScore: 0,
     boysScore: 0,
     category: 'science',
-    qIndex: -1,
+    catQuestionCount: 0,  // عداد الأسئلة في الفقرة الحالية (من 1 إلى 5)
     currentQ: null,
     buzzerOpen: false,
     buzzedTeam: null,
-    lockedTeams: [],      // الفرق التي أخطأت بالفعل في هذا السؤال
-    wrongOptions: [],     // الخيارات الخاطئة التي تم اختيارها (تظهر باللون الأحمر دون كشف الصح)
-    revealed: false,      // لا تتحول إلى true إلا عند الإجابة الصحيحة أو ضغط زر "إظهار الإجابة"
+    lockedTeams: [],
+    wrongOptions: [],
+    revealed: false,
     selectedOpt: null,
     statusMessage: '',
+    matchEnded: false,
+    winnerTeam: null,     // 'girls' | 'boys' | 'tie'
     timer: 15
   };
 
@@ -336,6 +371,7 @@
       else if (type === 'correct') synth.triggerAttackRelease(["C5", "E5", "G5", "C6"], "8n");
       else if (type === 'wrong') synth.triggerAttackRelease(["F3", "B2"], "4n");
       else if (type === 'next') synth.triggerAttackRelease(["E4", "A4"], "16n");
+      else if (type === 'win') synth.triggerAttackRelease(["C5", "E5", "G5", "B5", "C6"], "4n");
     } catch (e) {}
   }
 
@@ -468,15 +504,26 @@
     });
   }
 
+  // عرض السؤال التالي (بحد أقصى 5 أسئلة لكل فقرة)
   function nextQuestion() {
     const cat = document.getElementById('category-select').value;
     const filtered = questionsBank.filter(item => item.cat === cat);
-    const pool = filtered.length > 0 ? filtered : questionsBank;
-    const nextIdx = (roomState.qIndex + 1) % pool.length;
+    const pool = filtered.slice(0, QUESTIONS_PER_CATEGORY);
 
+    if (pool.length === 0) {
+      alert('لا توجد أسئلة في هذه الفقرة.');
+      return;
+    }
+
+    if (roomState.catQuestionCount >= QUESTIONS_PER_CATEGORY) {
+      alert(`انتهت أسئلة هذه الفقرة (${QUESTIONS_PER_CATEGORY} أسئلة)! اختر فقرة أخرى من القائمة العلوية أو اضغط "إنهاء وإعلان الفائز".`);
+      return;
+    }
+
+    const qIdx = roomState.catQuestionCount;
+    roomState.catQuestionCount++;
     roomState.category = cat;
-    roomState.qIndex = nextIdx;
-    roomState.currentQ = pool[nextIdx];
+    roomState.currentQ = pool[qIdx % pool.length];
     roomState.buzzerOpen = true;
     roomState.buzzedTeam = null;
     roomState.lockedTeams = [];
@@ -492,9 +539,20 @@
     renderUI();
   }
 
+  // عند تغيير الفقرة يتم تصفير عداد الـ 5 أسئلة للفقرة الجديدة
   function changeCategory() {
     roomState.category = document.getElementById('category-select').value;
+    roomState.catQuestionCount = 0;
+    roomState.currentQ = null;
+    roomState.buzzerOpen = false;
+    roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.wrongOptions = [];
+    roomState.revealed = false;
+    roomState.statusMessage = 'تم اختيار فقرة جديدة • اضغط "السؤال التالي" لبدء أول سؤال من 5';
+    clearInterval(timerInterval);
     broadcastState();
+    renderUI();
   }
 
   function startTimer() {
@@ -537,7 +595,6 @@
     }
   }
 
-  // معالجة الإجابة: إذا كانت خطأ تُخفى الإجابة الصحيحة ويُفتح الجرس تلقائياً للفريق المنافس
   function handleAnswerSubmission(optIdx, answeringTeam) {
     if (!roomState.currentQ || roomState.revealed) return;
     if (roomState.wrongOptions.includes(optIdx)) return;
@@ -571,18 +628,16 @@
       const otherTeam = answeringTeam === 'girls' ? 'boys' : 'girls';
       const otherTeamName = otherTeam === 'girls' ? roomState.girlsName : roomState.boysName;
 
-      // التحقق مما إذا كان الفريق المنافس لم يجرب بعد
       if (answeringTeam && !roomState.lockedTeams.includes(otherTeam)) {
         roomState.buzzedTeam = null;
-        roomState.buzzerOpen = true; // فتح الجرس للفريق المنافس فوراً
-        roomState.revealed = false;  // تظل الإجابة الصحيحة مخفية على الهوست
+        roomState.buzzerOpen = true;
+        roomState.revealed = false;
         roomState.timer = 15;
         roomState.statusMessage = `❌ إجابة خاطئة من ${wrongTeamName}! الجرس مفتوح الآن لـ ${otherTeamName}`;
       } else {
-        // إذا أخطأ الفريقان أو ضغط المقدم مباشرة
         roomState.buzzedTeam = null;
         roomState.buzzerOpen = false;
-        roomState.revealed = false; // لا تظهر الإجابة الصحيحة إلا عند ضغط المقدم "إظهار الإجابة"
+        roomState.revealed = false;
         roomState.statusMessage = `❌ إجابة خاطئة! اضغط على "إظهار الإجابة" لكشف الحل`;
       }
     }
@@ -618,6 +673,15 @@
       document.getElementById('host-boys-score').innerText = roomState.boysScore;
       document.getElementById('host-timer').innerText = roomState.timer;
 
+      const nextBtn = document.getElementById('next-q-btn');
+      if (roomState.catQuestionCount >= QUESTIONS_PER_CATEGORY) {
+        nextBtn.innerText = 'انتهت أسئلة الفقرة (5/5)';
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-slate-700 text-amber-300 font-black text-sm shadow cursor-pointer';
+      } else {
+        nextBtn.innerText = `السؤال التالي (${roomState.catQuestionCount}/${QUESTIONS_PER_CATEGORY}) ◀`;
+        nextBtn.className = 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow cursor-pointer';
+      }
+
       const banner = document.getElementById('buzz-banner');
       if (roomState.buzzedTeam) {
         const isGirls = roomState.buzzedTeam === 'girls';
@@ -635,7 +699,7 @@
 
       if (roomState.currentQ) {
         const ptsLabel = roomState.category === 'gamble' ? '20 نقطة (ضربة حظ)' : '10 نقاط';
-        document.getElementById('q-badge').innerText = `سؤال ${roomState.qIndex + 1} • ${ptsLabel}`;
+        document.getElementById('q-badge').innerText = `سؤال ${roomState.catQuestionCount} من ${QUESTIONS_PER_CATEGORY} • ${ptsLabel}`;
         document.getElementById('host-question-text').innerText = roomState.currentQ.q;
 
         const grid = document.getElementById('host-options-grid');
@@ -643,12 +707,10 @@
         grid.innerHTML = roomState.currentQ.opts.map((opt, i) => {
           let style = 'bg-slate-900/90 border-slate-700 text-white hover:border-sky-400';
           if (roomState.revealed) {
-            // لا تظهر الإجابة الصحيحة باللون الأخضر إلا إذا revealed === true
             if (i === roomState.currentQ.ans) style = 'bg-emerald-600 border-emerald-300 text-white';
             else if (roomState.wrongOptions.includes(i) || i === roomState.selectedOpt) style = 'bg-rose-600 border-rose-300 text-white';
             else style = 'bg-slate-900/40 border-slate-800 text-slate-500';
           } else if (roomState.wrongOptions.includes(i)) {
-            // تمييز الخيار الخاطئ فقط باللون الأحمر وإبقاء باقي الخيارات مخفية
             style = 'bg-rose-900/80 border-rose-500 text-rose-200 opacity-75';
           }
           return `<button onclick="submitAnswer(${i})" class="p-4 rounded-2xl border-2 text-right font-bold text-lg flex items-center gap-3 transition cursor-pointer ${style}">
@@ -656,10 +718,55 @@
             <span>${opt}</span>
           </button>`;
         }).join('');
+      } else {
+        document.getElementById('q-badge').innerText = `فقرة جديدة • ${QUESTIONS_PER_CATEGORY} أسئلة`;
+        document.getElementById('host-question-text').innerText = 'اضغط على "السؤال التالي" لبدء الفقرة!';
+        document.getElementById('host-options-grid').innerHTML = '';
       }
     } else if (myRole === 'girls' || myRole === 'boys') {
       document.getElementById('team-header-name').innerText = myRole === 'girls' ? roomState.girlsName : roomState.boysName;
       document.getElementById('team-my-score').innerText = myRole === 'girls' ? roomState.girlsScore : roomState.boysScore;
+
+      const playArea = document.getElementById('team-play-area');
+      const endArea = document.getElementById('team-end-area');
+
+      // إذا أنهى الهوست المباراة: إظهار "مببروووك" للفائز و"متزعلش متعوضة" للآخر
+      if (roomState.matchEnded) {
+        playArea.classList.add('hidden');
+        endArea.classList.remove('hidden');
+
+        const card = document.getElementById('team-end-card');
+        const emoji = document.getElementById('team-end-emoji');
+        const headline = document.getElementById('team-end-headline');
+        const subtext = document.getElementById('team-end-subtext');
+        const scoresEl = document.getElementById('team-end-scores');
+
+        scoresEl.innerText = `${roomState.girlsName}: ${roomState.girlsScore}  |  ${roomState.boysName}: ${roomState.boysScore}`;
+
+        if (roomState.winnerTeam === myRole) {
+          card.className = 'glass-card winner-glow rounded-3xl p-8 text-center border-2 border-amber-400';
+          emoji.innerText = '🏆🎉';
+          headline.innerText = 'مببروووك!';
+          headline.className = 'text-4xl sm:text-5xl font-black text-amber-400 mb-3';
+          subtext.innerText = 'ألف مبروك الفوز بالمسابقة يا أبطال! أداء مشرف وعباقرة بجد.';
+        } else if (roomState.winnerTeam === 'tie') {
+          card.className = 'glass-card rounded-3xl p-8 text-center border-2 border-sky-400';
+          emoji.innerText = '🤝✨';
+          headline.innerText = 'تعادل بطولي!';
+          headline.className = 'text-4xl font-black text-sky-400 mb-3';
+          subtext.innerText = 'منافسة قوية جداً وتعادل مستحق بين الفريقين!';
+        } else {
+          card.className = 'glass-card rounded-3xl p-8 text-center border-2 border-rose-400/60';
+          emoji.innerText = '💪💙';
+          headline.innerText = 'متزعلش متعوضة!';
+          headline.className = 'text-3xl sm:text-4xl font-black text-rose-300 mb-3';
+          subtext.innerText = 'متزعلش متعوضة المرة الجاية بإذن الله.. عملتوا ماتش عالمي وعاش على مجهودكم!';
+        }
+        return;
+      } else {
+        playArea.classList.remove('hidden');
+        endArea.classList.add('hidden');
+      }
 
       const buzzBtn = document.getElementById('team-buzzer-btn');
       const statusText = document.getElementById('team-status-text');
@@ -731,7 +838,7 @@
       return;
     }
     questionsBank.unshift({ cat, q, opts, ans });
-    localStorage.setItem('abakera_mnu_qs', JSON.stringify(questionsBank));
+    localStorage.setItem('abakera_mnu_qs_v2', JSON.stringify(questionsBank));
     document.getElementById('new-q-text').value = '';
     [0, 1, 2, 3].forEach(i => document.getElementById('new-q-opt' + i).value = '');
     renderQuestionsList();
@@ -739,7 +846,7 @@
 
   function deleteQuestion(idx) {
     questionsBank.splice(idx, 1);
-    localStorage.setItem('abakera_mnu_qs', JSON.stringify(questionsBank));
+    localStorage.setItem('abakera_mnu_qs_v2', JSON.stringify(questionsBank));
     renderQuestionsList();
   }
 
@@ -756,15 +863,50 @@
     `).join('');
   }
 
+  // إنهاء المباراة وإرسال النتيجة (مببروووك / متزعلش متعوضة) لموبايلات الفرق
   function endMatch() {
+    clearInterval(timerInterval);
+    roomState.matchEnded = true;
+    roomState.buzzerOpen = false;
+
     const modal = document.getElementById('winner-modal');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     const title = document.getElementById('winner-title');
-    if (roomState.girlsScore > roomState.boysScore) title.innerText = `🏆 الفائز: ${roomState.girlsName}`;
-    else if (roomState.boysScore > roomState.girlsScore) title.innerText = `🏆 الفائز: ${roomState.boysName}`;
-    else title.innerText = '🤝 تعادل مثير بين الفريقين!';
+
+    if (roomState.girlsScore > roomState.boysScore) {
+      roomState.winnerTeam = 'girls';
+      title.innerText = `🏆 الفائز: ${roomState.girlsName}`;
+    } else if (roomState.boysScore > roomState.girlsScore) {
+      roomState.winnerTeam = 'boys';
+      title.innerText = `🏆 الفائز: ${roomState.boysName}`;
+    } else {
+      roomState.winnerTeam = 'tie';
+      title.innerText = '🤝 تعادل مثير بين الفريقين!';
+    }
+
     document.getElementById('final-scores-summary').innerText = `${roomState.girlsName}: ${roomState.girlsScore} نقطة  |  ${roomState.boysName}: ${roomState.boysScore} نقطة`;
+    playTone('win');
+    broadcastState();
+  }
+
+  function resetMatch() {
+    document.getElementById('winner-modal').classList.add('hidden');
+    document.getElementById('winner-modal').classList.remove('flex');
+    roomState.girlsScore = 0;
+    roomState.boysScore = 0;
+    roomState.catQuestionCount = 0;
+    roomState.currentQ = null;
+    roomState.buzzerOpen = false;
+    roomState.buzzedTeam = null;
+    roomState.lockedTeams = [];
+    roomState.wrongOptions = [];
+    roomState.revealed = false;
+    roomState.matchEnded = false;
+    roomState.winnerTeam = null;
+    roomState.statusMessage = '';
+    broadcastState();
+    renderUI();
   }
 
   const urlParams = new URLSearchParams(window.location.search);
